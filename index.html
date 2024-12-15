@@ -5,171 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading Dashboard</title>
     <style>
-        /* Allgemeine Gestaltung */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            display: grid;
-            place-items: center;
-            height: 100vh;
-        }
-
-        /* Grid-Container */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            width: 100%;
-            max-width: 1400px;
-            height: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        /* Widgets */
-        .widget-container {
-            position: relative;
-            background-color: #1e1e1e;
-            border: 1px solid #444;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            aspect-ratio: 16/9;
+            background-color: #f4f4f4;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        /* Responsive Anpassungen */
-        @media (max-width: 768px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
+        .widget-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 20px 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .widget {
+            height: 800px; /* Doppelte Größe */
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="dashboard">
-        <!-- Widget 1: S&P 500 Chart -->
-        <div class="widget-container">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                {
-                "autosize": true,
-                "symbol": "SP:SPX",
-                "interval": "D",
-                "timezone": "Etc/UTC",
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "allow_symbol_change": true,
-                "calendar": false
-                }
-                </script>
+    <!-- Widget 1: SXR8 mit RSI -->
+    <div class="widget-container">
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+            <div class="tradingview-widget-copyright">
+                <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+                    <span class="blue-text">Track all markets on TradingView</span>
+                </a>
             </div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+            {
+            "autosize": true,
+            "symbol": "XETR:SXR8",
+            "interval": "W",
+            "timezone": "Etc/UTC",
+            "theme": "light",
+            "style": "2",
+            "locale": "en",
+            "hide_top_toolbar": true,
+            "hide_legend": true,
+            "allow_symbol_change": false,
+            "save_image": false,
+            "calendar": false,
+            "studies": [
+                "STD;RSI"
+            ],
+            "hide_volume": true,
+            "support_host": "https://www.tradingview.com"
+            }
+            </script>
         </div>
+    </div>
 
-        <!-- Widget 2: RSI für S&P 500 -->
-        <div class="widget-container">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-                {
-                "interval": "D",
-                "width": "100%",
-                "isTransparent": true,
-                "symbol": "SP:SPX",
-                "locale": "en",
-                "colorTheme": "dark",
-                "studies": ["RSI@tv-basicstudies"]
-                }
-                </script>
+    <!-- Widget 2: MSCI World mit RSI -->
+    <div class="widget-container">
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+            <div class="tradingview-widget-copyright">
+                <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+                    <span class="blue-text">Track all markets on TradingView</span>
+                </a>
             </div>
-        </div>
-
-        <!-- Widget 3: MSCI World Chart -->
-        <div class="widget-container">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                {
-                "autosize": true,
-                "symbol": "INDEX:MSCIWORLD",
-                "interval": "D",
-                "timezone": "Etc/UTC",
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "allow_symbol_change": true,
-                "calendar": false
-                }
-                </script>
-            </div>
-        </div>
-
-        <!-- Widget 4: RSI für MSCI World -->
-        <div class="widget-container">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-                {
-                "interval": "D",
-                "width": "100%",
-                "isTransparent": true,
-                "symbol": "INDEX:MSCIWORLD",
-                "locale": "en",
-                "colorTheme": "dark",
-                "studies": ["RSI@tv-basicstudies"]
-                }
-                </script>
-            </div>
-        </div>
-
-        <!-- Widget 5: US-Arbeitslosenquote -->
-        <div class="widget-container">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-economic-calendar.js" async>
-                {
-                "colorTheme": "dark",
-                "locale": "en",
-                "width": "100%",
-                "height": "100%",
-                "tabs": [
-                    {
-                        "title": "Unemployment Rate",
-                        "symbols": [
-                            {
-                                "proName": "ECONOMICS:USURTOT",
-                                "title": "US Unemployment Rate"
-                            }
-                        ]
-                    }
-                ]
-                }
-                </script>
-            </div>
-        </div>
-
-        <!-- Widget 6: PE Ratio für S&P 500 -->
-        <div class="widget-container">
-            <div class="tradingview-widget-container" style="height:100%;width:100%">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-fundamentals.js" async>
-                {
-                "symbol": "SP:SPX",
-                "locale": "en",
-                "width": "100%",
-                "height": "100%",
-                "colorTheme": "dark",
-                "fundamentalType": "P/E Ratio"
-                }
-                </script>
-            </div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+            {
+            "autosize": true,
+            "symbol": "XETR:EUNL",
+            "interval": "W",
+            "timezone": "Etc/UTC",
+            "theme": "light",
+            "style": "2",
+            "locale": "en",
+            "hide_top_toolbar": true,
+            "hide_legend": true,
+            "allow_symbol_change": false,
+            "save_image": false,
+            "calendar": false,
+            "studies": [
+                "STD;RSI"
+            ],
+            "hide_volume": true,
+            "support_host": "https://www.tradingview.com"
+            }
+            </script>
         </div>
     </div>
 </body>
