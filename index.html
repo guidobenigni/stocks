@@ -5,144 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading Dashboard</title>
     <style>
+        /* Allgemeine Gestaltung */
         body {
             margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 15px;
-            padding: 15px;
-            background-color: #f4f4f4;
+            place-items: center;
+            height: 100vh;
         }
-        .widget-container {
+
+        /* Grid-Container */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
             width: 100%;
-            aspect-ratio: 16 / 9;
-            background-color: white;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border-radius: 8px;
+            max-width: 1200px;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
         }
-        @media (max-width: 600px) {
+
+        /* Widgets */
+        .widget-container {
+            position: relative;
+            background-color: #1e1e1e;
+            border: 1px solid #444;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive Anpassungen */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 5px;
+            }
+
             .widget-container {
-                aspect-ratio: 4 / 3;
+                aspect-ratio: 4/3;
             }
         }
     </style>
 </head>
 <body>
-    <div class="widget-container">
-        <!-- TradingView Widget 1 -->
-        <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-            "autosize": true,
-            "symbol": "SP:SPX",
-            "interval": "D",
-            "timezone": "Etc/UTC",
-            "theme": "light",
-            "style": "1",
-            "locale": "en",
-            "allow_symbol_change": true,
-            "calendar": false
-            }
-            </script>
+    <div class="dashboard">
+        <!-- Widget 1 -->
+        <div class="widget-container">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "autosize": true,
+                "symbol": "SP:SPX",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false
+                }
+                </script>
+            </div>
         </div>
-    </div>
-    <div class="widget-container">
-        <!-- TradingView Widget 2 -->
-        <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-            "autosize": true,
-            "symbol": "NASDAQ:NDX",
-            "interval": "D",
-            "timezone": "Etc/UTC",
-            "theme": "light",
-            "style": "1",
-            "locale": "en",
-            "allow_symbol_change": true,
-            "calendar": false
-            }
-            </script>
+
+        <!-- Widget 2 -->
+        <div class="widget-container">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "autosize": true,
+                "symbol": "NASDAQ:NDX",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false
+                }
+                </script>
+            </div>
         </div>
-    </div>
-    <div class="widget-container">
-        <!-- TradingView Widget 3 -->
-        <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-            "autosize": true,
-            "symbol": "FOREXCOM:EURUSD",
-            "interval": "D",
-            "timezone": "Etc/UTC",
-            "theme": "light",
-            "style": "1",
-            "locale": "en",
-            "allow_symbol_change": true,
-            "calendar": false
-            }
-            </script>
+
+        <!-- Widget 3 -->
+        <div class="widget-container">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "autosize": true,
+                "symbol": "FOREXCOM:EURUSD",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false
+                }
+                </script>
+            </div>
         </div>
-    </div>
-    <div class="widget-container">
-        <!-- TradingView Widget 4 -->
-        <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-            "autosize": true,
-            "symbol": "AMZN",
-            "interval": "D",
-            "timezone": "Etc/UTC",
-            "theme": "light",
-            "style": "1",
-            "locale": "en",
-            "allow_symbol_change": true,
-            "calendar": false
-            }
-            </script>
+
+        <!-- Widget 4 -->
+        <div class="widget-container">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "autosize": true,
+                "symbol": "AMZN",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false
+                }
+                </script>
+            </div>
         </div>
-    </div>
-    <div class="widget-container">
-        <!-- TradingView Widget 5 -->
-        <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-            "autosize": true,
-            "symbol": "BTCUSD",
-            "interval": "D",
-            "timezone": "Etc/UTC",
-            "theme": "light",
-            "style": "1",
-            "locale": "en",
-            "allow_symbol_change": true,
-            "calendar": false
-            }
-            </script>
+
+        <!-- Widget 5 -->
+        <div class="widget-container">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "autosize": true,
+                "symbol": "BTCUSD",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false
+                }
+                </script>
+            </div>
         </div>
-    </div>
-    <div class="widget-container">
-        <!-- TradingView Widget 6 -->
-        <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-            "autosize": true,
-            "symbol": "TSLA",
-            "interval": "D",
-            "timezone": "Etc/UTC",
-            "theme": "light",
-            "style": "1",
-            "locale": "en",
-            "allow_symbol_change": true,
-            "calendar": false
-            }
-            </script>
+
+        <!-- Widget 6 -->
+        <div class="widget-container">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "autosize": true,
+                "symbol": "TSLA",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false
+                }
+                </script>
+            </div>
         </div>
     </div>
 </body>
