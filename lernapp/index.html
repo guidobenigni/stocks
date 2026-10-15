@@ -1035,7 +1035,7 @@ async function lernstandCode(){
   return 'LERNSTAND1:' + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 function claudeLink(prompt){ return 'https://claude.ai/new?q=' + encodeURIComponent(String(prompt).slice(0, 6000)); }
-const VERSION = '2026-10-15 06:28';
+const VERSION = '2026-10-15 06:30';
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
@@ -1761,12 +1761,12 @@ function renderKompass(F){
 }
 function gradePrompt(F, fall, fr, ans){
   const K = F.klausur;
-  return (K.pruefer || 'Du bist Prüferin an einer Universität.') + '\n\nBewerte die Antwort eines Studenten in einer Open-Book-Fallklausur so, wie es die Prüferin in der echten Klausur tun würde: streng, fair, nachvollziehbar.\n' + (K.bewertung ? 'Bewertungsregeln:\n' + K.bewertung + '\n' : '') +
+  return (K.pruefer || 'Du bist Prüferin an einer Universität.') + '\n\nBewerte die Antwort eines Studenten in einer ' + (K.art || 'Open-Book-Fallklausur') + ' so, wie es die Prüferin in der echten Klausur tun würde: streng, fair, nachvollziehbar.\n' + (K.bewertung ? 'Bewertungsregeln:\n' + K.bewertung + '\n' : '') +
     '\nFALL "' + fall.titel + '":\n' + fall.text + '\n\nFRAGE ' + fr.nr + ' (maximal ' + fr.punkte + ' Punkte):\n' + fr.text +
     '\n\nERWARTUNGSHORIZONT (Kriterien mit Punkten):\n' + fr.kriterien.map(k => '- [' + k.id + '] ' + k.t + ' (' + k.p + ' Punkte)').join('\n') +
     '\n\nMUSTERLÖSUNG (Orientierung, andere gut begründete Lösungen sind ebenso gültig):\n' + fr.muster +
     '\n\nANTWORT DES STUDENTEN:\n"""\n' + ans.slice(0, 9000) + '\n"""\n\nAntworte NUR mit JSON in genau dieser Form: {"kriterien":[{"id":"k1","punkte":0}],"punkte":0,"staerken":"1–2 Sätze, was gut war","fehlt":"1–3 Sätze, konkret was für volle Punkte fehlt","tipp":"1 Satz für die nächste Antwort"}. ' +
-    'Jedes Kriterium bekommt 0 bis seine Maximalpunkte (halbe Punkte erlaubt). "punkte" ist die Summe. Sprich den Studenten mit du an. Schreib auf Deutsch.';
+    'Jedes Kriterium bekommt 0 bis seine Maximalpunkte (halbe Punkte erlaubt). "punkte" ist die Summe. Sprich den Studenten mit du an. ' + (K.feedback_sprache || 'Schreib auf Deutsch.');
 }
 async function gradeOne(F, fall, fr, ans){
   const max = fr.punkte;
@@ -1930,13 +1930,22 @@ function renderStand(F){
 /* ================= Start ================= */
 async function boot(){
   if(!ENC){ newDay(); renderTop(); route(); return; }
-  rawHash(); let k = HKEY; try{ if(k) localStorage.setItem('lernapp-key', k); else k = HKEY = localStorage.getItem('lernapp-key') || ''; }catch(e){}
-  const lock = msg => { $('#view').innerHTML = '<div class="ui"><div class="card stack"><h2>🔒 Deine Lern-App</h2><p>' + esc(msg) + '</p><input id="keyin" class="kmp-q" placeholder="Persönlichen Link oder Schlüssel einfügen" aria-label="Link oder Schlüssel"><button type="button" class="btn primary" id="keygo">Öffnen</button></div></div>';
-    $('#keygo').onclick = () => { const v = $('#keyin').value.trim(); const m = v.match(/#([A-Za-z0-9_-]{30,})~/) || v.match(/^([A-Za-z0-9_-]{30,})$/); if(!m){ toast('Das ist kein gültiger Link.'); return; } HKEY = m[1]; try{ localStorage.setItem('lernapp-key', HKEY); }catch(e){} location.hash = HKEY + '~'; location.reload(); }; };
-  if(!k){ lock('Die Inhalte sind verschlüsselt. Öffne die App über deinen persönlichen Link oder füge ihn hier ein.'); return; }
+  /* Schlüssel: aus ?k= (bleibt beim Home-Bildschirm erhalten), aus dem Hash (#KEY~) oder aus dem Speicher dieser App */
+  const qk = new URLSearchParams(location.search).get('k') || ''; rawHash();
+  let k = HKEY || qk; try{ if(k) localStorage.setItem('lernapp-key', k); else k = localStorage.getItem('lernapp-key') || ''; }catch(e){}
+  const keyFrom = v => { v = String(v || '').trim(); const m = v.match(/[?&]k=([A-Za-z0-9_-]{30,})/) || v.match(/#([A-Za-z0-9_-]{30,})~/) || v.match(/^([A-Za-z0-9_-]{30,})$/); return m ? m[1] : ''; };
+  const openWith = key => { try{ localStorage.setItem('lernapp-key', key); }catch(e){} location.replace(location.pathname + '?k=' + key + '#'); };
+  const lock = msg => { $('#lvl').hidden = true; $('#view').innerHTML = '<div class="ui"><div class="card stack"><h2>🔒 Deine Lern-App</h2><p>' + esc(msg) + '</p>' +
+      '<button type="button" class="btn primary" id="keypaste">Link aus der Zwischenablage einfügen</button><input id="keyin" class="kmp-q" placeholder="… oder hier einfügen" aria-label="Link oder Schlüssel" autocapitalize="off" autocorrect="off" spellcheck="false"><button type="button" class="btn" id="keygo">Öffnen</button>' +
+      '<p class="muted small">Den Link findest du im Chat mit Claude. Das musst du nur einmal machen, danach merkt sich die App den Schlüssel.</p></div></div>';
+    $('#keygo').onclick = () => { const key = keyFrom($('#keyin').value); if(!key){ toast('Das ist kein gültiger Link.'); return; } openWith(key); };
+    $('#keyin').oninput = () => { const key = keyFrom($('#keyin').value); if(key) openWith(key); };
+    $('#keypaste').onclick = async () => { try{ const key = keyFrom(await navigator.clipboard.readText()); if(key){ openWith(key); return; } toast('In der Zwischenablage ist kein Link. Kopier ihn zuerst aus dem Chat.'); }catch(e){ toast('Einfügen ging nicht automatisch. Tipp ins Feld und füge ihn dort ein.'); $('#keyin').focus(); } }; };
+  if(!k){ lock('Die Inhalte sind verschlüsselt. Füge einmal deinen persönlichen Link ein.'); return; }
   try{ CK = await crypto.subtle.importKey('raw', b64u(k), 'AES-GCM', false, ['decrypt', 'encrypt']); const cfg = JSON.parse(await getText('d/faecher.json')); FAECHER = cfg.faecher; NAME = cfg.name || ''; }
-  catch(e){ console.warn(e); lock('Der Schlüssel passt nicht oder die Inhalte konnten nicht geladen werden. Prüf die Internetverbindung oder öffne deinen persönlichen Link erneut.'); return; }
-  if(!location.hash.includes('~')) history.replaceState(null, '', '#' + HKEY + '~' + location.hash.replace(/^#/, ''));
+  catch(e){ console.warn(e); try{ if(!qk && !HKEY) localStorage.removeItem('lernapp-key'); }catch(e2){} lock('Der Schlüssel passt nicht oder die Inhalte konnten nicht geladen werden. Prüf die Internetverbindung oder füge deinen persönlichen Link erneut ein.'); return; }
+  /* Schlüssel in die Adresse (?k=) legen, Hash nur noch für die Navigation: so nimmt „Zum Home-Bildschirm“ ihn sicher mit */
+  HKEY = ''; if(qk !== k) history.replaceState(null, '', location.pathname + '?k=' + k + '#' + rawHash());
   newDay(); renderTop(); route();
 }
 boot();
