@@ -432,6 +432,29 @@ details.rev{border-top:0}
 /* Lernseiten im App-Look */
 .ls{font-size:17px;line-height:1.5}
 .lvlchip[hidden]{display:none!important}
+
+/* Farben wie in Moodle (patch_farben.py) */
+.fcards{display:grid;gap:12px}
+.fcard{display:block;width:100%;text-align:left;border:0;padding:0;border-radius:var(--r);overflow:hidden;background:var(--surface);box-shadow:var(--shadow);cursor:pointer;color:inherit;font:inherit}
+.fcard .band{height:84px;position:relative;overflow:hidden}
+.fcard .band svg,.hband svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fcard .bd{padding:12px 16px 14px;display:grid;gap:2px}
+.fcard .bd b{font-size:17px;line-height:22px;font-weight:600}
+.fcard .bd small{font-size:15px;line-height:20px;color:var(--text-secondary)}
+.fcard .pb{height:4px;border-radius:2px;background:var(--fill);margin-top:8px;overflow:hidden}
+.fcard .pb span{display:block;height:100%;border-radius:2px}
+.fcard:active{opacity:.85}
+.hband{position:relative;overflow:hidden;border-radius:var(--r);color:#fff;padding:22px 16px 16px;min-height:118px;display:grid;align-content:end;gap:4px}
+.hband > :not(svg){position:relative}
+.hband .k{font-size:13px;line-height:18px;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.hband h1{color:#fff;font-size:28px;line-height:34px;margin:0}
+.hband p{color:rgba(255,255,255,.9);margin:0;font-size:15px;line-height:20px}
+.kbadge{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:600;font-size:14px;line-height:1;font-family:var(--font-round);letter-spacing:-.02em}
+.kbadge.lang{font-size:11px}
+.kbadge svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mitem.wb{grid-template-columns:30px minmax(0,1fr) auto 10px;gap:12px}
+.mitem.wb + .mitem::before,.mitem + .mitem.wb::before{left:58px}
+.mitem.soon{opacity:.6}
 #pane{min-width:0}
 .ls{overflow-wrap:break-word;min-width:0}
 .ls *, .ls{box-sizing:border-box}
@@ -1107,7 +1130,7 @@ async function lernstandCode(){
   return 'LERNSTAND1:' + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 function claudeLink(prompt){ return 'https://claude.ai/new?q=' + encodeURIComponent(String(prompt).slice(0, 6000)); }
-const VERSION = '2026-10-15 19:56';
+const VERSION = '2026-10-15 20:32';
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
@@ -1304,13 +1327,15 @@ function renderHome(){
   const fmtD = d => new Date(d + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'});
   const row = f => { const d = f.klausur ? daysUntil(f.klausur) : null; const ms = f.status === 'aktiv' ? fachMastery(f.id) : null;
     const sub = f.status === 'aktiv' ? [f.lva, f.klausur ? 'Prüfung ' + fmtD(f.klausur) + (d >= 0 ? ' · in ' + d + (d === 1 ? ' Tag' : ' Tagen') : '') : ''].filter(Boolean).join(' · ') : (f.hinweis || 'In Vorbereitung');
-    return '<button type="button" class="mitem' + (f.status === 'aktiv' ? '' : ' soon') + '" data-f="' + f.id + '"' + (f.status === 'aktiv' ? '' : ' aria-disabled="true"') + '><span><b>' + esc(f.name) + '</b><small>' + esc(sub) + '</small></span><span class="okdot">' + (ms ? Math.round(100*ms) + ' %' : '') + '</span></button>'; };
+    return '<button type="button" class="mitem wb' + (f.status === 'aktiv' ? '' : ' soon') + '" data-f="' + f.id + '"' + (f.status === 'aktiv' ? '' : ' aria-disabled="true"') + '><span class="kbadge" style="background:' + esc(f.farbe || '#8E8E93') + '">' + esc((f.kurz || f.name).slice(0, 1)) + '</span><span><b>' + esc(f.name) + '</b><small>' + esc(sub) + '</small></span><span class="okdot">' + (ms ? Math.round(100*ms) + ' %' : '') + '</span></button>'; };
   const act = FAECHER.filter(f => f.status === 'aktiv').sort((a, b) => (a.klausur || '9').localeCompare(b.klausur || '9')); const rest = FAECHER.filter(f => f.status !== 'aktiv');
-  let html = '<div class="ui"><div class="khead"><h1>Fächer</h1></div><div class="mlist">' + act.map(row).join('') + '</div>' +
+  const card = f => { const d = f.klausur ? daysUntil(f.klausur) : null; const ms = fachMastery(f.id) || 0;
+    return '<button type="button" class="fcard" data-f="' + f.id + '"><div class="band">' + musterSVG(f.farbe || '#007AFF', f.id) + '</div><div class="bd"><b>' + esc(f.name) + '</b><small>' + esc([f.lva, f.klausur ? 'Prüfung ' + fmtD(f.klausur) + (d >= 0 ? ' · in ' + d + (d === 1 ? ' Tag' : ' Tagen') : '') : ''].filter(Boolean).join(' · ')) + '</small><div class="pb" aria-label="Lernstand ' + Math.round(100*ms) + ' %"><span style="width:' + Math.max(2, Math.round(100*ms)) + '%;background:' + esc(f.farbe || '#007AFF') + '"></span></div></div></button>'; };
+  let html = '<div class="ui"><div class="khead"><h1>Fächer</h1></div><div class="fcards">' + act.map(card).join('') + '</div>' +
     (rest.length ? '<h3 class="muted" style="margin:8px 4px 0">Später</h3><div class="mlist">' + rest.map(row).join('') + '</div>' : '') +
     '<button type="button" class="linkbtn mutedlink" id="toStand" style="justify-self:center;margin-top:8px">Lernstand</button></div>';
   $('#view').innerHTML = html;
-  $('#view').querySelectorAll('.mitem[data-f]').forEach(b => b.onclick = () => { const m = meta(b.dataset.f); if(m.status === 'aktiv') nav(m.id); });
+  $('#view').querySelectorAll('[data-f]').forEach(b => b.onclick = () => { const m = meta(b.dataset.f); if(m.status === 'aktiv') nav(m.id); });
   $('#toStand').onclick = () => nav('stand');
   act.forEach(f => { if(!FACH[f.id]) loadFach(f.id).then(() => { if(R.view === 'home') renderHome(); }).catch(() => {}); });
 }
@@ -1319,6 +1344,25 @@ function insightsHTML(){
   return '<p class="src">Stand ' + esc(insights.aktualisiert || '') + '</p><ul style="margin:0;padding-left:1.2em;display:grid;gap:6px">' + insights.punkte.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' +
     ((insights.tipps || []).length ? '<p><b>Tipps für dich</b></p><ul style="margin:0;padding-left:1.2em;display:grid;gap:6px">' + insights.tipps.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' : '');
 }
+
+
+/* ================= Farben und Muster (wie Moodle-Kurskacheln) ================= */
+const KFARBEN = ['#007AFF', '#5856D6', '#AF52DE', '#D63A6A', '#E5483B', '#D97706', '#2E9E4F', '#0E8F8F', '#2B8CC4', '#8E6E4A', '#4B5BD6', '#B5508F'];
+function kapFarbe(F, k){ const i = F.kapitel.indexOf(k); return KFARBEN[(i + (F.farbOffset || 0)) % KFARBEN.length]; }
+function seedRnd(str){ let h = 2166136261; for(const c of String(str)) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return () => { h += 0x6D2B79F5; let t = h; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function musterSVG(farbe, seed){
+  const r = seedRnd(seed); const W = 400, H = 140, s = 46; let p = '';
+  for(let y = 0, row = 0; y < H + s; y += s * .866, row++){
+    for(let x = -s, col = 0; x < W + s; x += s / 2, col++){
+      const up = (col + row) % 2 === 0; const o = (r() * .16).toFixed(3); const fill = r() < .5 ? '#fff' : '#000';
+      const x0 = x + (row % 2 ? s / 2 : 0);
+      const pts = up ? [[x0, y + s * .866], [x0 + s / 2, y], [x0 + s, y + s * .866]] : [[x0, y], [x0 + s, y], [x0 + s / 2, y + s * .866]];
+      p += '<polygon points="' + pts.map(q => q[0].toFixed(1) + ',' + q[1].toFixed(1)).join(' ') + '" fill="' + fill + '" fill-opacity="' + o + '"/>';
+    }
+  }
+  return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="' + W + '" height="' + H + '" fill="' + farbe + '"/>' + p + '</svg>';
+}
+const ICON = {pruef:'<svg viewBox="0 0 24 24"><path d="M9 4h6M8 4H6v17h12V4h-2"/><path d="m9 13 2 2 4-4"/></svg>', buch:'<svg viewBox="0 0 24 24"><path d="M4 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-4a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h5z"/></svg>'};
 
 /* ================= Fach-Überblick ================= */
 function kapMastery(F, k){ return kpState(F, k).best || 0; }
@@ -1332,15 +1376,15 @@ function renderFach(F){
   const kps = F.kapitel.filter(k => F.Q.some(q => q.kap === k.k)); const passed = kps.filter(k => (kpState(F, k.k).best || 0) >= .5).length;
   const sims = F.klausur.typ === 'fall' ? (f.fallSims || []) : f.sims;
   let h = '<div class="ui">' +
-    '<div class="khead"><span class="k">' + esc(F.lva) + ' · Klausur ' + new Date(F.klausur.datum + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'}) + (d >= 0 ? ' · noch ' + d + ' Tage' : '') + '</span><h1>' + esc(F.name) + '</h1><p class="muted">' + esc(F.klausur.format) + '</p></div>' +
+    '<div class="hband">' + musterSVG(F.farbe || '#007AFF', F.id) + '<span class="k">' + esc(F.lva) + ' · Klausur ' + new Date(F.klausur.datum + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'}) + (d >= 0 ? ' · noch ' + d + ' Tage' : '') + '</span><h1>' + esc(F.name) + '</h1><p>' + esc(F.klausur.format) + '</p></div>' +
     '<div class="card stack"><div class="spread"><b>Lernstand</b><span class="mono">' + Math.round(100*ms) + ' %</span></div><div class="bar8"><span style="width:' + Math.round(100*ms) + '%"></span></div>' +
     '<div class="spread small muted"><span>Kapitel-Prüfungen bestanden: ' + passed + ' / ' + kps.length + '</span><span>Abschlussprüfung: ' + (sims.length ? f.best + ' / ' + F.klausur.punkte : 'noch nicht') + '</span></div></div>' +
         '<div class="mlist">' + F.kapitel.map(k => { const st = kpState(F, k.k); const P = (S.pod[F.id] || {})[k.k] || {}; const g = (k.spiele || []).filter(x => x.bereit);
       const gm = g.reduce((a, x) => a + Object.keys(((f.games[x.id] || {}).m) || {}).length, 0), gt = g.reduce((a, x) => a + (x.missionen || 0), 0);
       const bits = [k.audio ? 'Podcast ' + Math.round(k.audio.dauer/60) + ' min' + (P.done ? ' (gehört)' : '') : '', k.lern ? 'Lernstoff' : '', F.Q.some(q => q.kap === k.k) || (F.uebungen || []).some(u => u.kap === k.k) ? 'Prüfung' : ''].filter(Boolean);
-      return '<button type="button" class="mitem" data-k="' + k.k + '"><span><b>Kap. ' + esc(k.nr) + ' · ' + esc(k.name) + '</b><small>' + bits.join(' · ') + '</small></span><span class="okdot"' + (st.best != null ? ' style="color:var(--' + (st.best >= .5 ? 'good' : 'bad') + ')"' : '') + '>' + (st.best != null ? Math.round(100*st.best) + ' %' : '') + '</span></button>'; }).join('') +
-    '<button type="button" class="mitem final" data-go="endgegner"><span><b>Abschlussprüfung</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? (F.klausur.aufbau || 'ein Fall, drei offene Fragen') : 'alle Kapitel, im Format der Klausur') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
-    (F.kompass ? '<button type="button" class="mitem" data-go="kompass"><span><b>Zitier-Kompass</b><small>Für die Open-Book-Klausur: welches Modell auf welcher Buchseite</small></span><span class="okdot"></span></button>' : '') + '</div></div>';
+      return '<button type="button" class="mitem wb" data-k="' + k.k + '"><span class="kbadge' + (String(k.nr).length > 2 ? ' lang' : '') + '" style="background:' + kapFarbe(F, k) + '">' + esc(k.nr) + '</span><span><b>' + esc(k.name) + '</b><small>' + bits.join(' · ') + '</small></span><span class="okdot"' + (st.best != null ? ' style="color:var(--' + (st.best >= .5 ? 'good' : 'bad') + ')"' : '') + '>' + (st.best != null ? Math.round(100*st.best) + ' %' : '') + '</span></button>'; }).join('') +
+    '<button type="button" class="mitem final wb" data-go="endgegner"><span class="kbadge" style="background:' + esc(F.farbe || '#007AFF') + '">' + ICON.pruef + '</span><span><b>Abschlussprüfung</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? (F.klausur.aufbau || 'ein Fall, drei offene Fragen') : 'alle Kapitel, im Format der Klausur') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
+    (F.kompass ? '<button type="button" class="mitem wb" data-go="kompass"><span class="kbadge" style="background:#8E8E93">' + ICON.buch + '</span><span><b>Zitier-Kompass</b><small>Für die Open-Book-Klausur: welches Modell auf welcher Buchseite</small></span><span class="okdot"></span></button>' : '') + '</div></div>';
   $('#view').innerHTML = h; bindChapterChips(F);
   $('#view').querySelectorAll('[data-go]').forEach(b => b.onclick = () => nav(F.id + '.' + b.dataset.go));
   $('#view').querySelectorAll('.mitem[data-k]').forEach(b => b.onclick = () => nav(F.id + '.' + b.dataset.k));
@@ -1358,7 +1402,7 @@ function renderKapitel(F, kap){
   const links = [kap.audio ? ['kp-pod', 'Podcast'] : null, ['pane', 'Lernstoff'],
     (nq || nu) ? ['kp-pruef', 'Prüfung' + (kp.best != null ? ' · ' + Math.round(100*kp.best) + ' %' : '')] : null].filter(Boolean);
   let h = '<div class="ui">' +
-    '<div class="khead"><span class="k">' + esc(F.kurz) + ' · Kapitel ' + esc(kap.nr) + '</span><h1>' + esc(kap.name) + '</h1></div>' +
+    '<div class="hband">' + musterSVG(kapFarbe(F, kap), F.id + kap.k) + '<span class="k">' + esc(F.kurz) + ' · Kapitel ' + esc(kap.nr) + '</span><h1>' + esc(kap.name) + '</h1></div>' +
     '<div class="kpnav" role="navigation" aria-label="Abschnitte">' + links.map(x => '<button type="button" data-to="' + x[0] + '">' + x[1] + '</button>').join('') + '</div>' +
     (kap.audio ? '<section id="kp-pod"></section>' : '') + '</div>' +
     '<div id="pane" class="kpsec"></div>' +
