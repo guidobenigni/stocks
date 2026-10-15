@@ -431,6 +431,7 @@ details.rev{border-top:0}
 .kpsec{margin-top:32px}
 /* Lernseiten im App-Look */
 .ls{font-size:17px;line-height:1.5}
+.lvlchip[hidden]{display:none!important}
 #pane{min-width:0}
 .ls{overflow-wrap:break-word;min-width:0}
 .ls *, .ls{box-sizing:border-box}
@@ -1058,7 +1059,7 @@ details.rev{border-top:0}
 <header class="bar"><div class="in">
   <button type="button" class="back" id="back" aria-label="Zurück" hidden><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
   <div class="ttl" id="ttl">Lern-App</div>
-  <button type="button" class="lvlchip" id="lvl" aria-label="Level und Serie"></button>
+  <button type="button" class="lvlchip" id="lvl" hidden aria-hidden="true" tabindex="-1"></button>
 </div></header>
 <main id="view" aria-live="polite"></main>
 <div class="mini" id="mini" hidden><div class="in">
@@ -1070,7 +1071,7 @@ details.rev{border-top:0}
 </div></div>
 <audio id="aud" preload="metadata"></audio>
 <section class="stage" id="stage" hidden aria-modal="true" role="dialog">
-  <div class="sh"><div><b id="stTitle"></b><div class="mp" id="stMis"></div></div><button type="button" class="sound" id="stSound" aria-label="Ton an oder aus">🔊</button><button type="button" class="x" id="stClose" aria-label="Spiel schließen">✕</button></div>
+  <div class="sh"><div><b id="stTitle"></b><div class="mp" id="stMis"></div></div><button type="button" class="sound" id="stSound" aria-label="Ton an oder aus">Ton</button><button type="button" class="x" id="stClose" aria-label="Spiel schließen">✕</button></div>
   <div class="body" id="stBody"></div>
 </section>
 <canvas id="confetti" hidden></canvas>
@@ -1082,7 +1083,7 @@ details.rev{border-top:0}
 let FAECHER = [];
 let NAME = '';
 /* GitHub-Pages-Version: Inhalte liegen verschlüsselt (AES-GCM) daneben, der Schlüssel steht im persönlichen Link (#SCHLÜSSEL~route) */
-const ENC = true; const VERS = {"a/marketing/k01.mp3":"909f58a236","a/marketing/k02.mp3":"02e45f2334","a/marketing/k04.mp3":"e02f4afbe3","a/marketing/k08.mp3":"e768c1a33e","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/englisch/e1.js":"e5e350bd29","d/englisch/e2.js":"07676982ce","d/englisch/e3.js":"f1ddee9e6a","d/englisch/e4.js":"12ab0bcb6c","d/englisch/e5.js":"d0cd7f1823","d/englisch/e6.js":"e2e65e1c42","d/englisch/fach.json":"de97600aaa","d/faecher.json":"a0fa9d9153","d/marketing/fach.json":"accb1178ff","d/marketing/k01.js":"4932eeba55","d/marketing/k02.js":"a9352f54d4","d/marketing/k04.js":"2efa814ad0","d/marketing/k07.js":"4bdcdfc2f9","d/marketing/k08.js":"b40c8fac27","d/marketing/k09.js":"eebc4d3824","d/marketing/k10.js":"f01ea9d865","d/marketing/k11.js":"0c1f53e9ce","d/marketing/k12.js":"e2a6cfb36a","d/marketing/k13.js":"ffc77ef9e8","d/marketing/k14.js":"d3d058abff","d/marketing/k15.js":"a204e898e0","d/strategie/fach.json":"8d4bd89834","d/strategie/s1.js":"e4a41bb0b7","d/strategie/s2.js":"8b4cdc21c1","d/strategie/s3.js":"811930b9ab","d/strategie/s4.js":"079d92a2de","d/strategie/s5.js":"fcdaab164d","d/strategie/s6.js":"fa1aa6d072","g/bcgboerse.js":"a6f5bd6aed","g/preislabor.js":"90ff319049","g/segmentscanner.js":"547218064d","g/wegderware.js":"06c074bf49"};
+const ENC = true; const VERS = {"a/marketing/k01.mp3":"909f58a236","a/marketing/k02.mp3":"02e45f2334","a/marketing/k04.mp3":"e02f4afbe3","a/marketing/k08.mp3":"e768c1a33e","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/englisch/e1.js":"e5e350bd29","d/englisch/e2.js":"07676982ce","d/englisch/e3.js":"f1ddee9e6a","d/englisch/e4.js":"12ab0bcb6c","d/englisch/e5.js":"d0cd7f1823","d/englisch/e6.js":"e2e65e1c42","d/englisch/fach.json":"de97600aaa","d/faecher.json":"a0fa9d9153","d/marketing/fach.json":"accb1178ff","d/marketing/k01.js":"4932eeba55","d/marketing/k02.js":"a9352f54d4","d/marketing/k04.js":"2efa814ad0","d/marketing/k07.js":"4bdcdfc2f9","d/marketing/k08.js":"b40c8fac27","d/marketing/k09.js":"eebc4d3824","d/marketing/k10.js":"f01ea9d865","d/marketing/k11.js":"0c1f53e9ce","d/marketing/k12.js":"e2a6cfb36a","d/marketing/k13.js":"ffc77ef9e8","d/marketing/k14.js":"d3d058abff","d/marketing/k15.js":"a204e898e0","d/strategie/fach.json":"dff3e59982","d/strategie/s1.js":"e4a41bb0b7","d/strategie/s2.js":"8b4cdc21c1","d/strategie/s3.js":"811930b9ab","d/strategie/s4.js":"079d92a2de","d/strategie/s5.js":"fcdaab164d","d/strategie/s6.js":"fa1aa6d072","g/antwortcoach.js":"83cab310a1","g/bcgboerse.js":"a6f5bd6aed","g/preislabor.js":"90ff319049","g/segmentscanner.js":"547218064d","g/wegderware.js":"06c074bf49"};
 let CK = null, HKEY = '';
 const b64u = t => Uint8Array.from(atob(t.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((t.length + 3) % 4)), c => c.charCodeAt(0));
 async function getBuf(path){
@@ -1106,7 +1107,7 @@ async function lernstandCode(){
   return 'LERNSTAND1:' + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 function claudeLink(prompt){ return 'https://claude.ai/new?q=' + encodeURIComponent(String(prompt).slice(0, 6000)); }
-const VERSION = '2026-10-15 14:34';
+const VERSION = '2026-10-15 19:56';
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
@@ -1177,23 +1178,17 @@ const LEVELS = [[0,'Erstsemester'],[300,'Fleißige Biene'],[800,'Hörsaal-Stammg
 const GOAL = 300;
 const levelOf = xp => { let i = 0; while(i+1 < LEVELS.length && xp >= LEVELS[i+1][0]) i++; return i; };
 function streakDays(){ let n = 0; const d = new Date(); if(!S.days.includes(today())) d.setDate(d.getDate()-1); for(;;){ if(S.days.includes(dayKey(d))){ n++; d.setDate(d.getDate()-1); } else break; } return n; }
-function addXP(n){
-  touchDay(); const before = levelOf(S.xp); S.xp += n; S.day.xp += n; const after = levelOf(S.xp);
-  floatXP('+' + n); renderTop();
-  if(after > before){ confetti(); ton('level'); toast('Level ' + (after+1) + ': ' + LEVELS[after][1] + '!'); track('level', {lvl:after+1}); }
-  if(S.day.xp >= GOAL && S.day.xp - n < GOAL){ confetti(); toast('Tagesziel geschafft. ' + pickOne(['Lena: Feierabend verdient.','Prof: Für heute passt das, gell?','Ben: Und jetzt Pizza.'])); track('tagesziel', {}); }
-  checkBadges(); save();
-}
+function addXP(n){ touchDay(); S.xp += n; S.day.xp += n; save(); }
 function renderTop(){
-  newDay(); const i = levelOf(S.xp); const lo = LEVELS[i][0], hi = LEVELS[i+1] ? LEVELS[i+1][0] : lo + 5000;
+  newDay(); $('#lvl').hidden = true; return; const i = levelOf(S.xp); const lo = LEVELS[i][0], hi = LEVELS[i+1] ? LEVELS[i+1][0] : lo + 5000;
   const g = Math.min(1, (S.day.d === today() ? S.day.xp : 0)/GOAL), r = 9, c = 2*Math.PI*r, pl = Math.min(1, (S.xp-lo)/(hi-lo));
   $('#lvl').innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="' + r + '" fill="none" stroke="var(--line)" stroke-width="3.5"/><circle cx="12" cy="12" r="' + r + '" fill="none" stroke="var(--good)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="' + (c*g) + ' ' + c + '" transform="rotate(-90 12 12)"/><text x="12" y="15.5" text-anchor="middle" font-size="9" font-family="IBM Plex Mono" fill="var(--ink)">' + (i+1) + '</text></svg><span>' + S.xp + ' XP</span><span class="fl">🔥' + streakDays() + '</span>';
   $('#lvl').title = 'Level ' + (i+1) + ' · ' + LEVELS[i][1] + ' · ' + Math.round(pl*100) + ' % bis Level ' + (i+2) + ' · Tagesziel ' + GOAL + ' XP';
 }
-function floatXP(t){ const d = document.createElement('div'); d.className = 'xpfloat'; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 950); }
+function floatXP(t){ return; const d = document.createElement('div'); d.className = 'xpfloat'; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 950); }
 let toastT = null;
 function toast(t){ let el = $('.toast'); if(!el){ el = document.createElement('div'); el.className = 'toast'; el.setAttribute('role','status'); document.body.appendChild(el); } el.textContent = t; clearTimeout(toastT); toastT = setTimeout(() => el.remove(), 3200); }
-function confetti(){
+function confetti(){ return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const cv = $('#confetti'); cv.hidden = false; const ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
   const cols = ['#2B3A67','#E3B368','#1F6F63','#B8511F','#9DB0E8','#5B3E8C']; const P = Array.from({length:110}, () => ({x:innerWidth/2, y:innerHeight*0.35, vx:(Math.random()-.5)*13, vy:-Math.random()*12-3, s:4+Math.random()*6, c:pickOne(cols), r:Math.random()*6}));
@@ -1201,13 +1196,13 @@ function confetti(){
 }
 /* Kleine synthetische Töne (nach der ersten Berührung erlaubt) */
 let actx = null;
-function ton(art){
+function ton(art){ return;
   if(!S.ton) return; try{ actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if(actx.state === 'suspended') actx.resume(); }catch(e){ return; }
   const seq = {ok:[[660,.06],[880,.09]], fehler:[[220,.12]], klick:[[520,.03]], level:[[523,.08],[659,.08],[784,.08],[1047,.16]], muenze:[[988,.05],[1319,.12]], mission:[[392,.07],[523,.07],[659,.07],[784,.18]]}[art] || [[440,.05]];
   let t = actx.currentTime; seq.forEach(([f, d]) => { const o = actx.createOscillator(), g = actx.createGain(); o.type = art === 'fehler' ? 'sawtooth' : 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(art === 'fehler' ? .05 : .09, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + d); o.connect(g).connect(actx.destination); o.start(t); o.stop(t + d + .02); t += d * .9; });
 }
-const VOICE_OK = ['Lena: Sauber.','Ben: Okay, das hätt ich nicht gewusst.','Prof: Passt, genau so.','Prof: Schön, gell?','Ben: Läuft bei dir.','Lena: Genau das wollen die sehen.','Prof: Eh klar, oder?'];
-const VOICE_NO = ['Ben: Da bin ich auch reingefallen.','Prof: Na ja, schauen wir uns das kurz an.','Lena: Genau diese Falle mögen Prüfer.','Prof: Kein Problem, die kommt eh wieder.','Ben: Puh. Nächstes Mal sitzt die.','Lena: Lies die Begründung, dann hast du sie.'];
+const VOICE_OK = ['Richtig.'];
+const VOICE_NO = ['Nicht richtig. Die Begründung steht darunter.'];
 const BADGES = [
   {id:'erste', n:'Erster Schritt', d:'Die erste Aufgabe gelöst', ok:() => S.xp > 0},
   {id:'hundert', n:'Hundert', d:'100 Aussagen beantwortet', ok:() => allSt().reduce((a,s) => a+s.n, 0) >= 100},
@@ -1229,7 +1224,7 @@ const BADGES = [
   {id:'frage', n:'Neugierig', d:'Den Prof etwas gefragt', ok:() => S.asked >= 1}
 ];
 function allSt(){ return Object.values(S.f).flatMap(f => Object.values(f.st || {})); }
-function checkBadges(){ BADGES.forEach(b => { if(!S.badges[b.id] && b.ok()){ S.badges[b.id] = today(); toast('Abzeichen: ' + b.n); track('abzeichen', {id:b.id}); } }); }
+function checkBadges(){ return; BADGES.forEach(b => { if(!S.badges[b.id] && b.ok()){ S.badges[b.id] = today(); toast('Abzeichen: ' + b.n); track('abzeichen', {id:b.id}); } }); }
 
 /* ================= Laden von Fächern, Lernseiten, Spielen ================= */
 const FACH = {}; const LERN = {}; const SPIEL = {};
@@ -1297,38 +1292,30 @@ function todayPicks(){
   const picks = []; const act = FAECHER.filter(f => f.status === 'aktiv' && FACH[f.id]).sort((a, b) => (a.klausur || '9').localeCompare(b.klausur || '9'));
   for(const m of act){ const F = FACH[m.id]; if(picks.length >= 3) break;
     if(!picks.some(p => p.typ === 'ueben')){ const k = F.kapitel.find(k => F.Q.some(q => q.kap === k.k) && (kpState(F, k.k).best || 0) < .5);
-      if(k) picks.push({typ:'ueben', ic:'📖', t:'Kap. ' + k.nr + ' · ' + k.name, s:F.kurz + ' · lernen und Kapitel-Prüfung', go:F.id + '.' + k.k}); }
+      if(k) picks.push({typ:'ueben', ic:'', t:'Kap. ' + k.nr + ' · ' + k.name, s:F.kurz + ' · lernen und Kapitel-Prüfung', go:F.id + '.' + k.k}); }
     if(!picks.some(p => p.typ === 'spiel')){ const g = F.kapitel.flatMap(k => (k.spiele || []).filter(x => x.bereit).map(x => ({k, g:x}))).find(x => { const G = FS(F.id).games[x.g.id]; return !G || Object.keys(G.m || {}).length < (x.g.missionen || 1); });
-      if(g) picks.push({typ:'spiel', ic:'🎮', t:g.g.titel, s:F.kurz + ' · Kap. ' + g.k.nr + ' · ' + (g.g.dauer || '10 min'), go:F.id + '.' + g.k.k + '.spielen'}); }
+      if(g) picks.push({typ:'spiel', ic:'', t:g.g.titel, s:F.kurz + ' · Kap. ' + g.k.nr + ' · ' + (g.g.dauer || '10 min'), go:F.id + '.' + g.k.k + '.spielen'}); }
     if(!picks.some(p => p.typ === 'hoeren')){ const k = F.kapitel.find(k => k.audio && !(((S.pod[F.id] || {})[k.k] || {}).done));
-      if(k) picks.push({typ:'hoeren', ic:'🎧', t:'Podcast Kap. ' + k.nr, s:F.kurz + ' · ' + Math.round(k.audio.dauer/60) + ' min · auch unterwegs', go:F.id + '.' + k.k + '.hoeren'}); }
+      if(k) picks.push({typ:'hoeren', ic:'', t:'Podcast Kap. ' + k.nr, s:F.kurz + ' · ' + Math.round(k.audio.dauer/60) + ' min · auch unterwegs', go:F.id + '.' + k.k + '.hoeren'}); }
   }
   return picks.slice(0, 3);
 }
 function renderHome(){
-  const h = new Date().getHours(); const gruss = h < 11 ? 'Guten Morgen' : h < 18 ? 'Servus' : 'Guten Abend';
-  const act = FAECHER.filter(f => f.status === 'aktiv'); const next = FAECHER.filter(f => f.klausur && daysUntil(f.klausur) >= 0).sort((a,b) => a.klausur.localeCompare(b.klausur))[0];
-  let html = '<div class="ui"><div class="hero"><span class="eyebrow">' + new Date().toLocaleDateString('de-AT', {weekday:'long', day:'numeric', month:'long'}) + '</span><div class="hi">' + gruss + (NAME ? ', ' + esc(NAME) : '') + '.</div>' +
-    (next ? '<p class="muted">Nächste Prüfung: <b style="color:var(--ink)">' + esc(next.name) + '</b> in ' + daysUntil(next.klausur) + ' Tagen.</p>' : '') + '</div>' +
-    '<div class="today"><div class="t"><b>' + (S.day.d === today() ? S.day.xp : 0) + '</b><span>von ' + GOAL + ' XP heute</span></div><div class="t"><b>🔥 ' + streakDays() + '</b><span>Tage in Folge</span></div><div class="t"><b>' + (levelOf(S.xp)+1) + '</b><span>' + esc(LEVELS[levelOf(S.xp)][1]) + '</span></div></div>';
-  const picks = todayPicks(); if(picks.length) html += '<h2 style="margin-top:6px">Heute für dich</h2><div class="tiles picks">' + picks.map((p, i) => '<button type="button" class="tile" data-pick="' + i + '"><span class="eyebrow">' + p.ic + ' ' + esc(p.typ === 'spiel' ? 'Spielen' : p.typ === 'hoeren' ? 'Hören' : 'Weiterlernen') + '</span><b>' + esc(p.t) + '</b><span>' + esc(p.s) + '</span></button>').join('') + '</div>';
-  if(S.last && S.last.length > 1){ const p = S.last.replace(/^#/, '').replace(/^[^~]*~/, '').split('.'); const m = meta(p[0]); if(m.id) html += '<button type="button" class="tile" id="resume"><span class="eyebrow">Weitermachen</span><b>' + esc(m.name) + (p[1] && p[1].startsWith('k') ? ' · Kapitel ' + esc((FACH[p[0]] && (FACH[p[0]].kapitel.find(k => k.k === p[1]) || {}).nr) || p[1].slice(1)) : '') + '</b><span>Da, wo du aufgehört hast.</span></button>'; }
-  html += '<h2 style="margin-top:6px">Deine Fächer</h2><div class="subjects">' + FAECHER.map(f => {
-    const d = f.klausur ? daysUntil(f.klausur) : null; const ms = fachMastery(f.id);
-    return '<button type="button" class="subj' + (f.status === 'aktiv' ? '' : ' soon') + '" data-f="' + f.id + '" style="--c:' + esc(f.farbe) + '"' + (f.status === 'aktiv' ? '' : ' aria-disabled="true"') + '>' +
-      (d !== null && d >= 0 ? '<span class="cd"><b>' + d + '</b><small>TAGE</small></span>' : '') +
-      '<span class="meta">' + esc(f.lva || '') + '</span><span class="nm">' + esc(f.name) + '</span>' +
-      '<span class="meta">' + esc(f.status === 'aktiv' ? (f.untertitel || '') : (f.hinweis || 'in Vorbereitung')) + '</span>' +
-      (f.status === 'aktiv' ? '<span class="prog" aria-label="Lernstand"><span style="width:' + Math.round(100*(ms || 0)) + '%"></span></span>' : '') + '</button>'; }).join('') + '</div>';
-  html += '<div class="card stack"><h3>Was ich über dein Lernen weiß</h3>' + insightsHTML() + '</div></div>';
+  const fmtD = d => new Date(d + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'});
+  const row = f => { const d = f.klausur ? daysUntil(f.klausur) : null; const ms = f.status === 'aktiv' ? fachMastery(f.id) : null;
+    const sub = f.status === 'aktiv' ? [f.lva, f.klausur ? 'Prüfung ' + fmtD(f.klausur) + (d >= 0 ? ' · in ' + d + (d === 1 ? ' Tag' : ' Tagen') : '') : ''].filter(Boolean).join(' · ') : (f.hinweis || 'In Vorbereitung');
+    return '<button type="button" class="mitem' + (f.status === 'aktiv' ? '' : ' soon') + '" data-f="' + f.id + '"' + (f.status === 'aktiv' ? '' : ' aria-disabled="true"') + '><span><b>' + esc(f.name) + '</b><small>' + esc(sub) + '</small></span><span class="okdot">' + (ms ? Math.round(100*ms) + ' %' : '') + '</span></button>'; };
+  const act = FAECHER.filter(f => f.status === 'aktiv').sort((a, b) => (a.klausur || '9').localeCompare(b.klausur || '9')); const rest = FAECHER.filter(f => f.status !== 'aktiv');
+  let html = '<div class="ui"><div class="khead"><h1>Fächer</h1></div><div class="mlist">' + act.map(row).join('') + '</div>' +
+    (rest.length ? '<h3 class="muted" style="margin:8px 4px 0">Später</h3><div class="mlist">' + rest.map(row).join('') + '</div>' : '') +
+    '<button type="button" class="linkbtn mutedlink" id="toStand" style="justify-self:center;margin-top:8px">Lernstand</button></div>';
   $('#view').innerHTML = html;
-  $('#view').querySelectorAll('.subj').forEach(b => b.onclick = () => { const m = meta(b.dataset.f); if(m.status === 'aktiv') nav(m.id); else toast(m.name + ': ' + (m.hinweis || 'kommt bald')); });
-  const rs = $('#resume'); if(rs) rs.onclick = () => nav(S.last);
-  $('#view').querySelectorAll('[data-pick]').forEach(b => b.onclick = () => { const p = picks[+b.dataset.pick]; if(p.mode) { S.uebMode = p.mode; save(); } track('pick', {typ:p.typ, go:p.go}); nav(p.go); });
+  $('#view').querySelectorAll('.mitem[data-f]').forEach(b => b.onclick = () => { const m = meta(b.dataset.f); if(m.status === 'aktiv') nav(m.id); });
+  $('#toStand').onclick = () => nav('stand');
   act.forEach(f => { if(!FACH[f.id]) loadFach(f.id).then(() => { if(R.view === 'home') renderHome(); }).catch(() => {}); });
 }
 function insightsHTML(){
-  if(!insights || !(insights.punkte || []).length) return '<p class="muted small">Sobald du ein paar Runden gelernt hast, werte ich aus, wie du lernst: wo du zögerst, was du fragst, welche Spiele dir Spaß machen. Hier steht dann, was bei dir funktioniert und was ich deshalb ändere.</p>';
+  if(!insights || !(insights.punkte || []).length) return '<p class="muted small">Sobald du ein paar Runden gelernt hast, werte ich aus, wie du lernst: wo du zögerst, was du nachfragst, welche Kapitel schon sitzen. Hier steht dann, was bei dir funktioniert und was ich deshalb ändere.</p>';
   return '<p class="src">Stand ' + esc(insights.aktualisiert || '') + '</p><ul style="margin:0;padding-left:1.2em;display:grid;gap:6px">' + insights.punkte.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' +
     ((insights.tipps || []).length ? '<p><b>Tipps für dich</b></p><ul style="margin:0;padding-left:1.2em;display:grid;gap:6px">' + insights.tipps.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' : '');
 }
@@ -1344,17 +1331,16 @@ function renderFach(F){
   const f = FS(F.id); const d = daysUntil(F.klausur.datum); const ms = fachMastery(F.id) || 0;
   const kps = F.kapitel.filter(k => F.Q.some(q => q.kap === k.k)); const passed = kps.filter(k => (kpState(F, k.k).best || 0) >= .5).length;
   const sims = F.klausur.typ === 'fall' ? (f.fallSims || []) : f.sims;
-  let h = '<div class="ui">' + chapterChips(F, null) +
+  let h = '<div class="ui">' +
     '<div class="khead"><span class="k">' + esc(F.lva) + ' · Klausur ' + new Date(F.klausur.datum + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'}) + (d >= 0 ? ' · noch ' + d + ' Tage' : '') + '</span><h1>' + esc(F.name) + '</h1><p class="muted">' + esc(F.klausur.format) + '</p></div>' +
-    '<div class="card stack"><div class="spread"><b>Dein Lernstand</b><span class="mono">' + Math.round(100*ms) + ' %</span></div><div class="bar8"><span style="width:' + Math.round(100*ms) + '%"></span></div>' +
+    '<div class="card stack"><div class="spread"><b>Lernstand</b><span class="mono">' + Math.round(100*ms) + ' %</span></div><div class="bar8"><span style="width:' + Math.round(100*ms) + '%"></span></div>' +
     '<div class="spread small muted"><span>Kapitel-Prüfungen bestanden: ' + passed + ' / ' + kps.length + '</span><span>Abschlussprüfung: ' + (sims.length ? f.best + ' / ' + F.klausur.punkte : 'noch nicht') + '</span></div></div>' +
-    '<p class="muted small">So geht’s: Kapitel für Kapitel. Auf jeder Kapitelseite findest du Podcast, Lernstoff, Spiel und am Ende die Kapitel-Prüfung. Wenn alle sitzen, wartet unten die Abschlussprüfung.</p>' +
-    '<div class="mlist">' + F.kapitel.map(k => { const st = kpState(F, k.k); const P = (S.pod[F.id] || {})[k.k] || {}; const g = (k.spiele || []).filter(x => x.bereit);
+        '<div class="mlist">' + F.kapitel.map(k => { const st = kpState(F, k.k); const P = (S.pod[F.id] || {})[k.k] || {}; const g = (k.spiele || []).filter(x => x.bereit);
       const gm = g.reduce((a, x) => a + Object.keys(((f.games[x.id] || {}).m) || {}).length, 0), gt = g.reduce((a, x) => a + (x.missionen || 0), 0);
-      const bits = [k.lern ? 'Lernen' : '', k.audio ? 'Podcast ' + Math.round(k.audio.dauer/60) + ' min' + (P.done ? ' ✓' : '') : '', g.length ? 'Spiel ' + gm + '/' + gt + ' ★' : '', F.Q.some(q => q.kap === k.k) || (F.uebungen || []).some(u => u.kap === k.k) ? 'Prüfung' : ''].filter(Boolean);
+      const bits = [k.audio ? 'Podcast ' + Math.round(k.audio.dauer/60) + ' min' + (P.done ? ' (gehört)' : '') : '', k.lern ? 'Lernstoff' : '', F.Q.some(q => q.kap === k.k) || (F.uebungen || []).some(u => u.kap === k.k) ? 'Prüfung' : ''].filter(Boolean);
       return '<button type="button" class="mitem" data-k="' + k.k + '"><span><b>Kap. ' + esc(k.nr) + ' · ' + esc(k.name) + '</b><small>' + bits.join(' · ') + '</small></span><span class="okdot"' + (st.best != null ? ' style="color:var(--' + (st.best >= .5 ? 'good' : 'bad') + ')"' : '') + '>' + (st.best != null ? Math.round(100*st.best) + ' %' : '') + '</span></button>'; }).join('') +
-    '<button type="button" class="mitem final" data-go="endgegner"><span><b>🏁 Abschlussprüfung</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? (F.klausur.aufbau || 'ein Fall, drei offene Fragen, wie in echt') : 'alle Kapitel, wie in echt') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
-    (F.kompass ? '<button type="button" class="mitem" data-go="kompass"><span><b>📖 Zitier-Kompass</b><small>Für die Open-Book-Klausur: welches Modell auf welcher Buchseite</small></span><span class="okdot"></span></button>' : '') + '</div></div>';
+    '<button type="button" class="mitem final" data-go="endgegner"><span><b>Abschlussprüfung</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? (F.klausur.aufbau || 'ein Fall, drei offene Fragen') : 'alle Kapitel, im Format der Klausur') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
+    (F.kompass ? '<button type="button" class="mitem" data-go="kompass"><span><b>Zitier-Kompass</b><small>Für die Open-Book-Klausur: welches Modell auf welcher Buchseite</small></span><span class="okdot"></span></button>' : '') + '</div></div>';
   $('#view').innerHTML = h; bindChapterChips(F);
   $('#view').querySelectorAll('[data-go]').forEach(b => b.onclick = () => nav(F.id + '.' + b.dataset.go));
   $('#view').querySelectorAll('.mitem[data-k]').forEach(b => b.onclick = () => nav(F.id + '.' + b.dataset.k));
@@ -1369,16 +1355,16 @@ function renderKapitel(F, kap){
   const gs = kap.spiele || []; const ms = F.M.filter(m => m.kap === kap.k);
   const nq = F.Q.filter(q => q.kap === kap.k).length; const nu = (F.uebungen || []).filter(u => u.kap === kap.k).length;
   const kp = (FS(F.id).kp || {})[kap.k] || {};
-  const links = [kap.audio ? ['kp-pod', '🎧 Podcast'] : null, ['pane', '📖 Lernen'], (gs.length || ms.length) ? ['kp-spiel', '🎮 Spielen'] : null,
-    (nq || nu) ? ['kp-pruef', '✅ Prüfung' + (kp.best != null ? ' · ' + Math.round(100*kp.best) + ' %' : '')] : null].filter(Boolean);
-  let h = '<div class="ui">' + chapterChips(F, kap.k) +
+  const links = [kap.audio ? ['kp-pod', 'Podcast'] : null, ['pane', 'Lernstoff'],
+    (nq || nu) ? ['kp-pruef', 'Prüfung' + (kp.best != null ? ' · ' + Math.round(100*kp.best) + ' %' : '')] : null].filter(Boolean);
+  let h = '<div class="ui">' +
     '<div class="khead"><span class="k">' + esc(F.kurz) + ' · Kapitel ' + esc(kap.nr) + '</span><h1>' + esc(kap.name) + '</h1></div>' +
     '<div class="kpnav" role="navigation" aria-label="Abschnitte">' + links.map(x => '<button type="button" data-to="' + x[0] + '">' + x[1] + '</button>').join('') + '</div>' +
     (kap.audio ? '<section id="kp-pod"></section>' : '') + '</div>' +
     '<div id="pane" class="kpsec"></div>' +
-    ((gs.length || ms.length) ? '<section id="kp-spiel" class="kpsec"><div class="ui"><h2>🎮 Spielen</h2></div><div id="kp-spiel-in"></div></section>' : '') +
-    ((nq || nu) ? '<section id="kp-pruef" class="kpsec"><div class="ui"><h2>✅ Kapitel-Prüfung</h2></div><div id="kp-pruef-in"></div></section>' : '') +
-    '<div class="ui kpsec"><button type="button" class="btn primary wide" id="kp-next">' + (nx ? 'Weiter: Kap. ' + esc(nx.nr) + ' · ' + esc(nx.name) + ' →' : '🏁 Zur Abschlussprüfung →') + '</button></div>';
+    ((nq || nu) ? '<section id="kp-pruef" class="kpsec"><div class="ui"><h2>Kapitel-Prüfung</h2></div><div id="kp-pruef-in"></div></section>' : '') +
+    ((gs.length || ms.length) ? '<section id="kp-spiel" class="kpsec"><div class="ui"><h3 class="muted">Interaktive Übung (optional)</h3></div><div id="kp-spiel-in"></div></section>' : '') +
+    '<div class="ui kpsec"><button type="button" class="btn primary wide" id="kp-next">' + (nx ? 'Weiter: Kapitel ' + esc(nx.nr) + ' · ' + esc(nx.name) : 'Zur Abschlussprüfung') + '</button></div>';
   $('#view').innerHTML = h; bindChapterChips(F);
   $('#view').querySelectorAll('.kpnav [data-to]').forEach(b => b.onclick = () => { const el = document.getElementById(b.dataset.to); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); track('kp_sprung', {zu:b.dataset.to}); });
   if(kap.audio) renderPodKompakt(F, kap, $('#kp-pod'));
@@ -1391,7 +1377,7 @@ function renderKapitel(F, kap){
 function kpDoScroll(){ if(!kpScroll) return; const el = document.getElementById(kpScroll); kpScroll = null; if(el) setTimeout(() => el.scrollIntoView({block:'start'}), 60); }
 function renderPodKompakt(F, kap, box){
   const P = (S.pod[F.id] || {})[kap.k] || {}; const ms = kap.audio.marken || [];
-  box.innerHTML = '<div class="card podk"><button type="button" class="pp big" id="kpPlay" aria-label="Podcast abspielen"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button><div class="pk-t"><b>Podcast · ' + Math.round(kap.audio.dauer/60) + ' min</b><small>' + esc(kap.audio.titel || (F.podcast || 'Podcast')) + (P.done ? ' · ✓ gehört' : P.pos > 5 ? ' · weiter ab ' + fmt(P.pos) : '') + '</small></div></div>' +
+  box.innerHTML = '<div class="card podk"><button type="button" class="pp big" id="kpPlay" aria-label="Podcast abspielen"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button><div class="pk-t"><b>Podcast · ' + Math.round(kap.audio.dauer/60) + ' min</b><small>' + esc(kap.audio.titel || (F.podcast || 'Podcast')) + (P.done ? ' · gehört' : P.pos > 5 ? ' · weiter ab ' + fmt(P.pos) : '') + '</small></div></div>' +
     (ms.length > 1 ? '<details class="card pk-m"><summary>Sprungmarken (' + ms.length + ')</summary><div class="marks">' + ms.map((m, i) => '<button type="button" data-t="' + m.t + '"><span class="tm">' + fmt(m.t) + '</span><span>' + esc(m.titel) + '</span></button>').join('') + '</div></details>' : '');
   $('#kpPlay', box).onclick = () => playEp(F, kap);
   box.querySelectorAll('.marks button').forEach(b => b.onclick = () => playEp(F, kap, +b.dataset.t));
@@ -1457,7 +1443,7 @@ async function renderLernen(F, kap, pane){
   try{ await loadScript('d/' + F.id + '/' + kap.k + '.js'); }catch(e){ pane.innerHTML = '<div class="ui"><p class="muted">Die Lernseite konnte nicht geladen werden.</p></div>'; kpDoScroll(); return; }
   const L = LERN[F.id + '/' + kap.k]; if(!L || R.kap !== kap.k || R.tab !== 'lernen') return;
   pane.innerHTML = '<article class="ls">' + L.html + '</article>' +
-    '<div class="ui" style="margin-top:22px"><div class="card stack"><b>Gelesen? Dann ' + ((kap.spiele || []).length ? 'ab ins Spiel und danach ' : '') + 'in die Kapitel-Prüfung.</b><div class="row">' + ((kap.spiele || []).length ? '<button type="button" class="btn small" id="toSpiel">🎮 Spielen</button>' : '') + '<button type="button" class="btn small primary" id="toUeben">✅ Zur Prüfung</button></div></div></div>';
+    '<div class="ui" style="margin-top:22px"><button type="button" class="btn primary wide" id="toUeben">Weiter zur Kapitel-Prüfung</button></div>';
   try{ L.init && L.init(pane.querySelector('.ls')); }catch(e){ console.warn('Lernseite', e); }
   const go = id => { const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); };
   const tS = $('#toSpiel'); if(tS) tS.onclick = () => go('kp-spiel'); const tU = $('#toUeben'); if(tU) tU.onclick = () => go('kp-pruef');
@@ -1525,12 +1511,11 @@ function renderPodcasts(F){
 /* ================= Spiele ================= */
 function gameCard(F, kap, g){
   const st = (FS(F.id).games[g.id] || {}).m || {}; const n = Object.keys(st).length;
-  return '<button type="button" class="gamecard' + (g.bereit ? '' : ' soon') + '" data-g="' + g.id + '" data-k="' + kap.k + '" style="--g:' + esc(g.farbe || F.farbe) + '"><canvas></canvas>' + (g.bereit ? '<span class="ms">' + n + '/' + (g.missionen || '?') + ' ★</span>' : '') +
-    '<span class="gk">Kap. ' + esc(kap.nr) + ' · ' + esc(g.dauer || '') + '</span><b>' + esc(g.titel) + '</b><span>' + esc(g.untertitel || '') + '</span></button>';
+  return '<button type="button" class="mitem" data-g="' + g.id + '" data-k="' + kap.k + '"' + (g.bereit ? '' : ' aria-disabled="true"') + '><span><b>' + esc(g.titel) + '</b><small>' + esc((g.untertitel || '') + (g.dauer ? ' · ' + g.dauer : '')) + '</small></span><span class="okdot">' + (g.bereit && n ? n + '/' + (g.missionen || '?') : '') + '</span></button>';
 }
 function bindGameCards(F){
-  $('#view').querySelectorAll('.gamecard').forEach(b => {
-    b.onclick = () => { const k = F.kapitel.find(x => x.k === b.dataset.k); const g = (k.spiele || []).find(x => x.id === b.dataset.g); if(!g.bereit){ toast('Dieses Spiel baue ich gerade.'); return; } openGame(F, k, g); };
+  $('#view').querySelectorAll('[data-g]').forEach(b => {
+    b.onclick = () => { const k = F.kapitel.find(x => x.k === b.dataset.k); const g = (k.spiele || []).find(x => x.id === b.dataset.g); if(!g.bereit) return; openGame(F, k, g); };
     sparkle(b.querySelector('canvas'));
   });
 }
@@ -1540,21 +1525,21 @@ function sparkle(cv){ if(!cv || matchMedia('(prefers-reduced-motion: reduce)').m
 function renderSpielen(F, kap, pane){
   const gs = kap.spiele || []; const ms = F.M.filter(m => m.kap === kap.k);
   let h = '<div class="ui">';
-  h += gs.length ? '<div class="tiles">' + gs.map(g => gameCard(F, kap, g)).join('') + '</div>' : '<p class="muted">Für dieses Kapitel baue ich gerade ein Spiel.</p>';
-  if(ms.length) h += '<h2>Baukästen</h2><p class="muted small">Setz die Modelle des Kapitels selbst zusammen.</p><div class="mlist">' + ms.map(m => { const st = FS(F.id).mod[m.id]; return '<button type="button" class="mitem" data-m="' + m.id + '"><span><b>' + esc(m.titel) + '</b><small>' + ({ablauf:'Reihenfolge', matrix:'Matrix', gruppen:'Zuordnen'}[m.art]) + '</small></span><span class="okdot">' + (st && st.ok ? '✓ gelöst' : '') + '</span></button>'; }).join('') + '</div>';
+  h += gs.length ? '<div class="mlist">' + gs.map(g => gameCard(F, kap, g)).join('') + '</div>' : '';
+  if(ms.length) h += '<p class="muted small" style="margin:8px 4px 0">Modelle selbst zusammensetzen</p><div class="mlist">' + ms.map(m => { const st = FS(F.id).mod[m.id]; return '<button type="button" class="mitem" data-m="' + m.id + '"><span><b>' + esc(m.titel) + '</b><small>' + ({ablauf:'Reihenfolge', matrix:'Matrix', gruppen:'Zuordnen'}[m.art]) + '</small></span><span class="okdot">' + (st && st.ok ? '✓ gelöst' : '') + '</span></button>'; }).join('') + '</div>';
   pane.innerHTML = h + '</div>'; bindGameCards(F);
   pane.querySelectorAll('[data-m]').forEach(b => b.onclick = () => openModel(F, F.M.find(m => m.id === b.dataset.m), pane));
 }
 let stageClean = null, stageInfo = null;
 async function openGame(F, kap, g){
   const st = $('#stage'); $('#stTitle').textContent = g.titel; $('#stBody').innerHTML = '<div class="ui" style="padding:16px"><p class="muted">Lade das Spiel …</p></div>'; st.hidden = false; document.body.style.overflow = 'hidden';
-  $('#stSound').textContent = S.ton ? '🔊' : '🔇';
+  $('#stSound').textContent = S.ton ? 'Ton' : 'Stumm';
   try{ await loadScript('g/' + g.id + '.js'); }catch(e){ $('#stBody').innerHTML = '<div class="ui" style="padding:16px"><p>Das Spiel konnte nicht geladen werden.</p></div>'; return; }
   const def = SPIEL[g.id]; if(!def){ $('#stBody').innerHTML = '<div class="ui" style="padding:16px"><p>Das Spiel fehlt.</p></div>'; return; }
   const G = FS(F.id).games[g.id] = FS(F.id).games[g.id] || {m:{}, n:0, sek:0}; G.n++; save();
   const t0 = visNow(); stageInfo = {F, kap, g, t0};
   const misTotal = (def.missionen || []).length;
-  const misText = () => { const n = Object.keys(G.m).length; $('#stMis').textContent = misTotal ? n + ' von ' + misTotal + ' Missionen ★' : ''; };
+  const misText = () => { const n = Object.keys(G.m).length; $('#stMis').textContent = misTotal ? n + ' von ' + misTotal + ' erledigt' : ''; };
   misText(); track('spiel_start', {id:g.id, kap:kap.k});
   const body = $('#stBody'); body.innerHTML = '';
   const api = {
@@ -1581,13 +1566,13 @@ function closeStage(silent){
   if(!silent) route();
 }
 $('#stClose').onclick = () => closeStage();
-$('#stSound').onclick = () => { S.ton = !S.ton; save(); $('#stSound').textContent = S.ton ? '🔊' : '🔇'; if(S.ton) ton('klick'); };
+$('#stSound').onclick = () => { S.ton = !S.ton; save(); $('#stSound').textContent = S.ton ? 'Ton' : 'Stumm'; if(S.ton) ton('klick'); };
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && !$('#stage').hidden) closeStage(); });
 
 /* ================= Üben-Tab im Kapitel ================= */
 function renderUebenTab(F, kap, pane){
   const fallArt = F.klausur.typ === 'fall'; let sub = parse().c === 'ueben' && (S.uebMode || 'blitz'); if(fallArt && sub === 'fragen') sub = 'fall'; if(!fallArt && sub === 'fall') sub = 'fragen';
-  const modes = [['blitz','⚡ Blitz'], fallArt ? ['fall','📄 Fallfragen'] : ['fragen','📝 Klausurfragen']];
+  const modes = [['blitz','Aussagen'], fallArt ? ['fall','Fallfragen'] : ['fragen','Klausurfragen']];
   pane.innerHTML = '<div class="ui"><div class="seg" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Übungsart">' + modes.map(m => '<button type="button" data-m="' + m[0] + '" aria-pressed="' + (sub === m[0]) + '">' + m[1] + '</button>').join('') + '</div><div id="trainer"></div></div>';
   pane.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { S.uebMode = b.dataset.m; save(); renderUebenTab(F, kap, pane); });
   if(sub === 'fragen') renderFragen(F, kap.k, $('#trainer')); else if(sub === 'fall') renderFallUeben(F, kap, $('#trainer')); else renderBlitz(F, kap.k, $('#trainer'));
@@ -1608,7 +1593,7 @@ function judge(F, id, ok){ const f = FS(F.id); const s = f.st[id] || {b:0, n:0, 
 function kapLabel(F, k){ return 'Kap. ' + ((F.kapitel.find(x => x.k === k) || {}).nr || '?'); }
 
 /* ---------- Frag den Prof · Melden · Stimmung ---------- */
-function toolsHTML(){ return '<div class="tools">' + (sample ? '<button type="button" class="linkbtn" data-ask="1">💬 Frag den Prof</button>' : '<button type="button" class="linkbtn" data-askc="1">💬 In Claude fragen</button>') + '<button type="button" class="linkbtn mutedlink" data-report="1">⚑ Frage melden</button></div><div id="helpslot"></div>'; }
+function toolsHTML(){ return '<div class="tools">' + (sample ? '<button type="button" class="linkbtn" data-ask="1">Frage stellen</button>' : '<button type="button" class="linkbtn" data-askc="1">In Claude nachfragen</button>') + '<button type="button" class="linkbtn mutedlink" data-report="1">Fehler melden</button></div><div id="helpslot"></div>'; }
 function questionContext(F, q, focus){ const k = F.kapitel.find(x => x.k === q.kap) || {};
   return 'Kapitel ' + k.nr + ' (' + k.name + '), Thema: ' + q.thema + '\nStamm: ' + q.stamm + '\n' + ['a','b','c','d'].filter(l => q[l]).map(l => l + ') ' + q[l].t + ' → ' + (q[l].r ? 'RICHTIG' : 'FALSCH') + '. Begründung: ' + q[l].w).join('\n') + '\n' + q.kombis.map((x,i) => 'efg'[i] + ') ' + kombiText(x)).join('\n') + '\nRichtige Antwort: ' + correctOpt(q) + ')' + (focus ? '\nDer Student schaut gerade auf Aussage ' + focus + ').' : ''); }
 function bindTools(root, F, q, focus){ const a = root.querySelector('[data-ask]'); if(a) a.onclick = () => openAsk(F, q, focus);
@@ -1624,7 +1609,7 @@ function openAsk(F, q, focus){
     const prompt = F.prof.persona + '\n\nDie Übungsfrage mit Musterlösung:\n' + questionContext(F, q, focus) + '\n\nFrage des Studenten: ' + frage;
     try{ const res = await sample(prompt, {signal:askCtl.signal, cache:false, onText:({text}) => { out.innerHTML = '<div class="answer"></div>'; out.firstChild.textContent = text; }});
       S.asked++; checkBadges(); save(); track('hilfe', {id:q.id, l:focus || null, frage:frage.slice(0,300), antwort:res.text.slice(0,600), dauer_ms:Date.now()-t0});
-      out.insertAdjacentHTML('beforeend', '<div class="pick" style="margin-top:6px"><span class="small muted">Hat das geholfen?</span><button type="button" data-h="1">👍 ja</button><button type="button" data-h="0">👎 nein</button></div>');
+      out.insertAdjacentHTML('beforeend', '<div class="pick" style="margin-top:6px"><span class="small muted">Hat das geholfen?</span><button type="button" data-h="1">Ja</button><button type="button" data-h="0">Nein</button></div>');
       out.querySelectorAll('[data-h]').forEach(b => b.onclick = () => { track('hilfe_bewertung', {id:q.id, gut:b.dataset.h === '1'}); out.querySelector('.pick').innerHTML = '<span class="small muted">Danke, notiert.</span>'; });
     }catch(e){ const msg = {not_granted:'Du hast der App den Zugriff auf Claude nicht erlaubt. Das kannst du im Menü der Seite unter „Berechtigungen“ ändern.', rate_limited:'Gerade zu viele Anfragen. Versuch es in ein paar Minuten nochmal.', cancelled:''}[e && e.code];
       if(e && e.text){ out.innerHTML = '<div class="answer"></div>'; out.firstChild.textContent = e.text; } else out.innerHTML = msg === '' ? '' : '<div class="answer muted">' + esc(msg || 'Das hat nicht geklappt. Versuch es gleich nochmal.') + '</div>';
@@ -1639,7 +1624,7 @@ function openReport(F, q, focus){
   $('#repsend').onclick = async () => { const body = {zeit:new Date().toISOString(), fach:F.id, id:q.id, l:focus || null, gruende:[...sel], text:$('#reptext').value.trim().slice(0,600), sitzung:T.sid, version:VERSION};
     track('meldung', {id:q.id, gruende:body.gruende}); if(db && !dbOff){ try{ await db.collection('meldungen').add(body); }catch(e){} } slot.innerHTML = '<p class="small muted">Danke! Ich schaue mir das an und verbessere die Frage.</p>'; };
 }
-function moodHTML(){ return '<div class="sheet" id="mood"><b>Kurze Frage: Wie läuft’s gerade?</b><div class="pick">' + ['macht Spaß','passt','zu leicht','zu schwer','zäh','will andere Formate'].map(t => '<button type="button" aria-pressed="false" data-m="' + esc(t) + '">' + esc(t) + '</button>').join('') + '</div><div class="row"><button type="button" class="btn primary small" id="moodok">Fertig</button><button type="button" class="linkbtn mutedlink" id="moodskip">überspringen</button></div></div>'; }
+function moodHTML(){ return ''; return '<div class="sheet" id="mood"><b>Kurze Frage: Wie läuft’s gerade?</b><div class="pick">' + ['macht Spaß','passt','zu leicht','zu schwer','zäh','will andere Formate'].map(t => '<button type="button" aria-pressed="false" data-m="' + esc(t) + '">' + esc(t) + '</button>').join('') + '</div><div class="row"><button type="button" class="btn primary small" id="moodok">Fertig</button><button type="button" class="linkbtn mutedlink" id="moodskip">überspringen</button></div></div>'; }
 function bindMood(after){ const box = $('#mood'); if(!box) return; const sel = new Set(); box.querySelectorAll('[data-m]').forEach(b => b.onclick = () => { const v = b.dataset.m; sel.has(v) ? sel.delete(v) : sel.add(v); b.setAttribute('aria-pressed', sel.has(v)); });
   $('#moodok').onclick = () => { track('stimmung', {werte:[...sel]}); addXP(5); after(); }; $('#moodskip').onclick = () => { track('stimmung', {werte:[], skip:true}); after(); }; }
 
@@ -1763,9 +1748,9 @@ function buildExam(F){ const K = F.klausur; const need = K.mix; const ids = [];
 function examLeave(F){ const E = FS(F.id).exam; if(!E || E.done) return; const id = E.ids[E.cur]; E.zeit[id] = (E.zeit[id] || 0) + Math.round(visNow() - qT0); qT0 = visNow(); }
 function renderKlausur(F){
   if(F.klausur.typ === 'fall'){ renderFallKlausur(F); return; }
-  clearInterval(tick); setTitle(F.name, 'Endgegner'); const v = $('#view'); const f = FS(F.id); const E = f.exam; const K = F.klausur;
+  clearInterval(tick); setTitle(F.name, 'Abschlussprüfung'); const v = $('#view'); const f = FS(F.id); const E = f.exam; const K = F.klausur;
   if(!E){ const last = f.sims.slice(-3).reverse();
-    v.innerHTML = '<div class="ui"><article class="card stack"><span class="tag gold" style="justify-self:start">Endgegner</span><h2>Die Klausur</h2><p>' + esc(K.beschreibung) + '</p><p class="muted small">Auswertung erst nach dem Abgeben, wie in echt. Bestanden gibt 150 XP extra.</p><button type="button" class="btn primary wide" id="estart">Kampf starten</button></article>' +
+    v.innerHTML = '<div class="ui"><article class="card stack"><span class="tag gold" style="justify-self:start">Abschlussprüfung</span><h2>Die Klausur</h2><p>' + esc(K.beschreibung) + '</p><p class="muted small">Auswertung erst nach dem Abgeben, wie in echt. Bestanden gibt 150 XP extra.</p><button type="button" class="btn primary wide" id="estart">Kampf starten</button></article>' +
       (last.length ? '<article class="card stack"><h3>Deine letzten Versuche</h3>' + last.map(s => '<div class="spread"><span class="muted">' + esc(s.d) + '</span><b class="mono" style="color:var(--' + (s.p >= K.positiv ? 'good' : 'bad') + ')">' + s.p + ' / ' + K.punkte + '</b></div>').join('') + '</article>' : '') + '</div>';
     $('#estart').onclick = () => { buildExam(F); renderKlausur(F); }; return; }
   if(E.done){ renderResult(F); return; }
@@ -1799,9 +1784,9 @@ function finishExam(F, how){
 function renderResult(F){
   const f = FS(F.id); const E = f.exam; const K = F.klausur; const v = $('#view'); const p = E.punkte; const pass = p >= K.positiv; const pct = p / K.punkte;
   const per = {}; E.ids.forEach(id => { const q = F.Q.find(x => x.id === id); if(!q) return; const r = per[q.kap] = per[q.kap] || {p:0, max:0}; r.max += q.punkte; if(E.ans[id] === correctOpt(q)) r.p += q.punkte; });
-  const line = pass ? (pct >= .9 ? 'Prof: Da gibt’s nix mehr zu sagen. Einser-Niveau.' : pct >= .75 ? 'Lena: Souverän. Jetzt nur noch die Lücken unten.' : 'Ben: Bestanden! Mit den Lücken unten wird’s noch besser.') : 'Prof: Kein Drama. Genau dafür üben wir. Schauen Sie sich die roten Kapitel an.';
+  const line = pass ? 'Bestanden. Unten siehst du, wo noch Punkte liegen geblieben sind.' : 'Noch nicht bestanden. Die Kapitel mit roten Balken zuerst wiederholen.';
   let h = '<div class="ui">' + (E.mood ? '' : moodHTML()) + '<article class="card stack"><span class="muted">Ergebnis</span><div class="row" style="align-items:baseline"><span class="big" style="color:var(--' + (pass ? 'good' : 'bad') + ')">' + p + '</span><span class="mono muted">/ ' + K.punkte + ' Punkte</span></div><p><b>' + (pass ? 'Positiv.' : 'Noch nicht positiv. Dir fehlen ' + (K.positiv - p) + ' Punkte.') + '</b></p><p class="voice">' + esc(line) + '</p>' +
-    '<div class="stack" style="gap:6px">' + F.kapitel.filter(k => per[k.k]).map(k => { const r = per[k.k]; return '<div class="kaprow"><span>Kap. ' + esc(k.nr) + ' ' + esc(k.name) + '</span><span class="mono" style="text-align:right">' + r.p + '/' + r.max + '</span><div class="bar8" style="grid-column:1/3"><span style="width:' + (100*r.p/r.max) + '%;background:var(--' + (r.p/r.max >= .5 ? 'good' : 'bad') + ')"></span></div></div>'; }).join('') + '</div><button type="button" class="btn primary wide" id="eagain">Neuer Kampf</button></article><article class="card"><h3 style="margin-bottom:6px">Alle Fragen mit Lösung</h3>';
+    '<div class="stack" style="gap:6px">' + F.kapitel.filter(k => per[k.k]).map(k => { const r = per[k.k]; return '<div class="kaprow"><span>Kap. ' + esc(k.nr) + ' ' + esc(k.name) + '</span><span class="mono" style="text-align:right">' + r.p + '/' + r.max + '</span><div class="bar8" style="grid-column:1/3"><span style="width:' + (100*r.p/r.max) + '%;background:var(--' + (r.p/r.max >= .5 ? 'good' : 'bad') + ')"></span></div></div>'; }).join('') + '</div><button type="button" class="btn primary wide" id="eagain">Neue Prüfung</button></article><article class="card"><h3 style="margin-bottom:6px">Alle Fragen mit Lösung</h3>';
   E.ids.forEach((id, i) => { const q = F.Q.find(x => x.id === id); if(!q) return; const corr = correctOpt(q); const mine = E.ans[id]; const ok = mine === corr;
     h += '<details class="rev" data-id="' + id + '"><summary><span class="mono" style="color:var(--' + (ok ? 'good' : 'bad') + ')">' + (ok ? '✓' : '✗') + ' ' + (i+1) + '</span><span>' + esc(q.stamm) + ' <span class="muted small">(' + kapLabel(F, q.kap) + ')</span></span><span class="mono muted">' + (ok ? q.punkte : 0) + '/' + q.punkte + '</span></summary><div class="stack" style="gap:6px;padding-top:8px">' +
       ['a','b','c','d'].filter(l => q[l]).map(l => '<div class="fb ' + (q[l].r ? 'good' : 'bad') + '"><span><b>' + l + ') ' + (q[l].r ? 'richtig' : 'falsch') + ':</b> ' + esc(q[l].t) + '</span><span class="muted" style="font-size:.88rem">' + esc(q[l].w) + '</span></div>').join('') +
@@ -1827,7 +1812,7 @@ function bindKompass(F, root, id){
 }
 function renderKompass(F){
   setTitle(F.name, 'Zitier-Kompass'); const v = $('#view');
-  v.innerHTML = '<div class="ui"><article class="card stack"><h2>📖 Zitier-Kompass</h2><p class="muted small">Open Book heißt: Wer schnell die richtige Seite findet, gewinnt Zeit. Hier steht zu jedem Werkzeug die Buchseite laut Folien. Tippe auf die Quelle, um das Zitat zu kopieren.</p>' + kompassHTML(F, 'kq') + '</article></div>';
+  v.innerHTML = '<div class="ui"><article class="card stack"><h2>Zitier-Kompass</h2><p class="muted small">Open Book heißt: Wer schnell die richtige Seite findet, gewinnt Zeit. Hier steht zu jedem Werkzeug die Buchseite laut Folien. Tippe auf die Quelle, um das Zitat zu kopieren.</p>' + kompassHTML(F, 'kq') + '</article></div>';
   bindKompass(F, v, 'kq');
 }
 function gradePrompt(F, fall, fr, ans){
@@ -1850,9 +1835,9 @@ async function gradeOne(F, fall, fr, ans){
 }
 function fallStartHTML(F){
   const f = FS(F.id); const K = F.klausur; const done = {}; (f.fallSims || []).forEach(s => { done[s.id] = Math.max(done[s.id] || 0, s.p); });
-  return '<div class="ui"><article class="card stack"><span class="tag gold" style="justify-self:start">Endgegner</span><h2>Die Fallklausur</h2><p>' + esc(K.beschreibung) + '</p>' +
+  return '<div class="ui"><article class="card stack"><span class="tag gold" style="justify-self:start">Abschlussprüfung</span><h2>Die Fallklausur</h2><p>' + esc(K.beschreibung) + '</p>' +
     '<p class="muted small">' + (sample ? 'Nach dem Abgeben korrigiert der Prüfer-Bot jede Antwort nach dem Erwartungshorizont und sagt dir, was für volle Punkte fehlt.' : 'Nach dem Abgeben bewertest du dich selbst mit dem Erwartungshorizont und siehst die Musterlösung.') + ' Bestanden gibt 150 XP extra.</p>' +
-    '<button type="button" class="btn primary wide" id="fzufall">🎲 Zufälligen Fall ziehen</button></article>' +
+    '<button type="button" class="btn primary wide" id="fzufall">Zufälligen Fall wählen</button></article>' +
     '<article class="card stack"><h3>Oder such dir einen Fall aus</h3><div class="mlist">' + (F.faelle || []).map(x => '<button type="button" class="mitem" data-fall="' + esc(x.id) + '"><span><b>' + esc(x.titel) + '</b><small>' + esc(x.branche || '') + ' · Themen: ' + esc(x.fragen.map(q => (q.thema || '')).filter(Boolean).join(', ')) + '</small></span><span class="okdot">' + (done[x.id] != null ? done[x.id] + ' P' : '') + '</span></button>').join('') + '</div></article>' +
     ((f.fallSims || []).length ? '<article class="card stack"><h3>Deine letzten Versuche</h3>' + f.fallSims.slice(-5).reverse().map(s => '<div class="spread"><span class="muted">' + esc(s.d) + ' · ' + esc((fallById(F, s.id) || {}).titel || s.id) + '</span><b class="mono" style="color:var(--' + (s.p >= K.positiv ? 'good' : 'bad') + ')">' + s.p + ' / ' + K.punkte + ' · Note ' + s.note + '</b></div>').join('') + '</article>' : '') + '</div>';
 }
@@ -1860,18 +1845,18 @@ function startFall(F, id){ const f = FS(F.id); f.fall = {id, start:Date.now(), a
 let fallSaveT = null, fallQT = 0;
 function fallLeave(F){ const E = FS(F.id).fall; if(!E || E.done) return; const c = String(E.cur); E.zeit[c] = (E.zeit[c] || 0) + Math.round(visNow() - fallQT); fallQT = visNow(); }
 function renderFallKlausur(F){
-  clearInterval(tick); setTitle(F.name, 'Endgegner'); const v = $('#view'); const f = FS(F.id); const E = f.fall; const K = F.klausur;
+  clearInterval(tick); setTitle(F.name, 'Abschlussprüfung'); const v = $('#view'); const f = FS(F.id); const E = f.fall; const K = F.klausur;
   if(!E){ v.innerHTML = fallStartHTML(F);
     $('#fzufall').onclick = () => { const seen = new Set((f.fallSims || []).map(s => s.id)); const pool = (F.faelle || []).filter(x => !seen.has(x.id)); startFall(F, pickOne(pool.length ? pool : F.faelle).id); };
     v.querySelectorAll('[data-fall]').forEach(b => b.onclick = () => startFall(F, b.dataset.fall)); return; }
   const fall = fallById(F, E.id); if(!fall){ f.fall = null; save(); renderFallKlausur(F); return; }
   if(E.done){ renderFallResult(F); return; }
   const left = () => Math.max(0, E.start + K.minuten*60e3 - Date.now()); if(left() === 0){ finishFall(F, 'zeit'); return; }
-  const tabs = [['fall', 'Fall']].concat(fall.fragen.map(q => [String(q.nr), 'Frage ' + q.nr])).concat(F.kompass ? [['kompass', '📖']] : []);
+  const tabs = [['fall', 'Fall']].concat(fall.fragen.map(q => [String(q.nr), 'Frage ' + q.nr])).concat(F.kompass ? [['kompass', '']] : []);
   const cur = String(E.cur);
   let body = '';
   if(cur === 'fall') body = '<article class="card stack case"><span class="eyebrow">' + esc(fall.branche || 'Fallbeispiel') + '</span><h2>' + esc(fall.titel) + '</h2>' + paras(fall.text) + '<button type="button" class="btn primary wide" data-go="' + fall.fragen[0].nr + '">Zu Frage 1 →</button></article>';
-  else if(cur === 'kompass') body = '<article class="card stack"><h3>📖 Zitier-Kompass</h3>' + kompassHTML(F, 'kq') + '</article>';
+  else if(cur === 'kompass') body = '<article class="card stack"><h3>Zitier-Kompass</h3>' + kompassHTML(F, 'kq') + '</article>';
   else { const fr = fall.fragen.find(q => String(q.nr) === cur); const a = E.ans[cur] || '';
     body = '<details class="card casepeek"><summary>Fall nochmal lesen</summary><div class="case">' + paras(fall.text) + '</div></details>' +
       '<article class="card stack"><div class="row"><span class="tag gold">' + fr.punkte + ' Punkte</span>' + (fr.thema ? '<span class="tag">' + esc(fr.thema) + '</span>' : '') + '</div><p class="stem">' + esc(fr.text) + '</p>' +
@@ -1923,7 +1908,7 @@ function renderFallResult(F){
   if(t.all) recordFall(F);
   const pass = t.p >= K.positiv; const note = noteFor(K, t.p);
   let h = '<div class="ui">' + (t.all && !E.mood ? moodHTML() : '') + '<article class="card stack"><span class="muted">' + esc(fall.titel) + '</span>';
-  if(t.all) h += '<div class="row" style="align-items:baseline"><span class="big" style="color:var(--' + (pass ? 'good' : 'bad') + ')">' + (Math.round(t.p*2)/2) + '</span><span class="mono muted">/ ' + K.punkte + ' Punkte · Note ' + note + '</span></div>' + (K.noten_hinweis ? '<p class="small muted">' + esc(K.noten_hinweis) + '</p>' : '') + '<p><b>' + (pass ? 'Positiv.' : 'Noch nicht positiv. Dir fehlen ' + (K.positiv - t.p) + ' Punkte.') + '</b></p><p class="voice">' + esc(pass ? (note <= 2 ? 'Prof: Sehr stark. So schaut eine Einser-Antwort aus.' : 'Lena: Bestanden. Schau dir unten an, wo noch Punkte liegen geblieben sind.') : 'Prof: Kein Drama. Lesen Sie, was gefehlt hat, und probieren Sie den nächsten Fall.') + '</p>';
+  if(t.all) h += '<div class="row" style="align-items:baseline"><span class="big" style="color:var(--' + (pass ? 'good' : 'bad') + ')">' + (Math.round(t.p*2)/2) + '</span><span class="mono muted">/ ' + K.punkte + ' Punkte · Note ' + note + '</span></div>' + (K.noten_hinweis ? '<p class="small muted">' + esc(K.noten_hinweis) + '</p>' : '') + '<p><b>' + (pass ? 'Positiv.' : 'Noch nicht positiv. Dir fehlen ' + (K.positiv - t.p) + ' Punkte.') + '</b></p><p class="voice">' + esc(pass ? 'Bestanden. Unten steht je Frage, wo noch Punkte liegen geblieben sind.' : 'Noch nicht bestanden. Lies je Frage, was gefehlt hat.') + '</p>';
   else if(E.selbst) h += '<p><b>Selbstkorrektur:</b> Hak bei jeder Frage an, was deine Antwort wirklich enthält. Daraus ergeben sich deine Punkte.</p>';
   else h += '<p><b>Wird korrigiert …</b> ' + (E.gradeErr ? 'Das hat gerade nicht geklappt. <button type="button" class="linkbtn" id="fretry">Nochmal versuchen</button> oder <button type="button" class="linkbtn" id="fself">selbst korrigieren</button>' : 'Der Prüfer-Bot liest deine Antworten. Das dauert pro Frage etwa eine halbe Minute.') + '</p>';
   h += '<button type="button" class="btn primary wide" id="fagain">Neuer Fall</button></article>';
@@ -1932,7 +1917,7 @@ function renderFallResult(F){
     if(g){ h += '<div class="bar8"><span style="width:' + (100*g.punkte/fr.punkte) + '%;background:var(--' + (g.punkte/fr.punkte >= .5 ? 'good' : 'bad') + ')"></span></div>' +
       (g.staerken ? '<div class="fb good"><span><b>Gut:</b> ' + esc(g.staerken) + '</span></div>' : '') + (g.fehlt ? '<div class="fb bad"><span><b>Für volle Punkte fehlt:</b> ' + esc(g.fehlt) + '</span></div>' : '') + (g.tipp ? '<p class="voice">Tipp: ' + esc(g.tipp) + '</p>' : '') +
       '<details><summary class="small">Erwartungshorizont</summary><div class="stack" style="gap:4px;padding-top:6px">' + fr.kriterien.map(c => { const got = (g.kriterien.find(x => x.id === c.id) || {}).punkte; return '<div class="spread small"><span>' + esc(c.t) + '</span><span class="mono">' + (got != null ? got + '/' : '') + c.p + '</span></div>'; }).join('') + '</div></details>'; }
-    else if(E.selbst){ h += '<a class="btn small" style="justify-self:start" target="_blank" rel="noopener" href="' + esc(claudeLink(gradePrompt(F, fall, fr, a))) + '">🤖 Von Claude korrigieren lassen</a><div class="stack selfcheck" data-nr="' + k + '" style="gap:6px">' + fr.kriterien.map(c => '<label class="ck"><input type="checkbox" data-id="' + esc(c.id) + '" data-p="' + c.p + '"> <span>' + esc(c.t) + ' <span class="mono muted">(' + c.p + ' P)</span></span></label>').join('') + '<button type="button" class="btn small" data-selfok="' + k + '" style="justify-self:start">Punkte übernehmen</button></div>'; }
+    else if(E.selbst){ h += '<a class="btn small" style="justify-self:start" target="_blank" rel="noopener" href="' + esc(claudeLink(gradePrompt(F, fall, fr, a))) + '">Von Claude korrigieren lassen</a><div class="stack selfcheck" data-nr="' + k + '" style="gap:6px">' + fr.kriterien.map(c => '<label class="ck"><input type="checkbox" data-id="' + esc(c.id) + '" data-p="' + c.p + '"> <span>' + esc(c.t) + ' <span class="mono muted">(' + c.p + ' P)</span></span></label>').join('') + '<button type="button" class="btn small" data-selfok="' + k + '" style="justify-self:start">Punkte übernehmen</button></div>'; }
     else h += '<p class="muted small" id="gst' + k + '">wartet auf Korrektur</p>';
     h += '<details><summary class="small">Deine Antwort (' + words(a) + ' Wörter)</summary><div class="small" style="white-space:pre-wrap;padding-top:6px">' + esc(a || '–') + '</div></details>' +
       '<details' + (g || E.selbst ? ' open' : '') + '><summary class="small">Musterlösung</summary><div class="small muster" style="padding-top:6px">' + paras(fr.muster) + (fr.zitate && fr.zitate.length ? '<p class="mono muted">Quellen: ' + esc(fr.zitate.join(' · ')) + '</p>' : '') + '</div></details></article>'; });
@@ -1954,7 +1939,7 @@ function renderFallUeben(F, kap, box){
   const i = Math.min(items.length - 1, Math.max(0, (f.uebIdx && f.uebIdx[kap.k]) || 0)); const u = items[i]; const st = f.ueb[u.id] || {};
   box.innerHTML = '<article class="card stack"><div class="spread"><span class="eyebrow">Fallfrage ' + (i+1) + ' von ' + items.length + '</span><span class="mono small">' + (st.g ? st.g.punkte + '/' + u.punkte + ' P' : u.punkte + ' P') + '</span></div><h3>' + esc(u.titel) + '</h3>' + paras(u.situation) + '<p class="stem">' + esc(u.frage) + '</p>' +
     '<textarea class="fans" id="uans" aria-label="Deine Antwort" placeholder="' + esc(F.klausur.platzhalter || 'Begriff + Zitat → Anwendung auf den Fall → Begründung') + '">' + esc(st.a || '') + '</textarea><div class="spread small muted"><span id="uwc">' + words(st.a) + ' Wörter</span><span>' + (sample ? 'KI-Korrektur' : 'Selbstcheck') + '</span></div>' +
-    '<div class="row"><button type="button" class="btn primary" id="ucheck2">' + (sample ? 'Korrigieren lassen' : 'Mit Lösung vergleichen') + '</button>' + (F.kompass ? '<button type="button" class="btn" id="ukmp">📖 Kompass</button>' : '') + '</div><div id="ukbox"></div><div id="ures"></div>' +
+    '<div class="row"><button type="button" class="btn primary" id="ucheck2">' + (sample ? 'Korrigieren lassen' : 'Mit Lösung vergleichen') + '</button>' + (F.kompass ? '<button type="button" class="btn" id="ukmp">Kompass</button>' : '') + '</div><div id="ukbox"></div><div id="ures"></div>' +
     '<div class="judge"><button type="button" class="btn" id="uprev" ' + (i === 0 ? 'disabled' : '') + '>← Vorige</button><button type="button" class="btn" id="unext" ' + (i === items.length-1 ? 'disabled' : '') + '>Nächste →</button></div></article>';
   const t0 = visNow(); const ta = $('#uans', box);
   ta.oninput = () => { st.a = ta.value; f.ueb[u.id] = st; $('#uwc', box).textContent = words(ta.value) + ' Wörter'; clearTimeout(fallSaveT); fallSaveT = setTimeout(save, 600); };
@@ -1966,7 +1951,7 @@ function renderFallUeben(F, kap, box){
       '<details open><summary class="small">Musterlösung und Erwartungshorizont</summary><div class="small muster" style="padding-top:6px">' + paras(u.muster) + '<div class="stack" style="gap:4px">' + u.kriterien.map(c => '<div class="spread"><span>' + esc(c.t) + '</span><span class="mono">' + c.p + ' P</span></div>').join('') + '</div></div></details>'; };
   if(st.g || st.gezeigt) showRes();
   $('#ucheck2', box).onclick = async () => { const a = ta.value; track('fallfrage', {id:u.id, woerter:words(a), ms:Math.round(visNow() - t0)});
-    if(!sample || words(a) < 5){ st.gezeigt = true; f.ueb[u.id] = st; save(); showRes(); if(!sample && words(a) >= 5){ const r = $('#ures', box); r.insertAdjacentHTML('afterbegin', '<a class="btn small" target="_blank" rel="noopener" href="' + esc(claudeLink(gradePrompt(F, {titel:u.titel, text:u.situation}, {nr:1, text:u.frage, punkte:u.punkte, kriterien:u.kriterien, muster:u.muster}, a))) + '">🤖 Von Claude korrigieren lassen</a>'); } return; }
+    if(!sample || words(a) < 5){ st.gezeigt = true; f.ueb[u.id] = st; save(); showRes(); if(!sample && words(a) >= 5){ const r = $('#ures', box); r.insertAdjacentHTML('afterbegin', '<a class="btn small" target="_blank" rel="noopener" href="' + esc(claudeLink(gradePrompt(F, {titel:u.titel, text:u.situation}, {nr:1, text:u.frage, punkte:u.punkte, kriterien:u.kriterien, muster:u.muster}, a))) + '">Von Claude korrigieren lassen</a>'); } return; }
     const b = $('#ucheck2', box); b.disabled = true; $('#ures', box).innerHTML = '<p class="muted small">Der Prüfer liest …</p>';
     try{ const fake = {titel:u.titel, text:u.situation}; const g = await gradeOne(F, fake, {nr:1, text:u.frage, punkte:u.punkte, kriterien:u.kriterien, muster:u.muster}, a); st.g = g; st.gezeigt = true; f.ueb[u.id] = st; save(); track('fallfrage_note', {id:u.id, p:g.punkte, max:u.punkte}); addXP(10 + Math.round(10*g.punkte/u.punkte)); ton(g.punkte/u.punkte >= .5 ? 'ok' : 'fehler'); }
     catch(e){ st.gezeigt = true; f.ueb[u.id] = st; save(); toast(e && e.code === 'not_granted' ? 'Ohne Claude-Zugriff: Vergleich mit der Musterlösung.' : 'Korrektur hat nicht geklappt, hier die Musterlösung.'); }
@@ -1977,14 +1962,12 @@ function renderFallUeben(F, kap, box){
 function renderStand(F){
   const v = $('#view'); let h = '<div class="ui">';
   if(F){ setTitle(F.name, 'Mein Stand'); const f = FS(F.id); let mast = 0; Object.values(f.st).forEach(s => { if(s.b >= 2) mast++; }); const tot = F.Q.length*4;
-    h += chapterChips(F, null) + '<article class="card stack"><h2>Dein Stand in ' + esc(F.kurz) + '</h2><div class="spread"><span>Aussagen, die sitzen</span><b class="mono">' + mast + ' / ' + tot + '</b></div><div class="bar8"><span style="width:' + (100*mast/Math.max(1,tot)) + '%"></span></div>' +
+    h += '<article class="card stack"><h2>Stand in ' + esc(F.kurz) + '</h2><div class="spread"><span>Aussagen, die sitzen</span><b class="mono">' + mast + ' / ' + tot + '</b></div><div class="bar8"><span style="width:' + (100*mast/Math.max(1,tot)) + '%"></span></div>' +
       '<div class="spread"><span>Fragen zuletzt richtig</span><b class="mono">' + Object.values(f.q).filter(s => s.last).length + ' / ' + F.Q.length + '</b></div><div class="spread"><span>Baukästen gelöst</span><b class="mono">' + Object.values(f.mod).filter(x => x.ok).length + ' / ' + F.M.length + '</b></div>' +
       '<div class="spread"><span>Beste Simulation</span><b class="mono">' + (f.sims.length ? f.best + ' / ' + F.klausur.punkte : '–') + '</b></div><p class="muted small">„Sitzt“ heißt: mindestens zweimal hintereinander richtig. Ziel bis zur Klausur: alle Kapitel über 80 % und zwei Simulationen klar positiv.</p></article>' +
       '<article class="card stack"><h3>Nach Kapitel</h3>' + F.kapitel.map(k => { const r = kapMastery(F, k.k); return '<div class="kaprow"><span>Kap. ' + esc(k.nr) + ' ' + esc(k.name) + '</span><span class="mono" style="text-align:right">' + Math.round(100*r) + ' %</span><div class="bar8" style="grid-column:1/3"><span style="width:' + (100*r) + '%;background:var(--' + (r >= .8 ? 'good' : r >= .4 ? 'accent' : 'bad') + ')"></span></div></div>'; }).join('') + '</article>';
   }
-  h += '<article class="card stack"><h3>Level ' + (levelOf(S.xp)+1) + ' · ' + esc(LEVELS[levelOf(S.xp)][1]) + '</h3><p class="muted small">' + S.xp + ' XP gesamt · 🔥 ' + streakDays() + ' Tage in Folge · heute ' + (S.day.d === today() ? S.day.xp : 0) + ' von ' + GOAL + ' XP</p></article>' +
-    '<article class="card stack"><h3>Abzeichen</h3><div class="badges">' + BADGES.map(b => '<div class="badge' + (S.badges[b.id] ? ' on' : '') + '"><b>' + (S.badges[b.id] ? '★ ' : '') + esc(b.n) + '</b><span>' + esc(b.d) + '</span></div>').join('') + '</div></article>' +
-    '<article class="card stack"><h3>Was ich über dein Lernen weiß</h3>' + insightsHTML() + '</article>' +
+  h += '<article class="card stack"><h3>Was ich über dein Lernen weiß</h3>' + insightsHTML() + '</article>' +
     '<article class="card stack"><h3>Wunsch oder Idee?</h3><p class="muted small">Was soll ich an der App besser machen? Ich lese das bei der nächsten Auswertung.</p><textarea id="wish" style="width:100%;min-height:70px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface)" aria-label="Wunsch"></textarea><button type="button" class="btn small" id="wishsend" style="justify-self:start">Senden</button><div id="wishout"></div></article>' +
     (ENC ? '<article class="card stack"><h3>Lernstand an Claude schicken</h3><p class="muted small">Damit ich auswerten kann, wo du hängst und was gut funktioniert. Der Lernstand ist verschlüsselt, nur ich kann ihn mit deinem Schlüssel lesen.' + (S.sent ? ' Zuletzt geschickt: ' + esc(S.sent) + '.' : '') + '</p><button type="button" class="btn primary" id="lsCopy">Lernstand kopieren</button><p class="muted small" id="lsOut">Danach einfach im Chat mit Claude einfügen und senden.</p></article>' : '') +
     '<article class="card stack"><h3>Daten</h3><p class="muted small">' + (db && !dbOff ? 'Tracking ist aktiv: Wie lange du für Antworten brauchst, wo du hängst, was du fragst, welche Spiele du spielst. Das wertet dein Lernassistent aus und verbessert damit die Inhalte. Dein Fortschritt ist auf allen Geräten gleich.' : 'Tracking ist in dieser Ansicht nicht verfügbar. Dein Fortschritt bleibt auf diesem Gerät.') + '</p><div id="rs"><button type="button" class="btn small" id="reset">Fortschritt löschen</button></div></article></div>';
@@ -2006,7 +1989,7 @@ async function boot(){
   let k = HKEY || qk; try{ if(k) localStorage.setItem('lernapp-key', k); else k = localStorage.getItem('lernapp-key') || ''; }catch(e){}
   const keyFrom = v => { v = String(v || '').trim(); const m = v.match(/[?&]k=([A-Za-z0-9_-]{30,})/) || v.match(/#([A-Za-z0-9_-]{30,})~/) || v.match(/^([A-Za-z0-9_-]{30,})$/); return m ? m[1] : ''; };
   const openWith = key => { try{ localStorage.setItem('lernapp-key', key); }catch(e){} location.replace(location.pathname + '?k=' + key + '#'); };
-  const lock = msg => { $('#lvl').hidden = true; $('#view').innerHTML = '<div class="ui"><div class="card stack"><h2>🔒 Deine Lern-App</h2><p>' + esc(msg) + '</p>' +
+  const lock = msg => { $('#lvl').hidden = true; $('#view').innerHTML = '<div class="ui"><div class="card stack"><h2>Deine Lern-App</h2><p>' + esc(msg) + '</p>' +
       '<button type="button" class="btn primary" id="keypaste">Link aus der Zwischenablage einfügen</button><input id="keyin" class="kmp-q" placeholder="… oder hier einfügen" aria-label="Link oder Schlüssel" autocapitalize="off" autocorrect="off" spellcheck="false"><button type="button" class="btn" id="keygo">Öffnen</button>' +
       '<p class="muted small">Den Link findest du im Chat mit Claude. Das musst du nur einmal machen, danach merkt sich die App den Schlüssel.</p></div></div>';
     $('#keygo').onclick = () => { const key = keyFrom($('#keyin').value); if(!key){ toast('Das ist kein gültiger Link.'); return; } openWith(key); };
