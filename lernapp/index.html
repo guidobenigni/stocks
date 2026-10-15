@@ -645,6 +645,77 @@ details.rev{border-top:0}
 .ls .funnel .row.last .fill{background:var(--good)}
 .ls .funnel .pct{font-family:var(--font-mono);text-align:right;font-variant-numeric:tabular-nums}
 @media (max-width:480px){.ls .funnel .row{grid-template-columns:1fr 56px}.ls .funnel .bar{grid-column:1/-1;grid-row:2}}
+.ls .en-rows{display:grid;gap:6px;margin:1rem 0}
+.ls .en-r{background:var(--surface);border-radius:10px;padding:.55rem .8rem;font-size:15px;line-height:1.45}
+.ls .en-r .h{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline}
+.ls .en-r .h b{font-weight:600}
+.ls .en-r .ar{color:var(--text-muted)}
+.ls .en-r .n{color:var(--teal);font-weight:500}
+.ls .en-r .x{display:block;font-size:13.5px;color:var(--text-secondary);font-style:italic;margin-top:3px}
+.ls .en-k{display:inline-block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--coral);min-width:5.5em}
+.ls .en-bad{color:var(--danger);text-decoration:line-through;text-decoration-thickness:1.5px}
+.ls .en-good{color:var(--good);font-weight:500}
+.ls .en-svg{display:block;width:100%;height:auto;margin:.4rem 0 .8rem}
+.ls .en-svg .gl{stroke:var(--border);stroke-width:1}
+.ls .en-svg .yr{font-size:11px;fill:var(--text-secondary);text-anchor:middle}
+.ls .en-svg .vl{font-size:10.5px;fill:var(--text-primary);text-anchor:middle;font-weight:600}
+.ls .en-svg .sg{stroke-width:3.5;stroke-linecap:round;fill:none}
+.ls .en-svg .sg.up{stroke:var(--good)}
+.ls .en-svg .sg.dn{stroke:var(--danger)}
+.ls .en-svg .sg.fl{stroke:var(--text-muted)}
+.ls .en-svg .pt{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+.ls .en-out{font-size:15px;line-height:1.55;display:grid;gap:8px;margin-top:.6rem}
+.ls .en-out p{margin:0;padding:.55rem .75rem;background:var(--surface-2);border-radius:10px}
+.ls .en-out .k{display:block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin-bottom:2px}
+.ls .en-prep{color:var(--coral);font-weight:600}
+.ls .en-note{font-size:12.5px;color:var(--text-muted);margin:.6rem 0 0}
+.ls .en-model{background:var(--surface);border-radius:12px;padding:1rem 1.1rem;font-size:15.5px;line-height:1.65}
+.ls .en-tag{display:inline-block;font-family:var(--font-mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--teal-bg);color:var(--teal);border-radius:6px;padding:0 6px;margin-right:4px;vertical-align:1px}
+.ls .principle ol{margin:.2rem 0 0;padding-left:1.25rem;font-size:15px}
+.ls .principle ol li{margin-bottom:.3rem}
+.ls .calc-row.en-wide{grid-template-columns:150px 1fr 100px}
+.ls .calc-row.en-wide output{white-space:nowrap}
+@media (max-width:480px){.ls .calc-row.en-wide{grid-template-columns:1fr 100px}}
+.ls .en-mail{background:var(--surface);border-radius:12px;padding:1rem 1.1rem;font-size:15px;line-height:1.6;margin:.8rem 0;border-left:3px solid var(--teal)}
+.ls .en-n{display:inline-block;min-width:1.35em;text-align:center;font-family:var(--font-mono);font-size:11px;background:var(--coral);color:#fff;border-radius:999px;padding:0 4px;margin-left:2px;vertical-align:2px}
+.ls .en-doc{background:var(--surface);border-radius:12px;padding:.6rem;display:grid;gap:4px;margin:1rem 0;font-size:15px;line-height:1.55}
+.ls .en-blk{display:block;width:100%;text-align:left;font:inherit;color:var(--text-primary);background:transparent;border:0;border-radius:9px;padding:.45rem .6rem;cursor:pointer}
+.ls .en-blk:hover{background:var(--surface-2)}
+.ls .en-blk.on{background:var(--accent-bg);box-shadow:inset 3px 0 0 var(--accent)}
+.ls .en-blk:focus-visible{outline:2px solid var(--coral);outline-offset:1px}
+.ls .en-blk h4{margin:0 0 .15rem;font-size:15px;font-weight:700}
+.ls .en-blk p{margin:0}
+.ls .en-blk .memo{font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text-secondary)}
+.ls .en-rxn{margin:.1rem .4rem .5rem;padding:.6rem .8rem;border-radius:10px;background:var(--amber-bg);font-size:14px;line-height:1.5;color:var(--text-primary)}
+.ls .en-rxn b{color:var(--amber)}
+.ls .en-rxn[hidden]{display:none}
+.ls .en-lk{background:var(--teal-bg);color:var(--teal);border-radius:5px;padding:0 3px;font-weight:600}
+.ls .en-rf{background:var(--violet-bg);color:var(--violet);border-radius:5px;padding:0 3px;font-weight:600}
+.ls .en-pz{display:grid;gap:6px}
+.ls .en-pz button.s{display:block;width:100%;text-align:left;font:inherit;font-size:15px;line-height:1.45;color:var(--text-primary);background:var(--fill);border:0;border-radius:10px;padding:.6rem .75rem;cursor:pointer}
+.ls .en-pz button.s:disabled{opacity:.35;cursor:default}
+.ls .en-pz ol{margin:.6rem 0 0;padding-left:1.4rem;font-size:15px;line-height:1.5;min-height:1.5em}
+.ls .en-pz ol li{margin-bottom:.35rem}
+.ls .en-pz ol li.ok{color:var(--good)}
+.ls .en-pz ol li.no{color:var(--danger)}
+.ls .en-pz .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:.6rem}
+.ls .en-pz .fb{font-size:14px;color:var(--text-secondary);margin:.4rem 0 0}
+.ls .en-mx td, .ls .en-mx th{text-align:center}
+.ls .en-mx td:first-child, .ls .en-mx th:first-child{text-align:left}
+.ls .en-bar{height:8px;border-radius:4px;background:var(--fill);margin-top:6px;overflow:hidden}
+.ls .en-bar span{display:block;height:100%;background:var(--accent);border-radius:4px}
+.ls .stat.win{box-shadow:inset 0 0 0 2px var(--good)}
+.ls .en-fd{display:grid;gap:10px}
+.ls .en-fd .it{background:var(--surface-2);border-radius:10px;padding:.6rem .7rem}
+.ls .en-fd .ws{display:flex;flex-wrap:wrap;gap:2px}
+.ls .en-fd .w{font:inherit;font-size:15.5px;line-height:1.3;color:var(--text-primary);background:transparent;border:0;border-radius:6px;padding:3px 4px;cursor:pointer}
+.ls .en-fd .w:hover{background:var(--fill)}
+.ls .en-fd .w.no{background:var(--danger-bg);color:var(--danger)}
+.ls .en-fd .w.ok{background:var(--good-bg);color:var(--good);font-weight:600}
+.ls .en-fd .w:disabled{cursor:default}
+.ls .en-fd .fb{font-size:14px;margin:.4rem 0 0;color:var(--text-secondary)}
+.ls .en-fd .fb[hidden]{display:none}
+.ls .en-fd .sc{font-family:var(--font-mono);font-size:13px;color:var(--text-secondary)}
 .ls .stl-kompass{background:var(--coral-bg);border:1px solid var(--border);border-left:4px solid var(--coral);border-radius:12px;padding:1rem 1.15rem;margin:1.2rem 0}
 .ls .stl-kompass .label{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);margin-bottom:.35rem}
 .ls .stl-kompass ul{margin:.2rem 0 .7rem;padding-left:1.1rem;font-size:15px}
@@ -1011,7 +1082,7 @@ details.rev{border-top:0}
 let FAECHER = [];
 let NAME = '';
 /* GitHub-Pages-Version: Inhalte liegen verschlüsselt (AES-GCM) daneben, der Schlüssel steht im persönlichen Link (#SCHLÜSSEL~route) */
-const ENC = true; const VERS = {"a/marketing/k01.mp3":"909f58a236","a/marketing/k02.mp3":"02e45f2334","a/marketing/k04.mp3":"e02f4afbe3","a/marketing/k08.mp3":"e768c1a33e","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/faecher.json":"9679a106e1","d/marketing/fach.json":"accb1178ff","d/marketing/k01.js":"4932eeba55","d/marketing/k02.js":"a9352f54d4","d/marketing/k04.js":"2efa814ad0","d/marketing/k07.js":"4bdcdfc2f9","d/marketing/k08.js":"b40c8fac27","d/marketing/k09.js":"eebc4d3824","d/marketing/k10.js":"f01ea9d865","d/marketing/k11.js":"0c1f53e9ce","d/marketing/k12.js":"e2a6cfb36a","d/marketing/k13.js":"ffc77ef9e8","d/marketing/k14.js":"d3d058abff","d/marketing/k15.js":"a204e898e0","d/strategie/fach.json":"8d4bd89834","d/strategie/s1.js":"e4a41bb0b7","d/strategie/s2.js":"8b4cdc21c1","d/strategie/s3.js":"811930b9ab","d/strategie/s4.js":"079d92a2de","d/strategie/s5.js":"fcdaab164d","d/strategie/s6.js":"fa1aa6d072","g/bcgboerse.js":"a6f5bd6aed","g/preislabor.js":"90ff319049","g/segmentscanner.js":"547218064d","g/wegderware.js":"06c074bf49"};
+const ENC = true; const VERS = {"a/marketing/k01.mp3":"909f58a236","a/marketing/k02.mp3":"02e45f2334","a/marketing/k04.mp3":"e02f4afbe3","a/marketing/k08.mp3":"e768c1a33e","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/englisch/e1.js":"e5e350bd29","d/englisch/e2.js":"07676982ce","d/englisch/e3.js":"f1ddee9e6a","d/englisch/e4.js":"12ab0bcb6c","d/englisch/e5.js":"d0cd7f1823","d/englisch/e6.js":"e2e65e1c42","d/englisch/fach.json":"de97600aaa","d/faecher.json":"a0fa9d9153","d/marketing/fach.json":"accb1178ff","d/marketing/k01.js":"4932eeba55","d/marketing/k02.js":"a9352f54d4","d/marketing/k04.js":"2efa814ad0","d/marketing/k07.js":"4bdcdfc2f9","d/marketing/k08.js":"b40c8fac27","d/marketing/k09.js":"eebc4d3824","d/marketing/k10.js":"f01ea9d865","d/marketing/k11.js":"0c1f53e9ce","d/marketing/k12.js":"e2a6cfb36a","d/marketing/k13.js":"ffc77ef9e8","d/marketing/k14.js":"d3d058abff","d/marketing/k15.js":"a204e898e0","d/strategie/fach.json":"8d4bd89834","d/strategie/s1.js":"e4a41bb0b7","d/strategie/s2.js":"8b4cdc21c1","d/strategie/s3.js":"811930b9ab","d/strategie/s4.js":"079d92a2de","d/strategie/s5.js":"fcdaab164d","d/strategie/s6.js":"fa1aa6d072","g/bcgboerse.js":"a6f5bd6aed","g/preislabor.js":"90ff319049","g/segmentscanner.js":"547218064d","g/wegderware.js":"06c074bf49"};
 let CK = null, HKEY = '';
 const b64u = t => Uint8Array.from(atob(t.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((t.length + 3) % 4)), c => c.charCodeAt(0));
 async function getBuf(path){
@@ -1035,7 +1106,7 @@ async function lernstandCode(){
   return 'LERNSTAND1:' + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 function claudeLink(prompt){ return 'https://claude.ai/new?q=' + encodeURIComponent(String(prompt).slice(0, 6000)); }
-const VERSION = '2026-10-15 06:34';
+const VERSION = '2026-10-15 14:34';
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
@@ -1282,7 +1353,7 @@ function renderFach(F){
       const gm = g.reduce((a, x) => a + Object.keys(((f.games[x.id] || {}).m) || {}).length, 0), gt = g.reduce((a, x) => a + (x.missionen || 0), 0);
       const bits = [k.lern ? 'Lernen' : '', k.audio ? 'Podcast ' + Math.round(k.audio.dauer/60) + ' min' + (P.done ? ' ✓' : '') : '', g.length ? 'Spiel ' + gm + '/' + gt + ' ★' : '', F.Q.some(q => q.kap === k.k) || (F.uebungen || []).some(u => u.kap === k.k) ? 'Prüfung' : ''].filter(Boolean);
       return '<button type="button" class="mitem" data-k="' + k.k + '"><span><b>Kap. ' + esc(k.nr) + ' · ' + esc(k.name) + '</b><small>' + bits.join(' · ') + '</small></span><span class="okdot"' + (st.best != null ? ' style="color:var(--' + (st.best >= .5 ? 'good' : 'bad') + ')"' : '') + '>' + (st.best != null ? Math.round(100*st.best) + ' %' : '') + '</span></button>'; }).join('') +
-    '<button type="button" class="mitem final" data-go="endgegner"><span><b>🏁 Abschlussprüfung</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? 'ein Fall, drei offene Fragen, wie in echt' : 'alle Kapitel, wie in echt') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
+    '<button type="button" class="mitem final" data-go="endgegner"><span><b>🏁 Abschlussprüfung</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? (F.klausur.aufbau || 'ein Fall, drei offene Fragen, wie in echt') : 'alle Kapitel, wie in echt') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
     (F.kompass ? '<button type="button" class="mitem" data-go="kompass"><span><b>📖 Zitier-Kompass</b><small>Für die Open-Book-Klausur: welches Modell auf welcher Buchseite</small></span><span class="okdot"></span></button>' : '') + '</div></div>';
   $('#view').innerHTML = h; bindChapterChips(F);
   $('#view').querySelectorAll('[data-go]').forEach(b => b.onclick = () => nav(F.id + '.' + b.dataset.go));
@@ -1432,7 +1503,7 @@ document.addEventListener('play', e => { if(e.target !== aud && !aud.paused) aud
 function renderHoeren(F, kap, pane){
   if(!kap.audio){ pane.innerHTML = '<div class="ui"><p class="muted">Die Folge zu diesem Kapitel wird gerade vertont.</p></div>'; return; }
   const P = (S.pod[F.id] || {})[kap.k] || {}; const ms = kap.audio.marken || [];
-  pane.innerHTML = '<div class="ui ep"><div class="cover"><canvas id="cv"></canvas><small>' + esc(F.podcast || 'Podcast') + ' · Kap. ' + esc(kap.nr) + '</small><b>' + esc(kap.name) + '</b><small>' + Math.round(kap.audio.dauer/60) + ' min' + (kap.audio.stimmen === 'drei' ? ' · Lena, Ben und der Prof' : '') + (P.done ? ' · ✓ gehört' : P.pos ? ' · bei ' + fmt(P.pos) : '') + '</small></div>' +
+  pane.innerHTML = '<div class="ui ep"><div class="cover"><canvas id="cv"></canvas><small>' + esc(F.podcast || 'Podcast') + ' · Kap. ' + esc(kap.nr) + '</small><b>' + esc(kap.name) + '</b><small>' + Math.round(kap.audio.dauer/60) + ' min' + (kap.audio.stimmen === 'sonnfeld' ? ' · Zu Gast bei Sonnfeld' : kap.audio.stimmen === 'drei' ? ' · Lena, Ben und der Prof' : '') + (P.done ? ' · ✓ gehört' : P.pos ? ' · bei ' + fmt(P.pos) : '') + '</small></div>' +
     '<button type="button" class="btn primary wide" id="play">' + (P.pos > 5 && !P.done ? '▶ Weiterhören ab ' + fmt(P.pos) : '▶ Abspielen') + '</button>' +
     (ms.length ? '<div class="card"><b>Sprungmarken</b><div class="marks" id="marks">' + ms.map((m, i) => '<button type="button" data-t="' + m.t + '" data-e="' + ((ms[i+1] || {}).t || 1e9) + '"><span class="tm">' + fmt(m.t) + '</span><span>' + esc(m.titel) + '</span></button>').join('') + '</div></div>' : '') +
     '<p class="muted small">Tipp: Die Folge läuft unten weiter, während du in der App liest oder spielst. Bei gesperrtem Bildschirm spielt Safari meist weiter.</p></div>';
@@ -1446,7 +1517,7 @@ function waveCover(cv){ if(!cv) return; const ctx = cv.getContext('2d'); const d
 function renderPodcasts(F){
   const eps = F.kapitel.filter(k => k.audio);
   $('#view').innerHTML = '<div class="ui">' + chapterChips(F, null) + '<div class="khead"><span class="k">' + esc(F.kurz) + '</span><h1>' + esc(F.podcast || 'Podcasts') + '</h1><p class="muted">' + eps.length + ' Folgen. Tipp für unterwegs: einfach der Reihe nach durchhören.</p></div><div class="mlist">' +
-    eps.map(k => { const P = (S.pod[F.id] || {})[k.k] || {}; return '<button type="button" class="mitem" data-k="' + k.k + '"><span><b>Kap. ' + esc(k.nr) + ' · ' + esc(k.name) + '</b><small>' + Math.round(k.audio.dauer/60) + ' min' + (k.audio.stimmen === 'drei' ? ' · neue Staffel' : '') + '</small></span><span class="okdot">' + (P.done ? '✓' : P.pos ? fmt(P.pos) : '▶') + '</span></button>'; }).join('') + '</div></div>';
+    eps.map(k => { const P = (S.pod[F.id] || {})[k.k] || {}; return '<button type="button" class="mitem" data-k="' + k.k + '"><span><b>Kap. ' + esc(k.nr) + ' · ' + esc(k.name) + '</b><small>' + Math.round(k.audio.dauer/60) + ' min' + (k.audio.stimmen === 'sonnfeld' ? ' · Zu Gast bei Sonnfeld' : k.audio.stimmen === 'drei' ? ' · neue Staffel' : '') + '</small></span><span class="okdot">' + (P.done ? '✓' : P.pos ? fmt(P.pos) : '▶') + '</span></button>'; }).join('') + '</div></div>';
   bindChapterChips(F);
   $('#view').querySelectorAll('.mitem').forEach(b => b.onclick = () => { const k = F.kapitel.find(x => x.k === b.dataset.k); playEp(F, k); });
 }
@@ -1804,7 +1875,7 @@ function renderFallKlausur(F){
   else { const fr = fall.fragen.find(q => String(q.nr) === cur); const a = E.ans[cur] || '';
     body = '<details class="card casepeek"><summary>Fall nochmal lesen</summary><div class="case">' + paras(fall.text) + '</div></details>' +
       '<article class="card stack"><div class="row"><span class="tag gold">' + fr.punkte + ' Punkte</span>' + (fr.thema ? '<span class="tag">' + esc(fr.thema) + '</span>' : '') + '</div><p class="stem">' + esc(fr.text) + '</p>' +
-      '<textarea class="fans" id="fans" aria-label="Deine Antwort auf Frage ' + fr.nr + '" placeholder="Begriff erklären (mit Zitat, z. B. Reisinger et al. 2022, S. 79) → auf den Fall anwenden → begründen → Empfehlung.">' + esc(a) + '</textarea>' +
+      '<textarea class="fans" id="fans" aria-label="Deine Antwort auf Frage ' + fr.nr + '" placeholder="' + esc(K.platzhalter || 'Begriff erklären (mit Zitat, z. B. Reisinger et al. 2022, S. 79) → auf den Fall anwenden → begründen → Empfehlung.') + '">' + esc(a) + '</textarea>' +
       '<div class="spread small muted"><span id="fwc">' + words(a) + ' Wörter</span><span>wird automatisch gespeichert</span></div>' +
       '<div class="judge">' + (fr.nr > 1 ? '<button type="button" class="btn" data-go="' + (fr.nr - 1) + '">← Frage ' + (fr.nr - 1) + '</button>' : '<button type="button" class="btn" data-go="fall">← Fall</button>') + (fr.nr < fall.fragen.length ? '<button type="button" class="btn primary" data-go="' + (fr.nr + 1) + '">Frage ' + (fr.nr + 1) + ' →</button>' : '<button type="button" class="btn primary" id="fto">Zur Abgabe ↓</button>') + '</div></article>'; }
   v.innerHTML = '<div class="ui"><div class="exambar"><span class="timer" id="tm"></span><div class="ftabs" role="tablist">' + tabs.map(t => '<button type="button" role="tab" aria-selected="' + (t[0] === cur) + '" data-go="' + t[0] + '" class="' + ((E.ans[t[0]] || '').trim() ? 'done' : '') + '">' + t[1] + '</button>').join('') + '</div></div>' + body +
@@ -1852,7 +1923,7 @@ function renderFallResult(F){
   if(t.all) recordFall(F);
   const pass = t.p >= K.positiv; const note = noteFor(K, t.p);
   let h = '<div class="ui">' + (t.all && !E.mood ? moodHTML() : '') + '<article class="card stack"><span class="muted">' + esc(fall.titel) + '</span>';
-  if(t.all) h += '<div class="row" style="align-items:baseline"><span class="big" style="color:var(--' + (pass ? 'good' : 'bad') + ')">' + (Math.round(t.p*2)/2) + '</span><span class="mono muted">/ ' + K.punkte + ' Punkte · Note ' + note + '</span></div><p><b>' + (pass ? 'Positiv.' : 'Noch nicht positiv. Dir fehlen ' + (K.positiv - t.p) + ' Punkte.') + '</b></p><p class="voice">' + esc(pass ? (note <= 2 ? 'Prof: Sehr stark. So schaut eine Einser-Antwort aus.' : 'Lena: Bestanden. Schau dir unten an, wo noch Punkte liegen geblieben sind.') : 'Prof: Kein Drama. Lesen Sie, was gefehlt hat, und probieren Sie den nächsten Fall.') + '</p>';
+  if(t.all) h += '<div class="row" style="align-items:baseline"><span class="big" style="color:var(--' + (pass ? 'good' : 'bad') + ')">' + (Math.round(t.p*2)/2) + '</span><span class="mono muted">/ ' + K.punkte + ' Punkte · Note ' + note + '</span></div>' + (K.noten_hinweis ? '<p class="small muted">' + esc(K.noten_hinweis) + '</p>' : '') + '<p><b>' + (pass ? 'Positiv.' : 'Noch nicht positiv. Dir fehlen ' + (K.positiv - t.p) + ' Punkte.') + '</b></p><p class="voice">' + esc(pass ? (note <= 2 ? 'Prof: Sehr stark. So schaut eine Einser-Antwort aus.' : 'Lena: Bestanden. Schau dir unten an, wo noch Punkte liegen geblieben sind.') : 'Prof: Kein Drama. Lesen Sie, was gefehlt hat, und probieren Sie den nächsten Fall.') + '</p>';
   else if(E.selbst) h += '<p><b>Selbstkorrektur:</b> Hak bei jeder Frage an, was deine Antwort wirklich enthält. Daraus ergeben sich deine Punkte.</p>';
   else h += '<p><b>Wird korrigiert …</b> ' + (E.gradeErr ? 'Das hat gerade nicht geklappt. <button type="button" class="linkbtn" id="fretry">Nochmal versuchen</button> oder <button type="button" class="linkbtn" id="fself">selbst korrigieren</button>' : 'Der Prüfer-Bot liest deine Antworten. Das dauert pro Frage etwa eine halbe Minute.') + '</p>';
   h += '<button type="button" class="btn primary wide" id="fagain">Neuer Fall</button></article>';
@@ -1882,7 +1953,7 @@ function renderFallUeben(F, kap, box){
   if(!items.length){ box.innerHTML = '<p class="muted">Für dieses Kapitel kommen die Fallfragen bald.</p>'; return; }
   const i = Math.min(items.length - 1, Math.max(0, (f.uebIdx && f.uebIdx[kap.k]) || 0)); const u = items[i]; const st = f.ueb[u.id] || {};
   box.innerHTML = '<article class="card stack"><div class="spread"><span class="eyebrow">Fallfrage ' + (i+1) + ' von ' + items.length + '</span><span class="mono small">' + (st.g ? st.g.punkte + '/' + u.punkte + ' P' : u.punkte + ' P') + '</span></div><h3>' + esc(u.titel) + '</h3>' + paras(u.situation) + '<p class="stem">' + esc(u.frage) + '</p>' +
-    '<textarea class="fans" id="uans" aria-label="Deine Antwort" placeholder="Begriff + Zitat → Anwendung auf den Fall → Begründung">' + esc(st.a || '') + '</textarea><div class="spread small muted"><span id="uwc">' + words(st.a) + ' Wörter</span><span>' + (sample ? 'KI-Korrektur' : 'Selbstcheck') + '</span></div>' +
+    '<textarea class="fans" id="uans" aria-label="Deine Antwort" placeholder="' + esc(F.klausur.platzhalter || 'Begriff + Zitat → Anwendung auf den Fall → Begründung') + '">' + esc(st.a || '') + '</textarea><div class="spread small muted"><span id="uwc">' + words(st.a) + ' Wörter</span><span>' + (sample ? 'KI-Korrektur' : 'Selbstcheck') + '</span></div>' +
     '<div class="row"><button type="button" class="btn primary" id="ucheck2">' + (sample ? 'Korrigieren lassen' : 'Mit Lösung vergleichen') + '</button>' + (F.kompass ? '<button type="button" class="btn" id="ukmp">📖 Kompass</button>' : '') + '</div><div id="ukbox"></div><div id="ures"></div>' +
     '<div class="judge"><button type="button" class="btn" id="uprev" ' + (i === 0 ? 'disabled' : '') + '>← Vorige</button><button type="button" class="btn" id="unext" ' + (i === items.length-1 ? 'disabled' : '') + '>Nächste →</button></div></article>';
   const t0 = visNow(); const ta = $('#uans', box);
