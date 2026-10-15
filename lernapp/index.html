@@ -1024,8 +1024,18 @@ const AUDURL = {};
 async function audioURL(src){ if(!ENC) return src; if(AUDURL[src]) return AUDURL[src]; Object.keys(AUDURL).forEach(k => { URL.revokeObjectURL(AUDURL[k]); delete AUDURL[k]; });
   return AUDURL[src] = URL.createObjectURL(new Blob([await getBuf(src)], {type:'audio/mpeg'})); }
 const SILENT = 'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA//NwwAAAAAAAAAAAAEluZm8AAAAPAAAACAAAA/oAR0dHR0dHR0dHR0dHYmJiYmJiYmJiYmJifHx8fHx8fHx8fHx8fJaWlpaWlpaWlpaWlrGxsbGxsbGxsbGxsbHLy8vLy8vLy8vLy8vl5eXl5eXl5eXl5eXl////////////////AAAAAExhdmM2MC4zMQAAAAAAAAAAAAAAACQC1AAAAAAAAAP6yysejgAAAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxKMAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NAxKQAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80LEowAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80DEpAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsSjAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==';
+async function lernstandCode(){
+  let log = {}; try{ log = JSON.parse(localStorage.getItem('lernapp-log') || '{}'); }catch(e){}
+  const data = new TextEncoder().encode(JSON.stringify({v:1, erstellt:new Date().toISOString(), version:VERSION, stand:S, sitzungen:log}));
+  let packed = data, z = 0;
+  if(typeof CompressionStream !== 'undefined'){ packed = new Uint8Array(await new Response(new Blob([data]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer()); z = 1; }
+  const iv = crypto.getRandomValues(new Uint8Array(12)); const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, CK, packed));
+  const all = new Uint8Array(13 + ct.length); all[0] = z; all.set(iv, 1); all.set(ct, 13);
+  let bin = ''; for(let i = 0; i < all.length; i += 0x8000) bin += String.fromCharCode.apply(null, all.subarray(i, i + 0x8000));
+  return 'LERNSTAND1:' + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
 function claudeLink(prompt){ return 'https://claude.ai/new?q=' + encodeURIComponent(String(prompt).slice(0, 6000)); }
-const VERSION = '2026-10-15 06:14';
+const VERSION = '2026-10-15 06:17';
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
@@ -1905,8 +1915,14 @@ function renderStand(F){
     '<article class="card stack"><h3>Abzeichen</h3><div class="badges">' + BADGES.map(b => '<div class="badge' + (S.badges[b.id] ? ' on' : '') + '"><b>' + (S.badges[b.id] ? '★ ' : '') + esc(b.n) + '</b><span>' + esc(b.d) + '</span></div>').join('') + '</div></article>' +
     '<article class="card stack"><h3>Was ich über dein Lernen weiß</h3>' + insightsHTML() + '</article>' +
     '<article class="card stack"><h3>Wunsch oder Idee?</h3><p class="muted small">Was soll ich an der App besser machen? Ich lese das bei der nächsten Auswertung.</p><textarea id="wish" style="width:100%;min-height:70px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface)" aria-label="Wunsch"></textarea><button type="button" class="btn small" id="wishsend" style="justify-self:start">Senden</button><div id="wishout"></div></article>' +
+    (ENC ? '<article class="card stack"><h3>Lernstand an Claude schicken</h3><p class="muted small">Damit ich auswerten kann, wo du hängst und was gut funktioniert. Der Lernstand ist verschlüsselt, nur ich kann ihn mit deinem Schlüssel lesen.' + (S.sent ? ' Zuletzt geschickt: ' + esc(S.sent) + '.' : '') + '</p><button type="button" class="btn primary" id="lsCopy">Lernstand kopieren</button><p class="muted small" id="lsOut">Danach einfach im Chat mit Claude einfügen und senden.</p></article>' : '') +
     '<article class="card stack"><h3>Daten</h3><p class="muted small">' + (db && !dbOff ? 'Tracking ist aktiv: Wie lange du für Antworten brauchst, wo du hängst, was du fragst, welche Spiele du spielst. Das wertet dein Lernassistent aus und verbessert damit die Inhalte. Dein Fortschritt ist auf allen Geräten gleich.' : 'Tracking ist in dieser Ansicht nicht verfügbar. Dein Fortschritt bleibt auf diesem Gerät.') + '</p><div id="rs"><button type="button" class="btn small" id="reset">Fortschritt löschen</button></div></article></div>';
   v.innerHTML = h; if(F) bindChapterChips(F);
+  const lc = $('#lsCopy'); if(lc) lc.onclick = async () => { const out = $('#lsOut');
+    try{ flushLocal(); const code = await lernstandCode(); let ok = false; try{ await navigator.clipboard.writeText(code); ok = true; }catch(e){}
+      if(ok){ S.sent = new Date().toLocaleDateString('de-AT'); save(); out.textContent = 'Kopiert (' + Math.round(code.length/1024) + ' KB). Jetzt im Chat mit Claude einfügen und senden.'; track('lernstand_kopiert', {kb:Math.round(code.length/1024)}); }
+      else { out.innerHTML = '<textarea class="fans" style="min-height:120px" readonly>' + esc(code) + '</textarea><span>Kopieren ging nicht automatisch: Text oben antippen, alles auswählen, kopieren.</span>'; } }
+    catch(e){ out.textContent = 'Das hat nicht geklappt: ' + (e && e.message || e); } };
   $('#wishsend').onclick = async () => { const t = $('#wish').value.trim(); if(!t) return; track('wunsch', {text:t.slice(0,600)}); if(db && !dbOff){ try{ await db.collection('meldungen').add({zeit:new Date().toISOString(), art:'wunsch', text:t.slice(0,1000), sitzung:T.sid, version:VERSION}); }catch(e){} } $('#wish').value = ''; $('#wishout').innerHTML = '<p class="small muted">Danke, ist angekommen.</p>'; flush(); };
   $('#reset').onclick = () => { $('#rs').innerHTML = '<div class="judge"><button type="button" class="btn" id="rno">Abbrechen</button><button type="button" class="btn primary" id="ryes">Ja, alles löschen</button></div>'; $('#rno').onclick = () => route(); $('#ryes').onclick = () => { track('reset', {}); S = fresh(); save(); route(); }; };
 }
@@ -1918,7 +1934,7 @@ async function boot(){
   const lock = msg => { $('#view').innerHTML = '<div class="ui"><div class="card stack"><h2>🔒 Deine Lern-App</h2><p>' + esc(msg) + '</p><input id="keyin" class="kmp-q" placeholder="Persönlichen Link oder Schlüssel einfügen" aria-label="Link oder Schlüssel"><button type="button" class="btn primary" id="keygo">Öffnen</button></div></div>';
     $('#keygo').onclick = () => { const v = $('#keyin').value.trim(); const m = v.match(/#([A-Za-z0-9_-]{30,})~/) || v.match(/^([A-Za-z0-9_-]{30,})$/); if(!m){ toast('Das ist kein gültiger Link.'); return; } HKEY = m[1]; try{ localStorage.setItem('lernapp-key', HKEY); }catch(e){} location.hash = HKEY + '~'; location.reload(); }; };
   if(!k){ lock('Die Inhalte sind verschlüsselt. Öffne die App über deinen persönlichen Link oder füge ihn hier ein.'); return; }
-  try{ CK = await crypto.subtle.importKey('raw', b64u(k), 'AES-GCM', false, ['decrypt']); const cfg = JSON.parse(await getText('d/faecher.json')); FAECHER = cfg.faecher; NAME = cfg.name || ''; }
+  try{ CK = await crypto.subtle.importKey('raw', b64u(k), 'AES-GCM', false, ['decrypt', 'encrypt']); const cfg = JSON.parse(await getText('d/faecher.json')); FAECHER = cfg.faecher; NAME = cfg.name || ''; }
   catch(e){ console.warn(e); lock('Der Schlüssel passt nicht oder die Inhalte konnten nicht geladen werden. Prüf die Internetverbindung oder öffne deinen persönlichen Link erneut.'); return; }
   if(!location.hash.includes('~')) history.replaceState(null, '', '#' + HKEY + '~' + location.hash.replace(/^#/, ''));
   newDay(); renderTop(); route();
