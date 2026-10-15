@@ -1,40 +1,47 @@
 <!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Lern-App"><meta name="theme-color" content="#F3F1EA"><meta name="robots" content="noindex,nofollow"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><style>body{margin:0}</style></head><body><title>Guidos Lern-App</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Lern-App">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout: App fürs Handy. Oben eine schlanke Leiste (zurück, Titel, Level), darunter die Ansicht, unten der Mini-Player.
-   Farben und Schriften wie die Lernseiten (Papier, Tinte, Fraunces), damit alles aus einem Guss wirkt. */
+/* Layout: iPhone-App nach Apples Human Interface Guidelines. Durchscheinende Navigationsleiste, große Titel,
+   gruppierte Listen (inset grouped) auf Systemhintergrund, 8-pt-Raster, SF-Systemschrift, iOS-Systemfarben. */
 :root{
-  --bg:#F3F1EA;--surface:#FFFFFF;--surface-2:#EBE8DE;
-  --text-primary:#231F14;--text-secondary:#5B5644;--text-muted:#8C8770;
-  --border:#DAD5C5;--accent:#2B3A67;--accent-text:#2B3A67;--accent-bg:#E4E7F1;
-  --teal:#1F6F63;--teal-bg:#DEEFEA;--amber:#8A5A17;--amber-bg:#F5E7CE;
-  --danger:#8C2F2F;--danger-bg:#F5DEDE;--good:#215C33;--good-bg:#DEEFDE;
-  --coral:#B8511F;--coral-bg:#F6E3D6;--violet:#5B3E8C;--violet-bg:#E7E1F2;
-  --font-head:'Fraunces',Georgia,serif;--font-body:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--font-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
-  --ink:var(--text-primary);--muted:var(--text-secondary);--line:var(--border);--accent-ink:var(--surface);--accent-soft:var(--accent-bg);
-  --gold:var(--amber);--gold-soft:var(--amber-bg);--flame:var(--coral);--good-soft:var(--good-bg);--bad:var(--danger);--bad-soft:var(--danger-bg);
-  --r:14px;
+  --bg:#F2F2F7;--surface:#FFFFFF;--surface-2:#E9E9EF;--fill:rgba(118,118,128,.12);
+  --text-primary:#000000;--text-secondary:rgba(60,60,67,.6);--text-muted:#8E8E93;--tertiary:#C4C4C7;
+  --border:rgba(60,60,67,.18);--sep:rgba(60,60,67,.29);
+  --accent:#007AFF;--accent-text:#007AFF;--accent-bg:#E6F0FF;
+  --teal:#0071A4;--teal-bg:#E1F4F9;--amber:#C93400;--amber-bg:#FFF2E0;
+  --danger:#D70015;--danger-bg:#FFE8E7;--good:#248A3D;--good-bg:#E4F6E8;
+  --coral:#E8590C;--coral-bg:#FFEDE2;--violet:#5856D6;--violet-bg:#ECECFB;
+  --font-head:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --font-round:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --ink:var(--text-primary);--muted:var(--text-secondary);--line:var(--border);--accent-ink:#FFFFFF;--accent-soft:var(--accent-bg);
+  --gold:var(--amber);--gold-soft:var(--amber-bg);--flame:#FF9500;--good-soft:var(--good-bg);--bad:var(--danger);--bad-soft:var(--danger-bg);
+  --bar-bg:rgba(249,249,249,.78);--shadow:0 1px 2px rgba(0,0,0,.04);
+  --r:12px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#1B1912;--surface:#241F16;--surface-2:#2C2718;
-  --text-primary:#EFEAD9;--text-secondary:#B6AF97;--text-muted:#847C64;
-  --border:#3C3624;--accent:#9DB0E8;--accent-text:#B7C6F2;--accent-bg:#2A3350;
-  --teal:#6FCBB8;--teal-bg:#1E332E;--amber:#E3B368;--amber-bg:#3A2E14;
-  --danger:#E39A9A;--danger-bg:#3A2323;--good:#93D19E;--good-bg:#20331F;
-  --coral:#E8916A;--coral-bg:#3B2A1C;--violet:#B9A0E8;--violet-bg:#2C2440;
+  --bg:#000000;--surface:#1C1C1E;--surface-2:#2C2C2E;--fill:rgba(118,118,128,.24);
+  --text-primary:#FFFFFF;--text-secondary:rgba(235,235,245,.6);--text-muted:#8E8E93;--tertiary:#48484A;
+  --border:rgba(84,84,88,.6);--sep:rgba(84,84,88,.65);
+  --accent:#0A84FF;--accent-text:#0A84FF;--accent-bg:#0A2A4D;
+  --teal:#40C8E0;--teal-bg:#0E2E35;--amber:#FF9F0A;--amber-bg:#3A2A0A;
+  --danger:#FF453A;--danger-bg:#3A1513;--good:#30D158;--good-bg:#0F2E18;
+  --coral:#FF9F0A;--coral-bg:#3A2A0A;--violet:#5E5CE6;--violet-bg:#1E1D45;
+  --bar-bg:rgba(29,29,31,.78);--shadow:none;
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --bg:#1B1912;--surface:#241F16;--surface-2:#2C2718;
-  --text-primary:#EFEAD9;--text-secondary:#B6AF97;--text-muted:#847C64;
-  --border:#3C3624;--accent:#9DB0E8;--accent-text:#B7C6F2;--accent-bg:#2A3350;
-  --teal:#6FCBB8;--teal-bg:#1E332E;--amber:#E3B368;--amber-bg:#3A2E14;
-  --danger:#E39A9A;--danger-bg:#3A2323;--good:#93D19E;--good-bg:#20331F;
-  --coral:#E8916A;--coral-bg:#3B2A1C;--violet:#B9A0E8;--violet-bg:#2C2440;
+  --bg:#000000;--surface:#1C1C1E;--surface-2:#2C2C2E;--fill:rgba(118,118,128,.24);
+  --text-primary:#FFFFFF;--text-secondary:rgba(235,235,245,.6);--text-muted:#8E8E93;--tertiary:#48484A;
+  --border:rgba(84,84,88,.6);--sep:rgba(84,84,88,.65);
+  --accent:#0A84FF;--accent-text:#0A84FF;--accent-bg:#0A2A4D;
+  --teal:#40C8E0;--teal-bg:#0E2E35;--amber:#FF9F0A;--amber-bg:#3A2A0A;
+  --danger:#FF453A;--danger-bg:#3A1513;--good:#30D158;--good-bg:#0F2E18;
+  --coral:#FF9F0A;--coral-bg:#3A2A0A;--violet:#5E5CE6;--violet-bg:#1E1D45;
+  --bar-bg:rgba(29,29,31,.78);--shadow:none;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -286,6 +293,144 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
 .pk-m .marks{margin-top:8px}
 .mitem.final{border-color:var(--gold);background:var(--amber-bg)}
 .kpq .stem{font-weight:600}
+
+/* ================= Apple-Schicht (HIG): überschreibt die Grundformen oben ================= */
+body{font-size:17px;line-height:1.41;letter-spacing:-.022em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+a{color:var(--accent-text);text-decoration:none}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px}
+/* Navigationsleiste */
+.bar{background:var(--bar-bg);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid var(--sep)}
+.bar .in{padding:6px max(16px,env(safe-area-inset-right,0px)) 6px max(8px,env(safe-area-inset-left,0px));min-height:44px;gap:6px}
+.bar .back{width:auto;height:44px;padding:0 6px 0 2px;color:var(--accent);display:flex;align-items:center;gap:2px;font-size:17px}
+.bar .back svg{width:24px;height:24px;stroke-width:2.6}
+.bar .ttl{grid-column:2;font-family:var(--font-body);font-size:17px;font-weight:600;letter-spacing:-.022em;text-align:center}
+.bar .back{grid-column:1}.bar .lvlchip{grid-column:3;justify-self:end}
+.bar .ttl small{font-family:var(--font-body);font-size:12px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--text-secondary)}
+.lvlchip{border:0;background:var(--fill);font-family:var(--font-round);font-size:13px;font-weight:600;padding:4px 10px 4px 5px;font-variant-numeric:tabular-nums}
+main#view{padding-block:12px 160px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* Typo-Skala (iOS): Large Title 34, Title 1 28, Title 2 22, Title 3 20, Headline/Body 17, Callout 16, Subhead 15, Footnote 13, Caption 12 */
+.ui{gap:20px}
+.ui h1,.ui h2,.ui h3{font-family:var(--font-head);font-weight:700;letter-spacing:.011em}
+.ui h1{font-size:34px;line-height:41px}
+.ui h2{font-size:22px;line-height:28px;letter-spacing:.016em;margin-top:8px}
+.ui h3{font-size:20px;line-height:25px;font-weight:600;letter-spacing:.019em}
+.ui .small{font-size:15px;line-height:20px;letter-spacing:-.016em}
+.ui .muted{color:var(--text-secondary)}
+.ui .mono{font-family:var(--font-round);font-variant-numeric:tabular-nums;letter-spacing:0}
+.ui .eyebrow,.khead .k{font-family:var(--font-body);font-size:13px;line-height:18px;letter-spacing:-.006em;text-transform:uppercase;font-weight:400;color:var(--text-secondary)}
+.khead{gap:2px}
+.khead h1{font-size:34px;line-height:41px}
+/* Gruppen-Karten */
+.ui .card{border:0;border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.ui .stack{gap:12px}
+/* Knöpfe: gefüllt (prominent), grau getönt, Kapsel */
+.ui .btn{min-height:50px;border:0;border-radius:12px;padding:14px 20px;font-size:17px;font-weight:600;letter-spacing:-.022em;background:var(--fill);color:var(--accent);transition:opacity .15s,transform .1s}
+.ui .btn:active{opacity:.6;transform:scale(.99)}
+.ui .btn.primary{background:var(--accent);color:var(--accent-ink)}
+.ui .btn.small{min-height:34px;padding:7px 14px;font-size:15px;border-radius:999px}
+.ui .linkbtn{font-size:15px;font-weight:400;color:var(--accent)}
+.ui .linkbtn.mutedlink{color:var(--text-secondary)}
+.ui .tag{font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:0;text-transform:none;padding:3px 9px;border-radius:999px}
+.ui .bar8,.subj .prog{height:6px;border-radius:999px;background:var(--fill)}
+.ui .bar8 span{border-radius:999px}
+/* Startseite */
+.hero{gap:2px;padding-top:4px}
+.hero .hi{font-family:var(--font-head);font-size:34px;line-height:41px;font-weight:700;letter-spacing:.011em}
+.today{gap:12px}
+.today .t{border:0;border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.today .t b{font-family:var(--font-round);font-size:28px;line-height:34px;font-weight:700;font-variant-numeric:tabular-nums}
+.today .t span{font-size:13px;color:var(--text-secondary)}
+.subjects{gap:12px}
+.subj{border:0;border-radius:16px;padding:16px;gap:4px;box-shadow:var(--shadow)}
+.subj::before{inset:16px auto auto 16px;width:10px;height:10px;border-radius:50%}
+.subj .meta{font-family:var(--font-body);font-size:13px;letter-spacing:-.006em;padding-left:18px}
+.subj .meta + .nm + .meta{padding-left:0}
+.subj .nm{font-family:var(--font-head);font-size:20px;line-height:25px;font-weight:600;letter-spacing:.019em}
+.subj .cd{font-family:var(--font-round);right:16px;top:14px}
+.subj .cd b{font-size:22px;font-weight:700}
+.subj .cd small{font-family:var(--font-body);font-size:11px;letter-spacing:.02em}
+.subj.soon{background:var(--surface);border:0;opacity:.6;box-shadow:none}
+/* Kapitel-Chips und Abschnitts-Sprünge: Kapseln */
+.chips{gap:8px;padding:0 0 4px}
+.chip,.kpnav button,.ftabs button{border:0;background:var(--fill);color:var(--text-primary);border-radius:999px;padding:7px 14px;font-size:15px;font-weight:500;letter-spacing:-.016em}
+.chip[aria-pressed="true"],.ftabs button[aria-selected="true"]{background:var(--text-primary);color:var(--bg);font-weight:600}
+.chip .dot{background:var(--tertiary)}
+.kpnav{gap:8px;margin-top:0}
+/* Segmented Control */
+.seg{background:var(--fill);border-radius:9px;padding:2px;gap:0}
+.seg button{border-radius:7px;padding:6px 4px;font-size:13px;font-weight:500;color:var(--text-primary)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--text-primary);font-weight:600;box-shadow:0 3px 8px rgba(0,0,0,.12),0 3px 1px rgba(0,0,0,.04)}
+/* Kacheln */
+.tiles{gap:12px}
+.tile{border:0;border-radius:14px;padding:16px;gap:4px;box-shadow:var(--shadow)}
+.tile b{font-family:var(--font-head);font-size:17px;line-height:22px;font-weight:600}
+.tile span{font-size:15px;line-height:20px;color:var(--text-secondary)}
+.tile .eyebrow{font-size:12px}
+/* Gruppierte Liste wie in den Einstellungen */
+.mlist{gap:0;background:var(--surface);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.mitem{position:relative;grid-template-columns:minmax(0,1fr) auto 10px;gap:10px;border:0;border-radius:0;background:transparent;padding:11px 16px;min-height:44px;font-size:17px;line-height:22px}
+.mitem::after{content:"";width:8px;height:8px;border-top:2px solid var(--tertiary);border-right:2px solid var(--tertiary);transform:rotate(45deg);justify-self:end;margin-right:2px}
+.mitem + .mitem::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--sep)}
+.mitem:active{background:var(--fill)}
+.mitem b{font-weight:400}
+.mitem small{font-size:15px;line-height:20px;color:var(--text-secondary);margin-top:2px}
+.mitem.final{border:0;background:transparent}
+.mitem.final b{font-weight:600}
+.okdot{font-family:var(--font-round);font-size:15px;font-weight:600;color:var(--text-secondary)}
+/* Spielkarten */
+.gamecard{border-radius:20px;padding:20px 18px 18px;min-height:160px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.gamecard .gk{font-family:var(--font-body);font-size:12px;letter-spacing:.02em;font-weight:600}
+.gamecard b{font-family:var(--font-head);font-size:24px;line-height:29px;font-weight:700;letter-spacing:.007em}
+.gamecard span{font-size:15px;line-height:20px}
+.gamecard .ms{font-family:var(--font-round);font-size:12px;font-weight:600;background:rgba(255,255,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.gamecard.soon{background:var(--surface);border:0;opacity:.65;box-shadow:none}
+/* Podcast */
+.podk{gap:14px}
+.podk .pp.big{width:52px;height:52px}
+.pk-t b{font-family:var(--font-body);font-size:17px;font-weight:600}
+.pk-t small{font-size:15px;color:var(--text-secondary)}
+.pk-m summary{font-size:17px;font-weight:400;color:var(--accent);list-style:none}
+.pk-m summary::-webkit-details-marker{display:none}
+.marks button{font-size:15px;border-radius:10px;padding:9px 8px}
+.marks button .tm{font-family:var(--font-round);font-size:15px;color:var(--text-secondary);font-variant-numeric:tabular-nums}
+.mini{left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));bottom:calc(8px + env(safe-area-inset-bottom,0px));padding-bottom:0;border:0;border-radius:16px;background:var(--bar-bg);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.mini .in{padding:8px 12px 10px}
+.mini .nm{font-size:15px}
+.mini .nm small{font-family:var(--font-round);font-size:13px;color:var(--text-secondary)}
+.mini .sk{font-family:var(--font-round);font-size:13px;color:var(--accent)}
+.mini .prog{height:3px;background:var(--fill)}
+/* Prüfungen und Antworten */
+.stem{font-family:var(--font-body);font-size:17px;line-height:22px;font-weight:600;letter-spacing:-.022em}
+.radio{border:0;background:var(--fill);border-radius:12px;padding:12px 14px;font-size:16px;line-height:21px;gap:8px}
+.radio .l{font-family:var(--font-round);color:var(--text-secondary)}
+.radio[aria-checked="true"]{background:var(--accent-bg);box-shadow:0 0 0 2px var(--accent) inset}
+.radio[aria-checked="true"] .l{color:var(--accent)}
+.fb{border-radius:12px;font-size:15px;line-height:20px}
+.fb b{font-family:var(--font-body)}
+.big{font-family:var(--font-round);font-size:56px;font-weight:700;letter-spacing:-.01em}
+.timer{font-family:var(--font-round);font-variant-numeric:tabular-nums}
+.exambar{top:calc(env(safe-area-inset-top,0px) + 56px);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+details.rev{border-top:0}
+.ui details.card.rev{padding:14px 16px}
+.voice{font-size:15px;color:var(--text-secondary)}
+.kmp-q,.fans,.sheet textarea{border:0;background:var(--fill);border-radius:10px;font-size:17px}
+.kmp-q{padding:8px 12px;min-height:36px}
+.kmp{border:0;border-radius:12px;background:var(--surface);box-shadow:var(--shadow)}
+.kmp-cite{border:0;background:var(--fill);color:var(--accent);font-family:var(--font-body);font-size:13px;font-weight:600}
+.sheet{border:0;background:var(--surface);border-radius:14px;box-shadow:var(--shadow)}
+.pick button{border:0;background:var(--fill);font-size:15px}
+.badge{border:0;border-radius:12px;background:var(--surface)}
+.badge.on{background:var(--amber-bg)}
+/* Hinweise und Spielbühne */
+.toast{background:rgba(30,30,32,.9);color:#FFFFFF;border-radius:14px;font-size:15px;font-weight:600;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.xpfloat{font-family:var(--font-round)}
+.stage .sh{min-height:52px;border-bottom:.5px solid var(--sep);background:var(--bar-bg);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+.stage .sh b{font-family:var(--font-body);font-size:17px;font-weight:600}
+.stage .sh .mp{font-family:var(--font-round);font-size:13px;color:var(--text-secondary)}
+.stage .x,.stage .sound{width:32px;height:32px;border:0;border-radius:50%;background:var(--fill);color:var(--text-secondary);font-size:15px;font-weight:700}
+.kpsec{margin-top:32px}
+/* Lernseiten im App-Look */
+.ls{font-size:17px;line-height:1.5}
 #pane{min-width:0}
 .ls{overflow-wrap:break-word;min-width:0}
 .ls *, .ls{box-sizing:border-box}
@@ -821,6 +966,22 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
 .ls table.sx-tab td:first-child{white-space:normal;min-width:130px}
 .ls table.sx-tab td, .ls table.sx-tab th{font-size:13px}
 .ls{padding:0}
+.ls{padding:0;font-size:17px;line-height:1.5;letter-spacing:-.022em}
+.ls h1{font-size:28px;line-height:34px;font-weight:700;letter-spacing:.013em}
+.ls h2{font-size:22px;line-height:28px;font-weight:700;letter-spacing:.016em}
+.ls h3{font-size:20px;line-height:25px;font-weight:600;letter-spacing:.019em}
+.ls .eyebrow,.ls .act,.ls .label,.ls .meta,.ls .src{font-family:var(--font-body);letter-spacing:-.006em}
+.ls .eyebrow,.ls .act{font-size:13px;text-transform:uppercase;color:var(--text-secondary)}
+.ls .lead{font-size:20px;line-height:1.4;color:var(--text-primary)}
+.ls .card,.ls .demo,.ls .callout,.ls .principle,.ls .exam,.ls .source{border:0;border-radius:12px}
+.ls .card,.ls .demo{background:var(--surface)}
+.ls .xbtn,.ls .check button,.ls .chip{border:0;background:var(--fill);font-size:15px}
+.ls .xbtn.on,.ls .chip.active{background:var(--accent);color:#FFFFFF}
+.ls .step,.ls .xcell{border:0;background:var(--fill)}
+.ls .step.on{background:var(--accent);color:#FFFFFF}
+.ls hr.divider{border:0;height:.5px;background:var(--sep)}
+.ls input[type=range]{accent-color:var(--accent)}
+
 </style>
 
 <header class="bar"><div class="in">
@@ -850,7 +1011,7 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
 let FAECHER = [];
 let NAME = '';
 /* GitHub-Pages-Version: Inhalte liegen verschlüsselt (AES-GCM) daneben, der Schlüssel steht im persönlichen Link (#SCHLÜSSEL~route) */
-const ENC = true; const VERS = {"a/marketing/k01.mp3":"909f58a236","a/marketing/k02.mp3":"02e45f2334","a/marketing/k04.mp3":"e02f4afbe3","a/marketing/k08.mp3":"e768c1a33e","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/faecher.json":"9679a106e1","d/marketing/fach.json":"5b4fcaa7a4","d/marketing/k01.js":"4932eeba55","d/marketing/k02.js":"a9352f54d4","d/marketing/k04.js":"2efa814ad0","d/marketing/k07.js":"4bdcdfc2f9","d/marketing/k08.js":"b40c8fac27","d/marketing/k09.js":"eebc4d3824","d/marketing/k10.js":"f01ea9d865","d/marketing/k11.js":"0c1f53e9ce","d/marketing/k12.js":"e2a6cfb36a","d/marketing/k13.js":"ffc77ef9e8","d/marketing/k14.js":"d3d058abff","d/marketing/k15.js":"a204e898e0","d/strategie/fach.json":"8d4bd89834","d/strategie/s1.js":"e4a41bb0b7","d/strategie/s2.js":"8b4cdc21c1","d/strategie/s3.js":"811930b9ab","d/strategie/s4.js":"079d92a2de","d/strategie/s5.js":"fcdaab164d","d/strategie/s6.js":"fa1aa6d072","g/bcgboerse.js":"a6f5bd6aed","g/preislabor.js":"90ff319049"};
+const ENC = true; const VERS = {"a/marketing/k01.mp3":"909f58a236","a/marketing/k02.mp3":"02e45f2334","a/marketing/k04.mp3":"e02f4afbe3","a/marketing/k08.mp3":"e768c1a33e","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/faecher.json":"9679a106e1","d/marketing/fach.json":"9ac6ba664b","d/marketing/k01.js":"4932eeba55","d/marketing/k02.js":"a9352f54d4","d/marketing/k04.js":"2efa814ad0","d/marketing/k07.js":"4bdcdfc2f9","d/marketing/k08.js":"b40c8fac27","d/marketing/k09.js":"eebc4d3824","d/marketing/k10.js":"f01ea9d865","d/marketing/k11.js":"0c1f53e9ce","d/marketing/k12.js":"e2a6cfb36a","d/marketing/k13.js":"ffc77ef9e8","d/marketing/k14.js":"d3d058abff","d/marketing/k15.js":"a204e898e0","d/strategie/fach.json":"8d4bd89834","d/strategie/s1.js":"e4a41bb0b7","d/strategie/s2.js":"8b4cdc21c1","d/strategie/s3.js":"811930b9ab","d/strategie/s4.js":"079d92a2de","d/strategie/s5.js":"fcdaab164d","d/strategie/s6.js":"fa1aa6d072","g/bcgboerse.js":"a6f5bd6aed","g/preislabor.js":"90ff319049"};
 let CK = null, HKEY = '';
 const b64u = t => Uint8Array.from(atob(t.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((t.length + 3) % 4)), c => c.charCodeAt(0));
 async function getBuf(path){
@@ -864,7 +1025,7 @@ async function audioURL(src){ if(!ENC) return src; if(AUDURL[src]) return AUDURL
   return AUDURL[src] = URL.createObjectURL(new Blob([await getBuf(src)], {type:'audio/mpeg'})); }
 const SILENT = 'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA//NwwAAAAAAAAAAAAEluZm8AAAAPAAAACAAAA/oAR0dHR0dHR0dHR0dHYmJiYmJiYmJiYmJifHx8fHx8fHx8fHx8fJaWlpaWlpaWlpaWlrGxsbGxsbGxsbGxsbHLy8vLy8vLy8vLy8vl5eXl5eXl5eXl5eXl////////////////AAAAAExhdmM2MC4zMQAAAAAAAAAAAAAAACQC1AAAAAAAAAP6yysejgAAAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxKMAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NAxKQAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80LEowAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80DEpAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsSjAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==';
 function claudeLink(prompt){ return 'https://claude.ai/new?q=' + encodeURIComponent(String(prompt).slice(0, 6000)); }
-const VERSION = '2026-10-14 22:20';
+const VERSION = '2026-10-15 06:14';
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
@@ -1109,7 +1270,7 @@ function renderFach(F){
     '<p class="muted small">So geht’s: Kapitel für Kapitel. Auf jeder Kapitelseite findest du Podcast, Lernstoff, Spiel und am Ende die Kapitel-Prüfung. Wenn alle sitzen, wartet unten die Abschlussprüfung.</p>' +
     '<div class="mlist">' + F.kapitel.map(k => { const st = kpState(F, k.k); const P = (S.pod[F.id] || {})[k.k] || {}; const g = (k.spiele || []).filter(x => x.bereit);
       const gm = g.reduce((a, x) => a + Object.keys(((f.games[x.id] || {}).m) || {}).length, 0), gt = g.reduce((a, x) => a + (x.missionen || 0), 0);
-      const bits = [k.lern ? '📖 Lernen' : '', k.audio ? '🎧 ' + Math.round(k.audio.dauer/60) + ' min' + (P.done ? ' ✓' : '') : '', g.length ? '🎮 ' + gm + '/' + gt + ' ★' : '', F.Q.some(q => q.kap === k.k) || (F.uebungen || []).some(u => u.kap === k.k) ? '✅ Prüfung' : ''].filter(Boolean);
+      const bits = [k.lern ? 'Lernen' : '', k.audio ? 'Podcast ' + Math.round(k.audio.dauer/60) + ' min' + (P.done ? ' ✓' : '') : '', g.length ? 'Spiel ' + gm + '/' + gt + ' ★' : '', F.Q.some(q => q.kap === k.k) || (F.uebungen || []).some(u => u.kap === k.k) ? 'Prüfung' : ''].filter(Boolean);
       return '<button type="button" class="mitem" data-k="' + k.k + '"><span><b>Kap. ' + esc(k.nr) + ' · ' + esc(k.name) + '</b><small>' + bits.join(' · ') + '</small></span><span class="okdot"' + (st.best != null ? ' style="color:var(--' + (st.best >= .5 ? 'good' : 'bad') + ')"' : '') + '>' + (st.best != null ? Math.round(100*st.best) + ' %' : '') + '</span></button>'; }).join('') +
     '<button type="button" class="mitem final" data-go="endgegner"><span><b>🏁 Abschlussprüfung</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? 'ein Fall, drei offene Fragen, wie in echt' : 'alle Kapitel, wie in echt') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
     (F.kompass ? '<button type="button" class="mitem" data-go="kompass"><span><b>📖 Zitier-Kompass</b><small>Für die Open-Book-Klausur: welches Modell auf welcher Buchseite</small></span><span class="okdot"></span></button>' : '') + '</div></div>';
@@ -1180,8 +1341,8 @@ function renderKapPruefung(F, kap, box){
       '<div class="row"><button type="button" class="btn primary" id="kpAgain">Nochmal</button>' + (det.some(d => !d.ok) ? '<button type="button" class="btn" id="kpWrong2">Nur die falschen</button>' : '') + '</div></article>' +
       det.map((d, i) => { const q = F.Q.find(x => x.id === d.id); if(!q) return ''; const corr = correctOpt(q);
         return '<details class="card rev"' + (d.ok ? '' : ' open') + '><summary><span class="mono" style="color:var(--' + (d.ok ? 'good' : 'bad') + ')">' + (d.ok ? '✓' : '✗') + ' ' + (i+1) + '</span><span>' + esc(q.stamm) + '</span><span class="mono muted">' + (d.ok ? q.punkte : 0) + '/' + q.punkte + '</span></summary><div class="stack" style="gap:6px;padding-top:8px">' +
-          ['a','b','c','d'].map(l => '<div class="fb ' + (q[l].r ? 'good' : 'bad') + '"><span><b>' + l + ') ' + (q[l].r ? 'richtig' : 'falsch') + ':</b> ' + esc(q[l].t) + '</span><span class="muted" style="font-size:.88rem">' + esc(q[l].w) + '</span></div>').join('') +
-          '<p class="small">Richtig: <b>' + corr + ')</b>' + (corr > 'd' ? ' ' + esc(options(q).find(o => o.l === corr).text) : '') + ' · Deine Antwort: <b>' + (d.a ? d.a + ')' : 'keine') + '</b></p>' + toolsHTML() + '</div></details>'; }).join('');
+          ['a','b','c','d'].filter(l => q[l]).map(l => '<div class="fb ' + (q[l].r ? 'good' : 'bad') + '"><span><b>' + l + ') ' + (q[l].r ? 'richtig' : 'falsch') + ':</b> ' + esc(q[l].t) + '</span><span class="muted" style="font-size:.88rem">' + esc(q[l].w) + '</span></div>').join('') +
+          '<p class="small">Richtig: <b>' + corr + ')</b>' + (!stmts(q).includes(corr) ? ' ' + esc((options(q).find(o => o.l === corr) || {}).text || '') : '') + (q.neg ? ' <span class="muted">(gesucht waren die falschen Aussagen)</span>' : '') + (q.quelle ? ' <span class="tag">' + esc(q.quelle) + '</span>' : '') + ' · Deine Antwort: <b>' + (d.a ? d.a + ')' : 'keine') + '</b></p>' + toolsHTML() + '</div></details>'; }).join('');
   }
   if(fallArt && nu) h += '<h3 style="margin-top:6px">' + (pool.length ? 'Teil 2: ' : '') + 'Fallfrage wie in der Klausur</h3><div id="kpFall"></div>';
   box.innerHTML = h + '</div>';
@@ -1353,10 +1514,12 @@ function renderUebenTab(F, kap, pane){
 function renderBlitzWrap(F){ setTitle(F.name, 'Blitzrunde · alle Kapitel'); $('#view').innerHTML = '<div class="ui">' + chapterChips(F, null) + '<div id="trainer"></div></div>'; bindChapterChips(F); renderBlitz(F, null, $('#trainer')); }
 
 /* ---------- Gemeinsame Helfer Fragen ---------- */
-function kombiText(k){ if(k === 'alle') return 'alle Aussagen sind richtig'; const p = k.map(x => x + ')'); return p.length > 1 ? p.slice(0,-1).join(', ') + ' & ' + p[p.length-1] : p[0]; }
-function options(q){ const o = ['a','b','c','d'].map(l => ({l, text:q[l].t, set:[l]})); q.kombis.forEach((k,i) => o.push({l:'efg'[i], text:kombiText(k), set: k === 'alle' ? ['a','b','c','d'] : k.slice().sort()})); return o; }
+function kombiText(k, q){ if(k === 'alle') return (q && q.alle) || (q && q.neg ? 'alle Aussagen sind falsch' : 'alle Aussagen sind richtig'); if(k === 'keine') return (q && q.keine) || 'alle Aussagen sind falsch'; const p = k.map(x => x + ')'); return p.length > 1 ? p.slice(0,-1).join(', ') + ' & ' + p[p.length-1] : p[0]; }
+const stmts = q => ['a','b','c','d'].filter(l => q[l]);
+/* Originalformat: Aussagen a–d (manchmal nur a–c), danach Kombinationen; neg = „Welche Aussage ist falsch?“ → gesucht ist die Menge der falschen Aussagen */
+function options(q){ const st = stmts(q); const L = 'abcdefgh'; const o = st.map(l => ({l, text:q[l].t, set:[l]})); q.kombis.forEach((k,i) => o.push({l:L[st.length + i], text:kombiText(k, q), set: k === 'alle' ? st.slice() : k === 'keine' ? [] : k.slice().sort()})); return o; }
 const setKey = arr => arr.slice().sort().join('');
-function correctOpt(q){ const r = setKey(['a','b','c','d'].filter(l => q[l].r)); const o = options(q).find(o => setKey(o.set) === r); return o ? o.l : '?'; }
+function correctOpt(q){ const r = setKey(stmts(q).filter(l => q.neg ? !q[l].r : q[l].r)); const o = options(q).find(o => setKey(o.set) === r); return o ? o.l : '?'; }
 function optForSet(q, arr){ const r = setKey(arr); const o = options(q).find(o => setKey(o.set) === r); return o ? o.l : null; }
 function sentence(q, l){ return '<span class="st">' + esc(q.stamm.replace(/\s*…\s*$/, '')) + '</span> <span class="co">' + esc(q[l].t.replace(/^…\s*/, '')) + '</span>'; }
 const IV = [0, 5*60e3, 60*60e3, 20*3600e3, 3*86400e3, 7*86400e3];
@@ -1366,7 +1529,7 @@ function kapLabel(F, k){ return 'Kap. ' + ((F.kapitel.find(x => x.k === k) || {}
 /* ---------- Frag den Prof · Melden · Stimmung ---------- */
 function toolsHTML(){ return '<div class="tools">' + (sample ? '<button type="button" class="linkbtn" data-ask="1">💬 Frag den Prof</button>' : '<button type="button" class="linkbtn" data-askc="1">💬 In Claude fragen</button>') + '<button type="button" class="linkbtn mutedlink" data-report="1">⚑ Frage melden</button></div><div id="helpslot"></div>'; }
 function questionContext(F, q, focus){ const k = F.kapitel.find(x => x.k === q.kap) || {};
-  return 'Kapitel ' + k.nr + ' (' + k.name + '), Thema: ' + q.thema + '\nStamm: ' + q.stamm + '\n' + ['a','b','c','d'].map(l => l + ') ' + q[l].t + ' → ' + (q[l].r ? 'RICHTIG' : 'FALSCH') + '. Begründung: ' + q[l].w).join('\n') + '\n' + q.kombis.map((x,i) => 'efg'[i] + ') ' + kombiText(x)).join('\n') + '\nRichtige Antwort: ' + correctOpt(q) + ')' + (focus ? '\nDer Student schaut gerade auf Aussage ' + focus + ').' : ''); }
+  return 'Kapitel ' + k.nr + ' (' + k.name + '), Thema: ' + q.thema + '\nStamm: ' + q.stamm + '\n' + ['a','b','c','d'].filter(l => q[l]).map(l => l + ') ' + q[l].t + ' → ' + (q[l].r ? 'RICHTIG' : 'FALSCH') + '. Begründung: ' + q[l].w).join('\n') + '\n' + q.kombis.map((x,i) => 'efg'[i] + ') ' + kombiText(x)).join('\n') + '\nRichtige Antwort: ' + correctOpt(q) + ')' + (focus ? '\nDer Student schaut gerade auf Aussage ' + focus + ').' : ''); }
 function bindTools(root, F, q, focus){ const a = root.querySelector('[data-ask]'); if(a) a.onclick = () => openAsk(F, q, focus);
   const ac = root.querySelector('[data-askc]'); if(ac) ac.onclick = () => { track('hilfe_claude', {id:q.id}); open(claudeLink(F.prof.persona + '\n\nKontext (Übungsfrage aus meiner Lern-App):\n' + questionContext(F, q, focus) + '\n\nErklär mir bitte kurz und verständlich, warum die Lösung so ist, und gib mir eine Eselsbrücke.'), '_blank'); }; const r = root.querySelector('[data-report]'); if(r) r.onclick = () => openReport(F, q, focus); }
 let askCtl = null;
@@ -1401,7 +1564,7 @@ function bindMood(after){ const box = $('#mood'); if(!box) return; const sel = n
 
 /* ---------- Blitz ---------- */
 let BZ = {cur:null, done:false, streak:0, count:0, fb0:0, recent:[]};
-function stmtPool(F, kap){ const out = []; F.Q.forEach(q => { if(!kap || q.kap === kap) ['a','b','c','d'].forEach(l => out.push({q, l, id:q.id+'|'+l})); }); return out; }
+function stmtPool(F, kap){ const out = []; F.Q.forEach(q => { if(!kap || q.kap === kap) ['a','b','c','d'].filter(l => q[l]).forEach(l => out.push({q, l, id:q.id+'|'+l})); }); return out; }
 function nextStmt(F, kap){
   const f = FS(F.id); const pool = stmtPool(F, kap); if(!pool.length) return null; const now = Date.now();
   const sc = pool.filter(p => !BZ.recent.includes(p.id)).map(p => { const s = f.st[p.id]; let pr; if(!s) pr = 2 + Math.random(); else if(s.b === 0) pr = 3 + Math.random(); else if(now - s.t > IV[s.b]) pr = 1 + Math.random() - s.b*0.1; else pr = Math.random()*0.5 - s.b*0.1; return {p, pr}; }).sort((a,b) => b.pr - a.pr);
@@ -1560,8 +1723,8 @@ function renderResult(F){
     '<div class="stack" style="gap:6px">' + F.kapitel.filter(k => per[k.k]).map(k => { const r = per[k.k]; return '<div class="kaprow"><span>Kap. ' + esc(k.nr) + ' ' + esc(k.name) + '</span><span class="mono" style="text-align:right">' + r.p + '/' + r.max + '</span><div class="bar8" style="grid-column:1/3"><span style="width:' + (100*r.p/r.max) + '%;background:var(--' + (r.p/r.max >= .5 ? 'good' : 'bad') + ')"></span></div></div>'; }).join('') + '</div><button type="button" class="btn primary wide" id="eagain">Neuer Kampf</button></article><article class="card"><h3 style="margin-bottom:6px">Alle Fragen mit Lösung</h3>';
   E.ids.forEach((id, i) => { const q = F.Q.find(x => x.id === id); if(!q) return; const corr = correctOpt(q); const mine = E.ans[id]; const ok = mine === corr;
     h += '<details class="rev" data-id="' + id + '"><summary><span class="mono" style="color:var(--' + (ok ? 'good' : 'bad') + ')">' + (ok ? '✓' : '✗') + ' ' + (i+1) + '</span><span>' + esc(q.stamm) + ' <span class="muted small">(' + kapLabel(F, q.kap) + ')</span></span><span class="mono muted">' + (ok ? q.punkte : 0) + '/' + q.punkte + '</span></summary><div class="stack" style="gap:6px;padding-top:8px">' +
-      ['a','b','c','d'].map(l => '<div class="fb ' + (q[l].r ? 'good' : 'bad') + '"><span><b>' + l + ') ' + (q[l].r ? 'richtig' : 'falsch') + ':</b> ' + esc(q[l].t) + '</span><span class="muted" style="font-size:.88rem">' + esc(q[l].w) + '</span></div>').join('') +
-      '<p class="small">Richtig: <b>' + corr + ')</b>' + (corr > 'd' ? ' ' + esc(options(q).find(o => o.l === corr).text) : '') + ' · Deine Antwort: <b>' + (mine ? mine + ')' : 'keine') + '</b></p></div></details>'; });
+      ['a','b','c','d'].filter(l => q[l]).map(l => '<div class="fb ' + (q[l].r ? 'good' : 'bad') + '"><span><b>' + l + ') ' + (q[l].r ? 'richtig' : 'falsch') + ':</b> ' + esc(q[l].t) + '</span><span class="muted" style="font-size:.88rem">' + esc(q[l].w) + '</span></div>').join('') +
+      '<p class="small">Richtig: <b>' + corr + ')</b>' + (!stmts(q).includes(corr) ? ' ' + esc((options(q).find(o => o.l === corr) || {}).text || '') : '') + (q.neg ? ' <span class="muted">(gesucht waren die falschen Aussagen)</span>' : '') + (q.quelle ? ' <span class="tag">' + esc(q.quelle) + '</span>' : '') + ' · Deine Antwort: <b>' + (mine ? mine + ')' : 'keine') + '</b></p></div></details>'; });
   v.innerHTML = h + '</article></div>';
   bindMood(() => { E.mood = true; save(); const m = $('#mood'); if(m) m.remove(); });
   v.querySelectorAll('details.rev').forEach(d => d.addEventListener('toggle', () => { if(d.open) track('klausur_review', {id:d.dataset.id}); }));
