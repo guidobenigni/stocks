@@ -56,6 +56,7 @@ a{color:var(--accent-text)}
 .bar .in{max-width:760px;margin:0 auto;padding:8px 16px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center}
 .bar .back{border:0;background:none;width:36px;height:36px;border-radius:10px;cursor:pointer;display:grid;place-items:center;color:var(--ink)}
 .bar .back[hidden]{display:none}
+.bar .privbtn{grid-column:3;justify-self:end;border:0;background:var(--fill);color:var(--text-primary);border-radius:999px;padding:5px 12px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}.bar .privbtn[hidden]{display:none}
 .bar .back svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .bar .ttl{font-family:var(--font-head);font-weight:600;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bar .ttl small{display:block;font-family:var(--font-mono);font-size:.68rem;font-weight:400;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase}
@@ -2094,6 +2095,7 @@ details.rev{border-top:0}
   <button type="button" class="back" id="back" aria-label="Zurück" hidden><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
   <div class="ttl" id="ttl">Lern-App</div>
   <button type="button" class="lvlchip" id="lvl" hidden aria-hidden="true" tabindex="-1"></button>
+  <button type="button" class="privbtn" id="privBtn" hidden>Privat</button>
 </div></header>
 <main id="view" aria-live="polite"></main>
 <div class="mini" id="mini" hidden><div class="in">
@@ -2117,7 +2119,7 @@ details.rev{border-top:0}
 let FAECHER = [];
 let NAME = '';
 /* GitHub-Pages-Version: Inhalte liegen verschlüsselt (AES-GCM) daneben, der Schlüssel steht im persönlichen Link (#SCHLÜSSEL~route) */
-const ENC = true; const VERS = {"a/marketing/k01.mp3":"909f58a236","a/marketing/k02.mp3":"02e45f2334","a/marketing/k04.mp3":"e02f4afbe3","a/marketing/k08.mp3":"e768c1a33e","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/buchhaltung/b1.js":"ce98b48a6b","d/buchhaltung/b10.js":"7310452dd4","d/buchhaltung/b11.js":"a7a479870a","d/buchhaltung/b12.js":"47e73cfa65","d/buchhaltung/b13.js":"11c40220ab","d/buchhaltung/b14.js":"71025c511c","d/buchhaltung/b2.js":"ec64daf16e","d/buchhaltung/b3.js":"2edd2d416e","d/buchhaltung/b4.js":"589144d158","d/buchhaltung/b5.js":"a477b65aa4","d/buchhaltung/b6.js":"0fa292284c","d/buchhaltung/b7.js":"7c9dd73d9d","d/buchhaltung/b8.js":"07b04de5a1","d/buchhaltung/b9.js":"e75bfefc53","d/buchhaltung/fach.json":"a41e57a8c0","d/englisch/e1.js":"f88e360eeb","d/englisch/e2.js":"4ea57ccec3","d/englisch/e3.js":"61958ebf4e","d/englisch/e4.js":"86c5046e7a","d/englisch/e5.js":"58f3707ee0","d/englisch/e6.js":"b93adba314","d/englisch/fach.json":"070b337c3d","d/faecher.json":"117a065db2","d/marketing/fach.json":"d67daa4f90","d/marketing/k01.js":"0d4b4befaa","d/marketing/k02.js":"612a51417c","d/marketing/k04.js":"1ca202eae8","d/marketing/k07.js":"8787ee54f5","d/marketing/k08.js":"2959117af1","d/marketing/k09.js":"23e5acad22","d/marketing/k10.js":"ca8d1cf09d","d/marketing/k11.js":"10dca2a117","d/marketing/k12.js":"c0a9c75d5c","d/marketing/k13.js":"3e089fb849","d/marketing/k14.js":"9492f00fbe","d/marketing/k15.js":"f8f5104d91","d/strategie/fach.json":"1015860bb3","d/strategie/s1.js":"9767c07f02","d/strategie/s2.js":"7d0f96b458","d/strategie/s3.js":"3727394e28","d/strategie/s4.js":"db19e0017e","d/strategie/s5.js":"12e5ad4247","d/strategie/s6.js":"fbbc9acc82","g/antwortcoach.js":"c27a1a7462","g/bcgboerse.js":"1366f08ba0","g/buchungsbuero.js":"095f1e8f25","g/preislabor.js":"f8fceb40c6","g/segmentscanner.js":"8c5122ec10","g/wegderware.js":"1b5f5fe0ca"};
+const ENC = true; const VERS = {"a/marketing/k01.mp3":"909f58a236","a/marketing/k02.mp3":"02e45f2334","a/marketing/k04.mp3":"e02f4afbe3","a/marketing/k08.mp3":"e768c1a33e","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/buchhaltung/b1.js":"ce98b48a6b","d/buchhaltung/b10.js":"7310452dd4","d/buchhaltung/b11.js":"a7a479870a","d/buchhaltung/b12.js":"47e73cfa65","d/buchhaltung/b13.js":"11c40220ab","d/buchhaltung/b14.js":"71025c511c","d/buchhaltung/b2.js":"ec64daf16e","d/buchhaltung/b3.js":"2edd2d416e","d/buchhaltung/b4.js":"589144d158","d/buchhaltung/b5.js":"a477b65aa4","d/buchhaltung/b6.js":"0fa292284c","d/buchhaltung/b7.js":"7c9dd73d9d","d/buchhaltung/b8.js":"07b04de5a1","d/buchhaltung/b9.js":"e75bfefc53","d/buchhaltung/fach.json":"a41e57a8c0","d/englisch/e1.js":"f88e360eeb","d/englisch/e2.js":"4ea57ccec3","d/englisch/e3.js":"61958ebf4e","d/englisch/e4.js":"86c5046e7a","d/englisch/e5.js":"58f3707ee0","d/englisch/e6.js":"b93adba314","d/englisch/fach.json":"070b337c3d","d/faecher.json":"7add5ebcf3","d/marketing/fach.json":"d67daa4f90","d/marketing/k01.js":"0d4b4befaa","d/marketing/k02.js":"612a51417c","d/marketing/k04.js":"1ca202eae8","d/marketing/k07.js":"8787ee54f5","d/marketing/k08.js":"2959117af1","d/marketing/k09.js":"23e5acad22","d/marketing/k10.js":"ca8d1cf09d","d/marketing/k11.js":"10dca2a117","d/marketing/k12.js":"c0a9c75d5c","d/marketing/k13.js":"3e089fb849","d/marketing/k14.js":"9492f00fbe","d/marketing/k15.js":"f8f5104d91","d/strategie/fach.json":"1015860bb3","d/strategie/s1.js":"9767c07f02","d/strategie/s2.js":"7d0f96b458","d/strategie/s3.js":"3727394e28","d/strategie/s4.js":"db19e0017e","d/strategie/s5.js":"12e5ad4247","d/strategie/s6.js":"fbbc9acc82","g/antwortcoach.js":"c27a1a7462","g/bcgboerse.js":"1366f08ba0","g/buchungsbuero.js":"095f1e8f25","g/preislabor.js":"f8fceb40c6","g/segmentscanner.js":"8c5122ec10","g/wegderware.js":"1b5f5fe0ca"};
 let CK = null, HKEY = '';
 const b64u = t => Uint8Array.from(atob(t.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((t.length + 3) % 4)), c => c.charCodeAt(0));
 async function getBuf(path){
@@ -2141,7 +2143,7 @@ async function lernstandCode(){
   return 'LERNSTAND1:' + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 function claudeLink(prompt){ return 'https://claude.ai/new?q=' + encodeURIComponent(String(prompt).slice(0, 6000)); }
-const VERSION = '2026-10-23 16:35';
+const VERSION = '2026-10-29 06:30';
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
@@ -2287,17 +2289,31 @@ function rawHash(){ let h = location.hash.replace(/^#/, ''); const i = h.indexOf
 function parse(){ const h = rawHash(); const [fach, b, c] = h.split('.'); return {fach:fach || null, b:b || null, c:c || null}; }
 function nav(h){ h = String(h).replace(/^#/, ''); const i = h.indexOf('~'); if(i >= 0) h = h.slice(i + 1); const full = (HKEY ? HKEY + '~' : '') + h; if(location.hash.replace(/^#/, '') === full){ route(); return; } location.hash = full; }
 window.addEventListener('hashchange', () => { if(ENC && !CK){ location.reload(); return; } route(); });
-$('#back').onclick = () => { if(R.kap || (R.fach && R.view && R.view !== 'fach')) nav(R.fach); else nav(''); };
+$('#back').onclick = () => { if(R.kap || (R.fach && R.view && R.view !== 'fach')) nav(R.fach); else nav(meta(R.fach).bereich === 'privat' ? 'privat' : ''); };
+/* 25.10.: privater Bereich (eigene Seite #privat, Menüpunkt oben rechts), getrennt von den Uni-Fächern */
+const UNI = f => f.bereich !== 'privat';
+function privNav(p){ const b = $('#privBtn'); if(!b) return; const has = FAECHER.some(f => f.bereich === 'privat'); b.hidden = !has; if(!has) return;
+  const priv = p.fach === 'privat' || meta(p.fach).bereich === 'privat'; b.textContent = priv ? 'Uni' : 'Privat'; b.setAttribute('aria-label', priv ? 'Zu den Uni-Fächern' : 'Zum privaten Bereich'); b.onclick = () => nav(priv ? '' : 'privat'); }
+function renderPrivat(){
+  const ps = FAECHER.filter(f => f.bereich === 'privat');
+  const card = f => { const ms = f.status === 'aktiv' ? (fachMastery(f.id) || 0) : 0;
+    return '<button type="button" class="fcard" data-f="' + f.id + '"><div class="band">' + musterSVG(f.farbe || '#007AFF', f.id) + '</div><div class="bd"><b>' + esc(f.name) + '</b><small>' + esc(f.status === 'aktiv' ? (f.untertitel || '') : (f.hinweis || 'In Vorbereitung')) + '</small><div class="pb" aria-label="Lernstand ' + Math.round(100*ms) + ' %"><span style="width:' + Math.max(2, Math.round(100*ms)) + '%;background:' + esc(f.farbe || '#007AFF') + '"></span></div></div></button>'; };
+  $('#view').innerHTML = '<div class="ui"><div class="khead"><h1>Privat</h1></div><p class="muted small" style="margin:0 4px">Eigene Themen, getrennt von den Uni-Fächern.</p><div class="fcards">' + ps.map(card).join('') + '</div></div>';
+  $('#view').querySelectorAll('[data-f]').forEach(b => b.onclick = () => { const m = meta(b.dataset.f); if(m.status === 'aktiv') nav(m.id); });
+  ps.forEach(f => { if(f.status === 'aktiv' && !FACH[f.id]) loadFach(f.id).then(() => { if(R.view === 'privat') renderPrivat(); }).catch(() => {}); });
+}
 $('#lvl').onclick = () => { nav(R.fach ? R.fach + '.stand' : 'stand'); };
 let leaveHook = null;
 async function route(){
   if(leaveHook){ try{ leaveHook(); }catch(e){} leaveHook = null; }
   clearInterval(tick); closeStage(true);
   const p = parse(); viewTime();
-  R.fach = p.fach && p.fach !== 'stand' ? p.fach : null; R.kap = null; R.tab = null; R.view = null;
+  R.fach = p.fach && p.fach !== 'stand' && p.fach !== 'privat' ? p.fach : null; R.kap = null; R.tab = null; R.view = null;
   newDay(); renderTop(); const v = $('#view');
   $('#back').hidden = !R.fach && p.fach !== 'stand';
+  privNav(p);
   if(p.fach === 'stand'){ R.view = 'stand'; setTitle('Mein Stand', 'Alle Fächer'); renderStand(null); return; }
+  if(p.fach === 'privat'){ R.view = 'privat'; setTitle('Privat', ''); renderPrivat(); return; }
   if(!R.fach){ R.view = 'home'; setTitle('Lern-App', ''); renderHome(); return; }
   const m = meta(R.fach);
   if(!m.id){ nav(''); return; }
@@ -2323,7 +2339,7 @@ function setTitle(a, b){ $('#ttl').innerHTML = esc(a) + (b ? '<small>' + esc(b) 
 /* ================= Startseite ================= */
 function fachMastery(fid){ const F = FACH[fid]; if(!S.f[fid] || !F) return null; const ks = F.kapitel.filter(k => F.Q.some(q => q.kap === k.k)); return ks.length ? ks.reduce((a, k) => a + (kpState(F, k.k).best || 0), 0) / ks.length : 0; }
 function todayPicks(){
-  const picks = []; const act = FAECHER.filter(f => f.status === 'aktiv' && FACH[f.id]).sort((a, b) => (a.klausur || '9').localeCompare(b.klausur || '9'));
+  const picks = []; const act = FAECHER.filter(f => UNI(f) && f.status === 'aktiv' && FACH[f.id]).sort((a, b) => (a.klausur || '9').localeCompare(b.klausur || '9'));
   for(const m of act){ const F = FACH[m.id]; if(picks.length >= 3) break;
     if(!picks.some(p => p.typ === 'ueben')){ const k = F.kapitel.find(k => F.Q.some(q => q.kap === k.k) && (kpState(F, k.k).best || 0) < .5);
       if(k) picks.push({typ:'ueben', ic:'', t:'Kap. ' + k.nr + ' · ' + k.name, s:F.kurz + ' · lernen und Kapitel-Prüfung', go:F.id + '.' + k.k}); }
@@ -2339,7 +2355,7 @@ function renderHome(){
   const row = f => { const d = f.klausur ? daysUntil(f.klausur) : null; const ms = f.status === 'aktiv' ? fachMastery(f.id) : null;
     const sub = f.status === 'aktiv' ? [f.lva, f.klausur ? 'Prüfung ' + fmtD(f.klausur) + (d >= 0 ? ' · in ' + d + (d === 1 ? ' Tag' : ' Tagen') : '') : ''].filter(Boolean).join(' · ') : (f.hinweis || 'In Vorbereitung');
     return '<button type="button" class="mitem wb' + (f.status === 'aktiv' ? '' : ' soon') + '" data-f="' + f.id + '"' + (f.status === 'aktiv' ? '' : ' aria-disabled="true"') + '><span class="kbadge" style="background:' + esc(f.farbe || '#8E8E93') + '">' + esc((f.kurz || f.name).slice(0, 1)) + '</span><span><b>' + esc(f.name) + '</b><small>' + esc(sub) + '</small></span><span class="okdot">' + (ms ? Math.round(100*ms) + ' %' : '') + '</span></button>'; };
-  const act = FAECHER.filter(f => f.status === 'aktiv').sort((a, b) => (a.klausur || '9').localeCompare(b.klausur || '9')); const rest = FAECHER.filter(f => f.status !== 'aktiv');
+  const act = FAECHER.filter(f => UNI(f) && f.status === 'aktiv').sort((a, b) => (a.klausur || '9').localeCompare(b.klausur || '9')); const rest = FAECHER.filter(f => UNI(f) && f.status !== 'aktiv');
   const card = f => { const d = f.klausur ? daysUntil(f.klausur) : null; const ms = fachMastery(f.id) || 0;
     return '<button type="button" class="fcard" data-f="' + f.id + '"><div class="band">' + musterSVG(f.farbe || '#007AFF', f.id) + '</div><div class="bd"><b>' + esc(f.name) + '</b><small>' + esc([f.lva, f.klausur ? 'Prüfung ' + fmtD(f.klausur) + (d >= 0 ? ' · in ' + d + (d === 1 ? ' Tag' : ' Tagen') : '') : ''].filter(Boolean).join(' · ')) + '</small><div class="pb" aria-label="Lernstand ' + Math.round(100*ms) + ' %"><span style="width:' + Math.max(2, Math.round(100*ms)) + '%;background:' + esc(f.farbe || '#007AFF') + '"></span></div></div></button>'; };
   let html = '<div class="ui"><div class="khead"><h1>Fächer</h1></div><div class="fcards">' + act.map(card).join('') + '</div>' +
@@ -2383,18 +2399,18 @@ function chapterChips(F, active){
 }
 function bindChapterChips(F){ const box = $('#view .chips'); if(!box) return; box.querySelectorAll('.chip').forEach(b => b.onclick = () => nav(F.id + (b.dataset.k ? '.' + b.dataset.k + (R.tab && R.tab !== 'lernen' ? '.' + R.tab : '') : ''))); const a = box.querySelector('[aria-pressed="true"]'); if(a) box.scrollLeft = a.offsetLeft - box.clientWidth/2 + a.offsetWidth/2; }
 function renderFach(F){
-  const f = FS(F.id); const d = daysUntil(F.klausur.datum); const ms = fachMastery(F.id) || 0;
+  const f = FS(F.id); const d = F.klausur.datum ? daysUntil(F.klausur.datum) : null; const ms = fachMastery(F.id) || 0;
   const kps = F.kapitel.filter(k => F.Q.some(q => q.kap === k.k)); const passed = kps.filter(k => (kpState(F, k.k).best || 0) >= .5).length;
   const sims = F.klausur.typ === 'fall' ? (f.fallSims || []) : f.sims;
   let h = '<div class="ui">' +
-    '<div class="hband">' + musterSVG(F.farbe || '#007AFF', F.id) + '<span class="k">' + esc(F.lva) + ' · Klausur ' + new Date(F.klausur.datum + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'}) + (d >= 0 ? ' · noch ' + d + ' Tage' : '') + '</span><h1>' + esc(F.name) + '</h1><p>' + esc(F.klausur.format) + '</p></div>' +
+    '<div class="hband">' + musterSVG(F.farbe || '#007AFF', F.id) + '<span class="k">' + esc(F.lva) + (F.klausur.datum ? ' · Klausur ' + new Date(F.klausur.datum + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'}) + (d >= 0 ? ' · noch ' + d + ' Tage' : '') : ' · ' + F.kapitel.length + ' Kapitel') + '</span><h1>' + esc(F.name) + '</h1><p>' + esc(F.klausur.format) + '</p></div>' +
     '<div class="card stack"><div class="spread"><b>Lernstand</b><span class="mono">' + Math.round(100*ms) + ' %</span></div><div class="bar8"><span style="width:' + Math.round(100*ms) + '%"></span></div>' +
     '<div class="spread small muted"><span>Kapitel-Prüfungen bestanden: ' + passed + ' / ' + kps.length + '</span><span>Abschlussprüfung: ' + (sims.length ? f.best + ' / ' + F.klausur.punkte : 'noch nicht') + '</span></div></div>' +
         '<div class="mlist">' + F.kapitel.map(k => { const st = kpState(F, k.k); const P = (S.pod[F.id] || {})[k.k] || {}; const g = (k.spiele || []).filter(x => x.bereit);
       const gm = g.reduce((a, x) => a + Object.keys(((f.games[x.id] || {}).m) || {}).length, 0), gt = g.reduce((a, x) => a + (x.missionen || 0), 0);
       const bits = [k.audio ? 'Podcast ' + Math.round(k.audio.dauer/60) + ' min' + (P.done ? ' (gehört)' : '') : '', k.lern ? 'Lernstoff' : '', F.Q.some(q => q.kap === k.k) || (F.uebungen || []).some(u => u.kap === k.k) ? 'Prüfung' : ''].filter(Boolean);
       return '<button type="button" class="mitem wb" data-k="' + k.k + '"><span class="kbadge' + (String(k.nr).length > 2 ? ' lang' : '') + '" style="background:' + kapFarbe(F, k) + '">' + esc(k.nr) + '</span><span><b>' + esc(k.name) + '</b><small>' + bits.join(' · ') + '</small></span><span class="okdot"' + (st.best != null ? ' style="color:var(--' + (st.best >= .5 ? 'good' : 'bad') + ')"' : '') + '>' + (st.best != null ? Math.round(100*st.best) + ' %' : '') + '</span></button>'; }).join('') +
-    '<button type="button" class="mitem final wb" data-go="endgegner"><span class="kbadge" style="background:' + esc(F.farbe || '#007AFF') + '">' + ICON.pruef + '</span><span><b>Abschlussprüfung</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? (F.klausur.aufbau || 'ein Fall, drei offene Fragen') : 'alle Kapitel, im Format der Klausur') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
+    '<button type="button" class="mitem final wb" data-go="endgegner"><span class="kbadge" style="background:' + esc(F.farbe || '#007AFF') + '">' + ICON.pruef + '</span><span><b>' + (F.klausur.datum ? 'Abschlussprüfung' : 'Selbsttest') + '</b><small>' + esc(F.klausur.kurz) + ' · ' + (F.klausur.typ === 'fall' ? (F.klausur.aufbau || 'ein Fall, drei offene Fragen') : 'alle Kapitel, im Format der Klausur') + '</small></span><span class="okdot">' + (sims.length ? f.best + ' P' : '') + '</span></button>' +
     (F.kompass ? '<button type="button" class="mitem wb" data-go="kompass"><span class="kbadge" style="background:#8E8E93">' + ICON.buch + '</span><span><b>Zitier-Kompass</b><small>Für die Open-Book-Klausur: welches Modell auf welcher Buchseite</small></span><span class="okdot"></span></button>' : '') + '</div></div>';
   $('#view').innerHTML = h; bindChapterChips(F);
   $('#view').querySelectorAll('[data-go]').forEach(b => b.onclick = () => nav(F.id + '.' + b.dataset.go));
