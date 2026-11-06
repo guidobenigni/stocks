@@ -2294,6 +2294,53 @@ details.rev{border-top:0}
 .ls .lv-sum b{font-weight:600}
 .ls .lv-sum span{color:var(--text-secondary)}
 .ls .sv-fall{border-left:4px solid var(--teal);padding-left:12px}
+.ls .sv3-intro{margin-top:18px}
+.ls .sv3-lesen{margin:10px 6px 2px;font-size:14px;line-height:1.45;color:var(--text-secondary)}
+.ls .sv3-lesen b{color:var(--text-primary);font-weight:600}
+.ls .sv3-fall{background:var(--amber-bg);border-radius:14px;padding:14px 14px 10px;margin:16px 0}
+.ls .sv3-fall h2{margin:2px 0 8px}
+.ls .sv3-fall p{font-size:15px;line-height:1.45}
+.ls .sv3-fall .sv3-tab{background:var(--surface);border-radius:10px}
+.ls .sv3-fall .sv3-tab td, .ls .sv3-fall .sv3-tab th{padding:6px 8px}
+.ls .sv3-ann{background:var(--surface);border-radius:10px;padding:8px 10px}
+.ls .sv3-qu{font-size:13px!important;color:var(--text-secondary);margin:6px 0}
+.ls .sv3-fr{font-weight:600;margin:12px 0 4px}
+.ls .sv3-ol{margin:0 0 8px;padding-left:1.3rem;font-size:15px;line-height:1.45}
+.ls .sv3-ol li{margin:4px 0}
+.ls .sv3-end{font-weight:600;color:var(--amber);margin:10px 0 2px}
+.ls .sv3-tab{width:100%;table-layout:fixed;border-collapse:collapse;font-size:14px;line-height:1.35;margin:6px 0 10px;overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+.ls .sv3-tab th{font-weight:600;text-align:left;font-size:13px;color:var(--text-secondary);padding:4px;border-bottom:1px solid var(--sep)}
+.ls .sv3-tab td{padding:4px;vertical-align:top;border-bottom:.5px solid var(--sep)}
+.ls .sv3-tab th:first-child, .ls .sv3-tab td:first-child{width:40%}
+.ls .sv3-tab td:first-child{font-weight:600}
+.ls .sv3-tab tr:last-child td{border-bottom:0}
+.ls .sv3-anw{background:var(--accent-bg);border-radius:12px;padding:10px 14px;margin:14px 0;font-size:15px;line-height:1.45}
+.ls .sv3-anw>b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);margin-bottom:4px}
+.ls .sv3-anw p{margin:4px 0}
+.ls .sv3-anw ul{margin:4px 0;padding-left:1.1rem}
+.ls .sv3-anw li{margin:3px 0}
+.ls .sv3-anw .sv3-tab{background:var(--surface);border-radius:8px;margin:6px 0 4px}
+.ls .sv3-anw .sv3-tab td{padding:5px 8px}
+.ls .sv3-ant{background:var(--surface);border-radius:12px;padding:12px 14px;margin:14px 0}
+.ls .sv3-antk{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-secondary);margin:0 0 2px;font-weight:600}
+.ls .sv3-antq{font-weight:600;margin:0 0 8px;font-size:15px;line-height:1.4}
+.ls .sv3-st{border-left:3px solid var(--accent);padding:2px 0 2px 10px;margin:8px 0;font-size:15px;line-height:1.45}
+.ls .sv3-st>b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1px}
+.ls .sv3-st p{margin:3px 0}
+.ls .sv3-st ul{margin:3px 0;padding-left:1.1rem}
+.ls .sv3-st.sv3-a{border-color:var(--accent)}
+.ls .sv3-st.sv3-a>b{color:var(--accent)}
+.ls .sv3-st.sv3-v{border-color:var(--violet)}
+.ls .sv3-st.sv3-v>b{color:var(--violet)}
+.ls .sv3-st.sv3-t{border-color:var(--teal)}
+.ls .sv3-st.sv3-t>b{color:var(--teal)}
+.ls .sv3-st.sv3-g{border-color:var(--good)}
+.ls .sv3-st.sv3-g>b{color:var(--good)}
+.ls .sv3-st.sv3-o{border-color:var(--amber)}
+.ls .sv3-st.sv3-o>b{color:var(--amber)}
+.ls .sv3-mit{background:var(--good-bg);border-radius:12px;padding:10px 14px;margin:14px 0;font-size:15px;line-height:1.45}
+.ls .sv3-mit>b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--good);margin-bottom:2px}
+.ls .sv3-h3{font-weight:600;margin:18px 0 8px}
 .ls .lv-fig{margin:14px 0 18px;padding:12px 6px 10px;background:var(--surface);border-radius:12px}
 .ls .lv-fig .figlabel{margin:0 6px 10px}
 .ls .lv-g{display:block;width:100%;height:auto}
@@ -2685,7 +2732,7 @@ details.rev{border-top:0}
 let FAECHER = [];
 let NAME = '';
 /* GitHub-Pages-Version: Inhalte liegen verschlüsselt (AES-GCM) daneben, der Schlüssel steht im persönlichen Link (#SCHLÜSSEL~route) */
-const ENC = true; const VERS = {"a/marketing/k01.mp3":"c366ad0d4f","a/marketing/k02.mp3":"0a3f8b6614","a/marketing/k04.mp3":"bd1ac7830b","a/marketing/k07.mp3":"16357ca4cf","a/marketing/k08.mp3":"2ac7759d72","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/buchhaltung/b1.js":"ce98b48a6b","d/buchhaltung/b10.js":"7310452dd4","d/buchhaltung/b11.js":"a7a479870a","d/buchhaltung/b12.js":"47e73cfa65","d/buchhaltung/b13.js":"11c40220ab","d/buchhaltung/b14.js":"71025c511c","d/buchhaltung/b2.js":"ec64daf16e","d/buchhaltung/b3.js":"2edd2d416e","d/buchhaltung/b4.js":"589144d158","d/buchhaltung/b5.js":"a477b65aa4","d/buchhaltung/b6.js":"0fa292284c","d/buchhaltung/b7.js":"7c9dd73d9d","d/buchhaltung/b8.js":"07b04de5a1","d/buchhaltung/b9.js":"e75bfefc53","d/buchhaltung/fach.json":"a41e57a8c0","d/englisch/e1.js":"f88e360eeb","d/englisch/e2.js":"4ea57ccec3","d/englisch/e3.js":"61958ebf4e","d/englisch/e4.js":"86c5046e7a","d/englisch/e5.js":"58f3707ee0","d/englisch/e6.js":"b93adba314","d/englisch/fach.json":"070b337c3d","d/faecher.json":"d777ce20cf","d/marketing/fach.json":"c049e4dd12","d/marketing/k01.js":"0d4b4befaa","d/marketing/k02.js":"612a51417c","d/marketing/k04.js":"1ca202eae8","d/marketing/k07.js":"8787ee54f5","d/marketing/k08.js":"2959117af1","d/marketing/k09.js":"23e5acad22","d/marketing/k10.js":"ca8d1cf09d","d/marketing/k11.js":"10dca2a117","d/marketing/k12.js":"c0a9c75d5c","d/marketing/k13.js":"3e089fb849","d/marketing/k14.js":"9492f00fbe","d/marketing/k15.js":"f8f5104d91","d/mus/fach.json":"a30273b102","d/mus/mu1.js":"77628bb473","d/mus/mu10.js":"59242b1859","d/mus/mu2.js":"ead746d9c0","d/mus/mu3.js":"f866a57994","d/mus/mu4.js":"7ffbfb2d3d","d/mus/mu5.js":"cf488e0026","d/mus/mu6.js":"d55339e667","d/mus/mu7.js":"20acf12643","d/mus/mu8.js":"eff20fffea","d/mus/mu9.js":"498bedfdd6","d/steuern/fach.json":"2922cefbdb","d/steuern/st1.js":"324f401860","d/steuern/st10.js":"2803696748","d/steuern/st2.js":"d8d67c0598","d/steuern/st3.js":"c507c5bc4c","d/steuern/st4.js":"0dd864eaba","d/steuern/st5.js":"f4194c88f3","d/steuern/st6.js":"326389d4b9","d/steuern/st7.js":"11bafa8438","d/steuern/st8.js":"fc728923b8","d/steuern/st9.js":"8945a77a78","d/strategie/fach.json":"1015860bb3","d/strategie/s1.js":"9767c07f02","d/strategie/s2.js":"7d0f96b458","d/strategie/s3.js":"3727394e28","d/strategie/s4.js":"db19e0017e","d/strategie/s5.js":"12e5ad4247","d/strategie/s6.js":"fbbc9acc82","d/trainingslehre/fach.json":"cc8d0f1868","d/trainingslehre/t01.js":"ba70cb5a37","d/trainingslehre/t02.js":"3f5b263b97","d/trainingslehre/t03.js":"c3d1f01900","d/trainingslehre/t04.js":"7e28670e0b","d/trainingslehre/t05.js":"e8551cf931","d/trainingslehre/t06.js":"7c03436825","d/trainingslehre/t07.js":"2730a599e3","d/trainingslehre/t08.js":"416183c5d8","d/trainingslehre/t09.js":"d2621e8492","d/trainingslehre/t10.js":"0412d6a7b4","d/trainingslehre/t11.js":"6229f348ac","d/trainingslehre/t12.js":"5efdc3e921","d/trainingslehre/t13.js":"98c4441cb2","d/trainingslehre/t14.js":"b7d96a35b0","d/trainingslehre/t15.js":"f7d03fd5c7","d/trainingslehre/t16.js":"e88f8d0e7e","d/trainingslehre/t17.js":"10074ce1df","d/trainingslehre/t18.js":"4f9c97c3bc","d/trainingslehre/t19.js":"6e3c3faec5","g/antwortcoach.js":"c27a1a7462","g/bcgboerse.js":"1366f08ba0","g/buchungsbuero.js":"095f1e8f25","g/preislabor.js":"f8fceb40c6","g/segmentscanner.js":"8c5122ec10","g/wegderware.js":"1b5f5fe0ca"};
+const ENC = true; const VERS = {"a/marketing/k01.mp3":"c366ad0d4f","a/marketing/k02.mp3":"0a3f8b6614","a/marketing/k04.mp3":"bd1ac7830b","a/marketing/k07.mp3":"16357ca4cf","a/marketing/k08.mp3":"2ac7759d72","a/marketing/k09.mp3":"9cbc529a10","a/marketing/k10.mp3":"b86fc9e8f8","a/marketing/k11.mp3":"85fe47bc3d","a/strategie/s1.mp3":"d25e4bea5a","a/strategie/s2.mp3":"49e9d49c84","a/strategie/s3.mp3":"3e599d4526","a/strategie/s4.mp3":"c17f7d3692","a/strategie/s5.mp3":"da05f632cf","a/strategie/s6.mp3":"f60c86abd1","d/buchhaltung/b1.js":"ce98b48a6b","d/buchhaltung/b10.js":"7310452dd4","d/buchhaltung/b11.js":"a7a479870a","d/buchhaltung/b12.js":"47e73cfa65","d/buchhaltung/b13.js":"11c40220ab","d/buchhaltung/b14.js":"71025c511c","d/buchhaltung/b2.js":"ec64daf16e","d/buchhaltung/b3.js":"2edd2d416e","d/buchhaltung/b4.js":"589144d158","d/buchhaltung/b5.js":"a477b65aa4","d/buchhaltung/b6.js":"0fa292284c","d/buchhaltung/b7.js":"7c9dd73d9d","d/buchhaltung/b8.js":"07b04de5a1","d/buchhaltung/b9.js":"e75bfefc53","d/buchhaltung/fach.json":"a41e57a8c0","d/englisch/e1.js":"f88e360eeb","d/englisch/e2.js":"4ea57ccec3","d/englisch/e3.js":"61958ebf4e","d/englisch/e4.js":"86c5046e7a","d/englisch/e5.js":"58f3707ee0","d/englisch/e6.js":"b93adba314","d/englisch/fach.json":"070b337c3d","d/faecher.json":"d777ce20cf","d/marketing/fach.json":"c049e4dd12","d/marketing/k01.js":"0d4b4befaa","d/marketing/k02.js":"612a51417c","d/marketing/k04.js":"1ca202eae8","d/marketing/k07.js":"8787ee54f5","d/marketing/k08.js":"2959117af1","d/marketing/k09.js":"23e5acad22","d/marketing/k10.js":"ca8d1cf09d","d/marketing/k11.js":"10dca2a117","d/marketing/k12.js":"c0a9c75d5c","d/marketing/k13.js":"3e089fb849","d/marketing/k14.js":"9492f00fbe","d/marketing/k15.js":"f8f5104d91","d/mus/fach.json":"a30273b102","d/mus/mu1.js":"77628bb473","d/mus/mu10.js":"59242b1859","d/mus/mu2.js":"ead746d9c0","d/mus/mu3.js":"f866a57994","d/mus/mu4.js":"7ffbfb2d3d","d/mus/mu5.js":"cf488e0026","d/mus/mu6.js":"d55339e667","d/mus/mu7.js":"20acf12643","d/mus/mu8.js":"eff20fffea","d/mus/mu9.js":"498bedfdd6","d/steuern/fach.json":"2922cefbdb","d/steuern/st1.js":"324f401860","d/steuern/st10.js":"2803696748","d/steuern/st2.js":"d8d67c0598","d/steuern/st3.js":"c507c5bc4c","d/steuern/st4.js":"0dd864eaba","d/steuern/st5.js":"f4194c88f3","d/steuern/st6.js":"326389d4b9","d/steuern/st7.js":"11bafa8438","d/steuern/st8.js":"fc728923b8","d/steuern/st9.js":"8945a77a78","d/strategie/fach.json":"1015860bb3","d/strategie/s1.js":"7ab39eab87","d/strategie/s2.js":"d24bc944ef","d/strategie/s3.js":"74f1599e01","d/strategie/s4.js":"d063f7b1d1","d/strategie/s5.js":"54175b86dc","d/strategie/s6.js":"1be34ed69a","d/trainingslehre/fach.json":"cc8d0f1868","d/trainingslehre/t01.js":"ba70cb5a37","d/trainingslehre/t02.js":"3f5b263b97","d/trainingslehre/t03.js":"c3d1f01900","d/trainingslehre/t04.js":"7e28670e0b","d/trainingslehre/t05.js":"e8551cf931","d/trainingslehre/t06.js":"7c03436825","d/trainingslehre/t07.js":"2730a599e3","d/trainingslehre/t08.js":"416183c5d8","d/trainingslehre/t09.js":"d2621e8492","d/trainingslehre/t10.js":"0412d6a7b4","d/trainingslehre/t11.js":"6229f348ac","d/trainingslehre/t12.js":"5efdc3e921","d/trainingslehre/t13.js":"98c4441cb2","d/trainingslehre/t14.js":"b7d96a35b0","d/trainingslehre/t15.js":"f7d03fd5c7","d/trainingslehre/t16.js":"e88f8d0e7e","d/trainingslehre/t17.js":"10074ce1df","d/trainingslehre/t18.js":"4f9c97c3bc","d/trainingslehre/t19.js":"6e3c3faec5","g/antwortcoach.js":"c27a1a7462","g/bcgboerse.js":"1366f08ba0","g/buchungsbuero.js":"095f1e8f25","g/preislabor.js":"f8fceb40c6","g/segmentscanner.js":"8c5122ec10","g/wegderware.js":"1b5f5fe0ca"};
 let CK = null, HKEY = '';
 const b64u = t => Uint8Array.from(atob(t.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((t.length + 3) % 4)), c => c.charCodeAt(0));
 async function getBuf(path){
@@ -2709,7 +2756,7 @@ async function lernstandCode(){
   return 'LERNSTAND1:' + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 function claudeLink(prompt){ return 'https://claude.ai/new?q=' + encodeURIComponent(String(prompt).slice(0, 6000)); }
-const VERSION = '2026-11-06 00:48';
+const VERSION = '2026-11-06 12:21';
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
