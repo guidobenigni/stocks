@@ -406,6 +406,12 @@ main#view{padding-block:12px 160px;padding-left:max(16px,env(safe-area-inset-lef
 .radio .l{font-family:var(--font-round);color:var(--text-secondary)}
 .radio[aria-checked="true"]{background:var(--accent-bg);box-shadow:0 0 0 2px var(--accent) inset}
 .radio[aria-checked="true"] .l{color:var(--accent)}
+.radio:disabled{cursor:default;color:inherit;opacity:1}
+.radio.ok{background:var(--good-bg);box-shadow:0 0 0 2px var(--good) inset}
+.radio.ok .l{color:var(--good)}
+.radio.no{background:var(--danger-bg);box-shadow:0 0 0 2px var(--danger) inset}
+.radio.no .l{color:var(--danger)}
+.kpsol{display:grid;gap:6px;margin-top:4px}
 .fb{border-radius:12px;font-size:15px;line-height:20px}
 .fb b{font-family:var(--font-body)}
 .big{font-family:var(--font-round);font-size:56px;font-weight:700;letter-spacing:-.01em}
@@ -3269,6 +3275,14 @@ function renderPodKompakt(F, kap, box){
 
 /* ---------- Kapitel-Prüfung (Format der echten Klausur, nur Fragen dieses Kapitels) ---------- */
 function kpState(F, k){ const f = FS(F.id); f.kp = f.kp || {}; return f.kp[k] = f.kp[k] || {}; }
+function kpSolHTML(q, a){ const corr = correctOpt(q); const ok = a === corr; const ct = (options(q).find(o => o.l === corr) || {}).text || '';
+  return '<div class="kpsol"><div class="result ' + (ok ? 'good' : 'bad') + '">' + (ok ? 'Richtig: ' : (a ? 'Falsch. Richtig wäre ' : 'Richtig ist ')) + corr + ')' + (stmts(q).includes(corr) ? '' : ' · ' + esc(ct)) + '</div>' +
+    stmts(q).map(l => '<div class="fb ' + (q[l].r ? 'good' : 'bad') + '"><span><b>' + l + ') ' + (q[l].r ? 'stimmt' : 'stimmt nicht') + ':</b> ' + esc(q[l].t) + '</span><span class="muted" style="font-size:.88rem">' + esc(q[l].w) + '</span></div>').join('') +
+    (q.neg ? '<p class="small muted">Gesucht waren die falschen Aussagen.</p>' : '') + (q.quelle ? '<p class="small"><span class="tag">' + esc(q.quelle) + '</span></p>' : '') + '</div>'; }
+function kpqInner(q, i, total, a){ const shown = a !== undefined; const corr = correctOpt(q);
+  return '<div class="spread"><span class="mono small muted">Frage ' + (i+1) + ' von ' + total + '</span><span class="tag gold">' + q.punkte + (q.punkte === 1 ? ' Punkt' : ' Punkte') + '</span></div><p class="stem">' + esc(q.stamm) + '</p><div class="stack" style="gap:6px" role="radiogroup">' +
+    options(q).map(o => '<button type="button" class="radio' + (shown ? (o.l === corr ? ' ok' : o.l === a ? ' no' : '') : '') + '" role="radio" aria-checked="' + (a === o.l) + '" data-l="' + o.l + '"' + (shown ? ' disabled' : '') + '><span class="l">' + o.l + ')</span><span>' + esc(o.text) + '</span></button>').join('') + '</div>' +
+    (shown ? kpSolHTML(q, a) : '<button type="button" class="linkbtn mutedlink kpShow">Lösung zeigen (zählt als nicht beantwortet)</button>'); }
 function renderKapPruefung(F, kap, box){
   const st = kpState(F, kap.k); const pool = F.Q.filter(q => q.kap === kap.k);
   const fallArt = F.klausur.typ === 'fall'; const nu = (F.uebungen || []).filter(u => u.kap === kap.k).length;
@@ -3276,15 +3290,14 @@ function renderKapPruefung(F, kap, box){
   let h = '<div class="ui">';
   const run = st.run;
   if(pool.length && !run){
-    h += '<article class="card stack"><b>' + pool.length + ' Fragen im Klausurformat</b><p class="muted small">' + (fallArt ? 'Wissensfragen zu diesem Teil: Aussagen a–d plus Kombinationen e–g, genau eine Antwort ist richtig. Danach eine Fallfrage wie in der echten Klausur.' : 'Wie am ' + new Date(F.klausur.datum + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'}) + ': Aussagen a–d plus Kombinationen e–g, genau eine Antwort ist richtig. Bestanden ab 50 %.') + '</p>' +
+    h += '<article class="card stack"><b>' + pool.length + ' Fragen im Klausurformat</b><p class="muted small">' + (fallArt ? 'Wissensfragen zu diesem Teil: Aussagen a–d plus Kombinationen e–g, genau eine Antwort ist richtig. Danach eine Fallfrage wie in der echten Klausur.' : 'Wie am ' + new Date(F.klausur.datum + 'T00:00:00').toLocaleDateString('de-AT', {day:'numeric', month:'long'}) + ': Aussagen a–d plus Kombinationen e–g, genau eine Antwort ist richtig. Bestanden ab 50 %.') + ' Nach jeder Antwort steht die Lösung mit Erklärung direkt darunter.</p>' +
       (st.best != null ? '<div class="spread small"><span>Bestes Ergebnis</span><b class="mono" style="color:var(--' + (st.best >= .5 ? 'good' : 'bad') + ')">' + pct(st.best) + '</b></div><div class="bar8"><span style="width:' + pct(st.best) + '"></span></div>' : '') +
       '<button type="button" class="btn primary wide" id="kpStart">' + (st.n ? 'Nochmal alle Fragen' : 'Prüfung starten') + '</button>' +
       ((st.falsch || []).length ? '<button type="button" class="btn wide" id="kpWrong">Nur die ' + st.falsch.length + ' falschen wiederholen</button>' : '') + '</article>';
   } else if(pool.length && !run.done){
     const ans = run.ans; const n = Object.keys(ans).length;
     h += run.ids.map((id, i) => { const q = F.Q.find(x => x.id === id); if(!q) return ''; const a = ans[id];
-      return '<article class="card stack kpq" data-id="' + id + '"><div class="spread"><span class="mono small muted">Frage ' + (i+1) + ' von ' + run.ids.length + '</span><span class="tag gold">' + q.punkte + (q.punkte === 1 ? ' Punkt' : ' Punkte') + '</span></div><p class="stem">' + esc(q.stamm) + '</p><div class="stack" style="gap:6px" role="radiogroup">' +
-        options(q).map(o => '<button type="button" class="radio" role="radio" aria-checked="' + (a === o.l) + '" data-l="' + o.l + '"><span class="l">' + o.l + ')</span><span>' + esc(o.text) + '</span></button>').join('') + '</div></article>'; }).join('') +
+      return '<article class="card stack kpq" data-id="' + id + '" data-i="' + i + '">' + kpqInner(q, i, run.ids.length, a) + '</article>'; }).join('') +
       '<article class="card stack"><p class="small muted" id="kpCount">' + n + ' von ' + run.ids.length + ' beantwortet</p><button type="button" class="btn primary wide" id="kpSub">Abgeben</button><button type="button" class="linkbtn mutedlink" id="kpAbort">Abbrechen</button></article>';
   } else if(pool.length){
     const det = run.det || []; const p = det.reduce((a, d) => a + (d.ok ? d.pkt : 0), 0); const max = det.reduce((a, d) => a + d.pkt, 0); const ok = p / Math.max(1, max) >= .5;
@@ -3302,11 +3315,11 @@ function renderKapPruefung(F, kap, box){
   const b2 = $('#kpWrong', box) || $('#kpWrong2', box); if(b2) b2.onclick = () => start((st.falsch || []).filter(id => pool.some(q => q.id === id)));
   const b3 = $('#kpAgain', box); if(b3) b3.onclick = () => start(pool.map(q => q.id));
   const ab = $('#kpAbort', box); if(ab) ab.onclick = () => { track('kp_abbruch', {kap:kap.k, beantwortet:Object.keys(run.ans).length}); st.run = null; save(); renderKapPruefung(F, kap, box); };
-  box.querySelectorAll('.kpq .radio').forEach(b => b.onclick = () => { const art = b.closest('.kpq'); const id = art.dataset.id; const was = run.ans[id];
-    run.ans[id] = b.dataset.l; run.zeit[id] = (run.zeit[id] || 0) + Math.round(visNow() - run.last); run.last = visNow(); if(was && was !== b.dataset.l) run.wechsel = (run.wechsel || 0) + 1;
-    art.querySelectorAll('.radio').forEach(x => x.setAttribute('aria-checked', x === b)); ton('klick'); save();
-    $('#kpCount', box).textContent = Object.keys(run.ans).length + ' von ' + run.ids.length + ' beantwortet';
-    const nxt = art.nextElementSibling; if(!was && nxt && nxt.classList.contains('kpq') && !run.ans[nxt.dataset.id]) setTimeout(() => nxt.scrollIntoView({behavior:'smooth', block:'start'}), 180); });
+  const kpReveal = (art, l) => { const id = art.dataset.id; if(run.ans[id] !== undefined) return; const q = F.Q.find(x => x.id === id); if(!q) return;
+    run.ans[id] = l; run.zeit[id] = (run.zeit[id] || 0) + Math.round(visNow() - run.last); run.last = visNow();
+    art.innerHTML = kpqInner(q, +art.dataset.i, run.ids.length, l); ton(l ? (l === correctOpt(q) ? 'ok' : 'fehler') : 'klick'); save();
+    $('#kpCount', box).textContent = Object.keys(run.ans).length + ' von ' + run.ids.length + ' beantwortet'; track('kp_antwort', {kap:kap.k, id, a:l || null, ok:l === correctOpt(q)}); };
+  box.querySelectorAll('.kpq').forEach(art => art.addEventListener('click', e => { const b = e.target.closest('.radio, .kpShow'); if(!b || b.disabled) return; kpReveal(art, b.classList.contains('kpShow') ? '' : b.dataset.l); }));
   const sub = $('#kpSub', box); if(sub) sub.onclick = () => { const open = run.ids.length - Object.keys(run.ans).length;
     if(open && !sub.dataset.sure){ sub.dataset.sure = '1'; sub.textContent = open + (open === 1 ? ' Frage ist' : ' Fragen sind') + ' offen. Trotzdem abgeben?'; return; }
     const f = FS(F.id); const det = run.ids.map(id => { const q = F.Q.find(x => x.id === id); const ok = run.ans[id] === correctOpt(q); const s2 = f.q[id] || {n:0, r:0}; s2.n++; if(ok) s2.r++; s2.last = ok; f.q[id] = s2;
